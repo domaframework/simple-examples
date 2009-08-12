@@ -19,17 +19,17 @@ import java.io.Serializable;
 
 import org.seasar.doma.domain.AbstractIntegerDomain;
 
-public class VersionNo extends AbstractIntegerDomain<VersionNo>
-        implements Serializable {
+public class VersionNo extends AbstractIntegerDomain<VersionNo> implements
+		Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public VersionNo() {
-        super();
-    }
+	public VersionNo() {
+		super();
+	}
 
-    public VersionNo(Integer value) {
-        super(value);
-    }
+	public VersionNo(Integer value) {
+		super(value);
+	}
 
 }

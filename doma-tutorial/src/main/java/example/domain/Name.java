@@ -19,17 +19,16 @@ import java.io.Serializable;
 
 import org.seasar.doma.domain.AbstractStringDomain;
 
-public class Name extends AbstractStringDomain<Name> implements
-        Serializable {
+public class Name extends AbstractStringDomain<Name> implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public Name() {
-        super();
-    }
+	public Name() {
+		super();
+	}
 
-    public Name(String value) {
-        super(value);
-    }
+	public Name(String value) {
+		super(value);
+	}
 
 }

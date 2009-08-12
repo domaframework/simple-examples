@@ -9,7 +9,7 @@ public class UpdateTest extends TutorialTestCase {
 
 	private final EmployeeDao dao = new EmployeeDao_();
 
-	public void testDelete() throws Exception {
+	public void testUpdate() throws Exception {
 		Employee employee = dao.selectById(new Identity(1));
 		employee.name().set("hoge");
 		dao.update(employee);

@@ -20,16 +20,16 @@ import java.io.Serializable;
 import org.seasar.doma.domain.AbstractIntegerDomain;
 
 public class Identity extends AbstractIntegerDomain<Identity> implements
-        Serializable {
+		Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public Identity() {
-        super();
-    }
+	public Identity() {
+		super();
+	}
 
-    public Identity(Integer value) {
-        super(value);
-    }
+	public Identity(Integer value) {
+		super(value);
+	}
 
 }

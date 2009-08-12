@@ -1,0 +1,20 @@
+<project name="doma-tutorial" default="dist" basedir=".">
+
+	<target name="copy">
+		<copy todir="lib" file="../doma/target/doma-${ver}.jar"/>
+		<copy todir="lib/sources" file="../doma/target/doma-${ver}-sources.jar"/>
+	</target>
+
+	<target name="dist" depends="copy">
+		<mkdir dir="${zipDir}"/>
+		<zip zipfile="${zipDir}/doma-tutorial-${ver}.zip">
+			<zipfileset prefix="doma-tutorial" dir=".">
+				<exclude name="**/bin/**"/>
+				<exclude name="**/target/**"/>
+				<exclude name="**/site/**"/>
+				<exclude name="build.xml"/>
+			</zipfileset>
+		</zip>
+	</target>
+
+</project>

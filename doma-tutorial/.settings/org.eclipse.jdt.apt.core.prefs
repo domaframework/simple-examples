@@ -1,5 +1,7 @@
-#Wed Aug 12 21:32:48 JST 2009
+#Mon Sep 07 21:06:00 JST 2009
 eclipse.preferences.version=1
 org.eclipse.jdt.apt.aptEnabled=true
 org.eclipse.jdt.apt.genSrcDir=.apt_generated
+org.eclipse.jdt.apt.processorOptions/dto.generation=true
+org.eclipse.jdt.apt.processorOptions/dto.package=example.dto
 org.eclipse.jdt.apt.reconcileEnabled=true

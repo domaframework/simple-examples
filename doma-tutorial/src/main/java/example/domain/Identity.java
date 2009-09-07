@@ -17,10 +17,9 @@ package example.domain;
 
 import java.io.Serializable;
 
-import org.seasar.doma.domain.AbstractIntegerDomain;
+import org.seasar.doma.domain.IntegerDomain;
 
-public class Identity extends AbstractIntegerDomain<Identity> implements
-		Serializable {
+public class Identity extends IntegerDomain<Identity> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

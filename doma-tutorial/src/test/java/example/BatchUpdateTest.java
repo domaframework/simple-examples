@@ -15,7 +15,7 @@ public class BatchUpdateTest extends TutorialTestCase {
 		List<Employee> list = dao.selectAll();
 		for (Employee employee : list) {
 			Salary salary = employee.salary();
-			if (salary.isNotNull()) {
+			if (!salary.isNull()) {
 				employee.salary().set(salary.get() * 2);
 			}
 		}

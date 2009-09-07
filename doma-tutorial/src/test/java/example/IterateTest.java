@@ -22,7 +22,7 @@ public class IterateTest extends TutorialTestCase {
 			@Override
 			public Integer iterate(Employee target, IterationContext context) {
 				Salary salary = target.salary();
-				if (salary.isNotNull()) {
+				if (!salary.isNull()) {
 					sum += salary.get();
 				}
 				return sum;
@@ -39,7 +39,7 @@ public class IterateTest extends TutorialTestCase {
 			@Override
 			public Integer iterate(Employee target, IterationContext context) {
 				Salary salary = target.salary();
-				if (salary.isNotNull()) {
+				if (!salary.isNull()) {
 					sum += salary.get();
 				}
 				if (sum > 10000) {

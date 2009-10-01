@@ -30,21 +30,19 @@ import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import example.AppConfig;
-import example.domain.Identity;
-import example.domain.Name;
 import example.entity.Employee;
 
 @Dao(config = AppConfig.class)
 public interface EmployeeDao {
 
 	@Select
-	Employee selectById(Identity id);
+	Employee selectById(Integer id);
 
 	@Select
 	List<Employee> selectAll();
 
 	@Select
-	List<Employee> selectByNames(List<Name> names);
+	List<Employee> selectByNames(List<String> names);
 
 	@Select
 	List<Employee> selectAll(SelectOptions options);

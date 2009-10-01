@@ -15,29 +15,77 @@
  */
 package example.entity;
 
-import org.seasar.doma.Delegate;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.seasar.doma.ChangedProperties;
+import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Version;
 
-import example.domain.Identity;
-import example.domain.Name;
 import example.domain.Salary;
-import example.domain.VersionNo;
 
 @Entity
-public interface Employee {
+public class Employee {
 
 	@Id
-	Identity id();
+	@Column(name = "ID")
+	Integer id;
 
-	Name name();
+	@Column(name = "NAME")
+	String name;
 
-	Salary salary();
+	@Column(name = "SALARY")
+	Salary salary;
 
 	@Version
-	VersionNo version();
+	@Column(name = "VERSION")
+	Integer version;
 
-	@Delegate(to = EmployeeDelegate.class)
-	String getSalaryDescription();
+	@ChangedProperties
+	Set<String> changedProperties = new HashSet<String>();
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		changedProperties.add("id");
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		changedProperties.add("name");
+		this.name = name;
+	}
+
+	public Salary getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Salary salary) {
+		changedProperties.add("salary");
+		this.salary = salary;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		changedProperties.add("version");
+		this.version = version;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary
+				+ ", version=" + version + "]";
+	}
+
 }

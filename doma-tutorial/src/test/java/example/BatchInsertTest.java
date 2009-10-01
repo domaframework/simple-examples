@@ -3,24 +3,24 @@ package example;
 import java.util.Arrays;
 
 import example.dao.EmployeeDao;
-import example.dao.EmployeeDao_;
+import example.dao.EmployeeDaoImpl;
+import example.domain.Salary;
 import example.entity.Employee;
-import example.entity.Employee_;
 
 public class BatchInsertTest extends TutorialTestCase {
 
-	private final EmployeeDao dao = new EmployeeDao_();
+	private final EmployeeDao dao = new EmployeeDaoImpl();
 
 	public void testBatchInsert() throws Exception {
-		Employee employee1 = new Employee_();
-		employee1.id().set(99);
-		employee1.name().set("test-1");
-		employee1.salary().set(300);
+		Employee employee1 = new Employee();
+		employee1.setId(99);
+		employee1.setName("test-1");
+		employee1.setSalary(new Salary(300));
 
-		Employee employee2 = new Employee_();
-		employee2.id().set(100);
-		employee2.name().set("test-2");
-		employee2.salary().set(500);
+		Employee employee2 = new Employee();
+		employee2.setId(100);
+		employee2.setName("test-2");
+		employee2.setSalary(new Salary(500));
 
 		dao.batchInsert(Arrays.asList(employee1, employee2));
 	}

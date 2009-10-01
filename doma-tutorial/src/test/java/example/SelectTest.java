@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import example.dao.EmployeeDao;
-import example.dao.EmployeeDao_;
-import example.domain.Name;
+import example.dao.EmployeeDaoImpl;
 import example.entity.Employee;
 
 public class SelectTest extends TutorialTestCase {
 
-	private final EmployeeDao dao = new EmployeeDao_();
+	private final EmployeeDao dao = new EmployeeDaoImpl();
 
 	public void testIn() throws Exception {
-		List<Name> names = Arrays.asList(new Name("JONES"), new Name("SCOTT"));
+		List<String> names = Arrays.asList("JONES", "SCOTT");
 		List<Employee> list = dao.selectByNames(names);
 		for (Employee employee : list) {
 			Logger.getAnonymousLogger().info(employee.toString());

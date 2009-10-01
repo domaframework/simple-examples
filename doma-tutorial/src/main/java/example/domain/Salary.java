@@ -15,20 +15,34 @@
  */
 package example.domain;
 
-import java.io.Serializable;
+import org.seasar.doma.Domain;
 
-import org.seasar.doma.domain.IntegerDomain;
+@Domain(valueType = Integer.class)
+public class Salary {
 
-public class Salary extends IntegerDomain<Salary> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	public Salary() {
-		super();
-	}
+	private final Integer value;
 
 	public Salary(Integer value) {
-		super(value);
+		this.value = value;
+	}
+
+	public Integer getValue() {
+		return value;
+	}
+
+	public Salary add(Salary salary) {
+		if (salary == null) {
+			throw new NullPointerException("The salary parameter is null.");
+		}
+		if (this.value == null || salary.value == null) {
+			return new Salary(null);
+		}
+		return new Salary(this.value + salary.value);
+	}
+
+	@Override
+	public String toString() {
+		return value != null ? String.valueOf(value) : null;
 	}
 
 }

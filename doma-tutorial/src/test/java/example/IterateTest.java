@@ -6,48 +6,48 @@ import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.IterationContext;
 
 import example.dao.EmployeeDao;
-import example.dao.EmployeeDao_;
+import example.dao.EmployeeDaoImpl;
 import example.domain.Salary;
 import example.entity.Employee;
 
 public class IterateTest extends TutorialTestCase {
 
-	private final EmployeeDao dao = new EmployeeDao_();
+	private final EmployeeDao dao = new EmployeeDaoImpl();
 
 	public void testIterate() throws Exception {
-		Integer sum = dao.selectAll(new IterationCallback<Integer, Employee>() {
+		Salary sum = dao.selectAll(new IterationCallback<Salary, Employee>() {
 
-			private int sum = 0;
+			private Salary sum = new Salary(0);
 
 			@Override
-			public Integer iterate(Employee target, IterationContext context) {
-				Salary salary = target.salary();
-				if (!salary.isNull()) {
-					sum += salary.get();
+			public Salary iterate(Employee target, IterationContext context) {
+				Salary salary = target.getSalary();
+				if (salary != null) {
+					sum = sum.add(salary);
 				}
 				return sum;
 			}
 		});
-		Logger.getAnonymousLogger().info(String.valueOf(sum));
+		Logger.getAnonymousLogger().info(sum.toString());
 	}
 
 	public void testIterate_exit() throws Exception {
-		Integer sum = dao.selectAll(new IterationCallback<Integer, Employee>() {
+		Salary sum = dao.selectAll(new IterationCallback<Salary, Employee>() {
 
-			private int sum = 0;
+			private Salary sum = new Salary(0);
 
 			@Override
-			public Integer iterate(Employee target, IterationContext context) {
-				Salary salary = target.salary();
-				if (!salary.isNull()) {
-					sum += salary.get();
+			public Salary iterate(Employee target, IterationContext context) {
+				Salary salary = target.getSalary();
+				if (salary != null) {
+					sum = sum.add(salary);
 				}
-				if (sum > 10000) {
+				if (sum.getValue() != null && sum.getValue() > 10000) {
 					context.exit();
 				}
 				return sum;
 			}
 		});
-		Logger.getAnonymousLogger().info(String.valueOf(sum));
+		Logger.getAnonymousLogger().info(sum.toString());
 	}
 }

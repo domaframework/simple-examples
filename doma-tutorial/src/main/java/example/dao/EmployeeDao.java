@@ -30,45 +30,59 @@ import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import example.AppConfig;
+import example.domain.Salary;
 import example.entity.Employee;
+import example.entity.Employee.JobType;
 
 @Dao(config = AppConfig.class)
 public interface EmployeeDao {
 
-	@Select
-	Employee selectById(Integer id);
+    @Select
+    Employee selectById(Integer id);
 
-	@Select
-	List<Employee> selectAll();
+    @Select
+    List<Employee> selectByNames(List<String> names);
 
-	@Select
-	List<Employee> selectByNames(List<String> names);
+    @Select
+    List<Employee> selectByJobType(JobType jobType);
 
-	@Select
-	List<Employee> selectAll(SelectOptions options);
+    @Select
+    List<JobType> selectAllJobTypes();
 
-	@Select(iterate = true)
-	<R> R selectAll(IterationCallback<R, Employee> callback);
+    @Select
+    List<Employee> selectBySalary(Salary salary);
 
-	@Delegate(to = EmployeeDaoDelegate.class)
-	int count();
+    @Select
+    Salary selectSummedSalary();
 
-	@Insert
-	int insert(Employee employee);
+    @Select
+    List<Employee> selectAll();
 
-	@Update
-	int update(Employee employee);
+    @Select
+    List<Employee> selectAll(SelectOptions options);
 
-	@Delete
-	int delete(Employee employee);
+    @Select(iterate = true)
+    <R> R selectAll(IterationCallback<R, Employee> callback);
 
-	@BatchInsert
-	int[] batchInsert(List<Employee> employees);
+    @Delegate(to = EmployeeDaoDelegate.class)
+    int count();
 
-	@BatchUpdate
-	int[] batchUpdate(List<Employee> employees);
+    @Insert
+    int insert(Employee employee);
 
-	@BatchDelete
-	int[] batchDelete(List<Employee> employees);
+    @Update
+    int update(Employee employee);
+
+    @Delete
+    int delete(Employee employee);
+
+    @BatchInsert
+    int[] batchInsert(List<Employee> employees);
+
+    @BatchUpdate
+    int[] batchUpdate(List<Employee> employees);
+
+    @BatchDelete
+    int[] batchDelete(List<Employee> employees);
 
 }

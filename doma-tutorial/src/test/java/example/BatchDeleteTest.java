@@ -8,10 +8,10 @@ import example.entity.Employee;
 
 public class BatchDeleteTest extends TutorialTestCase {
 
-	private final EmployeeDao dao = new EmployeeDaoImpl();
+    private final EmployeeDao dao = new EmployeeDaoImpl();
 
-	public void testBatchDelete() throws Exception {
-		List<Employee> list = dao.selectAll();
-		dao.batchDelete(list);
-	}
+    public void testBatchDelete() throws Exception {
+        List<Employee> list = dao.selectAll();
+        dao.batchDelete(list);
+    }
 }

@@ -29,63 +29,79 @@ import example.domain.Salary;
 @Entity
 public class Employee {
 
-	@Id
-	@Column(name = "ID")
-	Integer id;
+    @Id
+    @Column(name = "ID")
+    Integer id;
 
-	@Column(name = "NAME")
-	String name;
+    @Column(name = "NAME")
+    String name;
 
-	@Column(name = "SALARY")
-	Salary salary;
+    @Column(name = "SALARY")
+    Salary salary;
 
-	@Version
-	@Column(name = "VERSION")
-	Integer version;
+    @Column(name = "JOB_TYPE")
+    JobType jobType;
 
-	@ChangedProperties
-	Set<String> changedProperties = new HashSet<String>();
+    @Version
+    @Column(name = "VERSION")
+    Integer version;
 
-	public Integer getId() {
-		return id;
-	}
+    @ChangedProperties
+    Set<String> changedProperties = new HashSet<String>();
 
-	public void setId(Integer id) {
-		changedProperties.add("id");
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Integer id) {
+        changedProperties.add("id");
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		changedProperties.add("name");
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Salary getSalary() {
-		return salary;
-	}
+    public void setName(String name) {
+        changedProperties.add("name");
+        this.name = name;
+    }
 
-	public void setSalary(Salary salary) {
-		changedProperties.add("salary");
-		this.salary = salary;
-	}
+    public Salary getSalary() {
+        return salary;
+    }
 
-	public Integer getVersion() {
-		return version;
-	}
+    public void setSalary(Salary salary) {
+        changedProperties.add("salary");
+        this.salary = salary;
+    }
 
-	public void setVersion(Integer version) {
-		changedProperties.add("version");
-		this.version = version;
-	}
+    public JobType getJobType() {
+        return jobType;
+    }
 
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary
-				+ ", version=" + version + "]";
-	}
+    public void setJobType(JobType jobType) {
+        changedProperties.add("jobType");
+        this.jobType = jobType;
+    }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        changedProperties.add("version");
+        this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [changedProperties=" + changedProperties + ", id="
+                + id + ", jobType=" + jobType + ", name=" + name + ", salary="
+                + salary + ", version=" + version + "]";
+    }
+
+    public static enum JobType {
+        SALESMAN, MANAGER, ANALYST, PRESIDENT, CLERK
+    }
 }

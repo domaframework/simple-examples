@@ -1,3 +1,4 @@
 <factorypath>
-    <factorypathentry kind="WKSPJAR" id="/doma-tutorial/lib/doma-0.9.6.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="WKSPJAR" id="/doma-tutorial/lib/doma-0.9.6.jar" enabled="false" runInBatchMode="false"/>
+    <factorypathentry kind="WKSPJAR" id="/doma-tutorial/lib/doma-0.9.7-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>

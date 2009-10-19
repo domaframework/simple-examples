@@ -9,16 +9,16 @@ import example.entity.Employee;
 
 public class BatchUpdateTest extends TutorialTestCase {
 
-	private final EmployeeDao dao = new EmployeeDaoImpl();
+    private final EmployeeDao dao = new EmployeeDaoImpl();
 
-	public void testBatchUpdate() throws Exception {
-		List<Employee> list = dao.selectAll();
-		for (Employee employee : list) {
-			Salary salary = employee.getSalary();
-			if (salary != null) {
-				employee.setSalary(salary.add(new Salary(100)));
-			}
-		}
-		dao.batchUpdate(list);
-	}
+    public void testBatchUpdate() throws Exception {
+        List<Employee> list = dao.selectAll();
+        for (Employee employee : list) {
+            Salary salary = employee.getSalary();
+            if (salary != null) {
+                employee.setSalary(salary.add(new Salary(100)));
+            }
+        }
+        dao.batchUpdate(list);
+    }
 }

@@ -24,25 +24,25 @@ import org.seasar.doma.jdbc.dialect.HsqldbDialect;
 
 public class AppConfig extends DomaAbstractConfig {
 
-	protected static final DataSource dataSource = createDataSource();
+    protected static final DataSource dataSource = createDataSource();
 
-	protected static final Dialect dialect = new HsqldbDialect();
+    protected static final Dialect dialect = new HsqldbDialect();
 
-	@Override
-	public DataSource dataSource() {
-		return dataSource;
-	}
+    @Override
+    public DataSource dataSource() {
+        return dataSource;
+    }
 
-	@Override
-	public Dialect dialect() {
-		return dialect;
-	}
+    @Override
+    public Dialect dialect() {
+        return dialect;
+    }
 
-	protected static DataSource createDataSource() {
-		SimpleDataSource dataSource = new SimpleDataSource();
-		dataSource.setUrl("jdbc:hsqldb:mem:tutorial");
-		dataSource.setUser("sa");
-		return dataSource;
-	}
+    protected static DataSource createDataSource() {
+        SimpleDataSource dataSource = new SimpleDataSource();
+        dataSource.setUrl("jdbc:hsqldb:mem:tutorial");
+        dataSource.setUser("sa");
+        return dataSource;
+    }
 
 }

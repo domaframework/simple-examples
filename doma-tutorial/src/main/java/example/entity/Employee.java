@@ -15,13 +15,12 @@
  */
 package example.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-import org.seasar.doma.ChangedProperties;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
+import org.seasar.doma.OriginalStates;
 import org.seasar.doma.Version;
 
 import example.domain.Salary;
@@ -46,15 +45,14 @@ public class Employee {
     @Column(name = "VERSION")
     Integer version;
 
-    @ChangedProperties
-    Set<String> changedProperties = new HashSet<String>();
+    @OriginalStates
+    Serializable originalStates;
 
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
-        changedProperties.add("id");
         this.id = id;
     }
 
@@ -63,7 +61,6 @@ public class Employee {
     }
 
     public void setName(String name) {
-        changedProperties.add("name");
         this.name = name;
     }
 
@@ -72,7 +69,6 @@ public class Employee {
     }
 
     public void setSalary(Salary salary) {
-        changedProperties.add("salary");
         this.salary = salary;
     }
 
@@ -81,7 +77,6 @@ public class Employee {
     }
 
     public void setJobType(JobType jobType) {
-        changedProperties.add("jobType");
         this.jobType = jobType;
     }
 
@@ -90,15 +85,13 @@ public class Employee {
     }
 
     public void setVersion(Integer version) {
-        changedProperties.add("version");
         this.version = version;
     }
 
     @Override
     public String toString() {
-        return "Employee [changedProperties=" + changedProperties + ", id="
-                + id + ", jobType=" + jobType + ", name=" + name + ", salary="
-                + salary + ", version=" + version + "]";
+        return "Employee [id=" + id + ", jobType=" + jobType + ", name=" + name
+                + ", salary=" + salary + ", version=" + version + "]";
     }
 
     public static enum JobType {

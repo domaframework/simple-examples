@@ -20,7 +20,7 @@ public class EmployeeDaoDelegate {
 
     public int count() {
         try {
-            Connection connection = config.dataSource().getConnection();
+            Connection connection = config.getDataSource().getConnection();
             try {
                 PreparedStatement preparedStatement = connection
                         .prepareStatement("select count(*) from employee");

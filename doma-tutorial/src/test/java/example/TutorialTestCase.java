@@ -12,7 +12,7 @@ public abstract class TutorialTestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Connection connection = appConfig.dataSource().getConnection();
+        Connection connection = appConfig.getDataSource().getConnection();
         try {
             Statement statement = connection.createStatement();
             try {
@@ -56,7 +56,7 @@ public abstract class TutorialTestCase extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        Connection connection = appConfig.dataSource().getConnection();
+        Connection connection = appConfig.getDataSource().getConnection();
         try {
             Statement statement = connection.createStatement();
             try {

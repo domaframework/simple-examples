@@ -29,12 +29,12 @@ public class AppConfig extends DomaAbstractConfig {
     protected static final Dialect dialect = new HsqldbDialect();
 
     @Override
-    public DataSource dataSource() {
+    public DataSource getDataSource() {
         return dataSource;
     }
 
     @Override
-    public Dialect dialect() {
+    public Dialect getDialect() {
         return dialect;
     }
 

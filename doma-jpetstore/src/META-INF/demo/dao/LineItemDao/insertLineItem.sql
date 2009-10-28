@@ -1,0 +1,2 @@
+INSERT INTO LINEITEM (ORDERID, LINENUM, ITEMID, QUANTITY, UNITPRICE)
+VALUES (/*lineItem.orderId*/1, /*lineItem.lineNumber*/1, /*lineItem.itemId*/'itemId', /*lineItem.quantity*/1, /*lineItem.unitPrice*/1)

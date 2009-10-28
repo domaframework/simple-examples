@@ -1,0 +1,22 @@
+<project name="doma-tutorial" default="dist" basedir=".">
+
+	<target name="copy">
+		<copy todir="war/WEB-INF/lib" file="../doma/target/doma-${ver}.jar"/>
+		<copy todir="libsrc" file="../doma/target/doma-${ver}-sources.jar"/>
+	</target>
+
+	<target name="dist" depends="copy">
+		<mkdir dir="${zipDir}"/>
+		<zip zipfile="${zipDir}/doma-sastruts-demo-${ver}.zip">
+			<zipfileset prefix="doma-sastruts-demo" dir=".">
+				<exclude name="**/WEB-INF/classes/**"/>
+				<exclude name="work/**"/>
+				<exclude name="**/.apt_generated/**"/>
+				<exclude name="**/target/**"/>
+				<exclude name="**/site/**"/>
+				<exclude name="build.xml"/>
+			</zipfileset>
+		</zip>
+	</target>
+
+</project>

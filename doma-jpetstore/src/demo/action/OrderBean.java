@@ -1,5 +1,6 @@
 package demo.action;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,24 +8,19 @@ import java.util.Map;
 
 import org.apache.struts.beanaction.ActionContext;
 
-import com.ibatis.common.util.PaginatedList;
-
 import demo.entity.Order;
 import demo.service.AccountService;
 import demo.service.OrderService;
 
-public class OrderBean extends AbstractBean {
+public class OrderBean extends AbstractBean implements Serializable {
 
     private static final List CARD_TYPE_LIST;
-
-    private AccountService accountService;
-    private OrderService orderService;
 
     private Order order;
     private int orderId;
     private boolean shippingAddressRequired;
     private boolean confirmed;
-    private PaginatedList orderList;
+    private List<Order> orderList;
     private String pageDirection;
 
     static {
@@ -43,8 +39,6 @@ public class OrderBean extends AbstractBean {
         order = new Order();
         shippingAddressRequired = false;
         confirmed = false;
-        this.accountService = accountService;
-        this.orderService = orderService;
     }
 
     public int getOrderId() {
@@ -91,7 +85,7 @@ public class OrderBean extends AbstractBean {
         this.pageDirection = pageDirection;
     }
 
-    public PaginatedList getOrderList() {
+    public List<Order> getOrderList() {
         return orderList;
     }
 
@@ -99,17 +93,18 @@ public class OrderBean extends AbstractBean {
         Map sessionMap = ActionContext.getActionContext().getSessionMap();
         AccountBean accountBean = (AccountBean) sessionMap.get("accountBean");
         // TODO
-        // orderList =
-        // orderService.getOrdersByUsername(accountBean.getAccount().getUsername());
+        orderList = getOrderService().getOrdersByUsername(
+                accountBean.getAccount().getUsername());
         return SUCCESS;
     }
 
     public String switchOrderPage() {
-        if ("next".equals(pageDirection)) {
-            orderList.nextPage();
-        } else if ("previous".equals(pageDirection)) {
-            orderList.previousPage();
-        }
+        // TODO
+        // if ("next".equals(pageDirection)) {
+        // orderList.nextPage();
+        // } else if ("previous".equals(pageDirection)) {
+        // orderList.previousPage();
+        // }
         return SUCCESS;
     }
 
@@ -141,7 +136,7 @@ public class OrderBean extends AbstractBean {
             return CONFIRM;
         } else if (getOrder() != null) {
 
-            orderService.insertOrder(order);
+            getOrderService().insertOrder(order);
 
             CartBean cartBean = (CartBean) sessionMap.get("cartBean");
             cartBean.clear();
@@ -159,7 +154,7 @@ public class OrderBean extends AbstractBean {
         Map sessionMap = ActionContext.getActionContext().getSessionMap();
         AccountBean accountBean = (AccountBean) sessionMap.get("accountBean");
 
-        order = orderService.getOrder(orderId);
+        order = getOrderService().getOrder(orderId);
 
         if (accountBean.getAccount().getUsername().equals(order.getUsername())) {
             return SUCCESS;
@@ -182,6 +177,20 @@ public class OrderBean extends AbstractBean {
         confirmed = false;
         orderList = null;
         pageDirection = null;
+    }
+
+    /**
+     * @return the accountService
+     */
+    private AccountService getAccountService() {
+        return new AccountService();
+    }
+
+    /**
+     * @return the orderService
+     */
+    private OrderService getOrderService() {
+        return new OrderService();
     }
 
 }

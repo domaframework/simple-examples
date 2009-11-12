@@ -9,21 +9,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.ibatis.common.util.PaginatedArrayList;
-import com.ibatis.common.util.PaginatedList;
-
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private final Map itemMap = Collections.synchronizedMap(new HashMap());
-    private final PaginatedList itemList = new PaginatedArrayList(4);
+    private final List<CartItem> itemList = new ArrayList<CartItem>();
 
     public Iterator getCartItems() {
         return itemList.iterator();
     }
 
-    public PaginatedList getCartItemList() {
+    public List<CartItem> getCartItemList() {
         return itemList;
     }
 
@@ -32,13 +29,7 @@ public class Cart implements Serializable {
     }
 
     public Iterator getAllCartItems() {
-        List allItems = new ArrayList();
-        itemList.gotoPage(0);
-        allItems.addAll(itemList);
-        while (itemList.nextPage()) {
-            allItems.addAll(itemList);
-        }
-        return allItems.iterator();
+        return itemList.iterator();
     }
 
     public boolean containsItemId(String itemId) {

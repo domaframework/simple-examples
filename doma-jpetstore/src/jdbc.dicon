@@ -13,9 +13,7 @@
 			"org.hsqldb.jdbcDriver"
 		</property>
 		<property name="URL">
-			"jdbc:hsqldb:file:"
-				+ @org.seasar.framework.util.ResourceUtil@getBuildDir('app.dicon').getCanonicalPath()
-				+ "/data-hsqldb/demo"
+			"jdbc:hsqldb:mem:jpetstore"
 		</property>
 		<property name="user">"sa"</property>
 		<property name="password">""</property>

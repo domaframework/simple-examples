@@ -12,9 +12,7 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Transient;
 
-import demo.config.NullNamingConvention;
-
-@Entity(namingConvention = NullNamingConvention.class)
+@Entity
 @Table(name = "ORDERS")
 public class Order implements Serializable {
 

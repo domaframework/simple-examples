@@ -36,14 +36,6 @@
           Add to Cart</html:link></td>
       </tr>
     </logic:iterate>
-    <tr><td>
-      <logic:notEqual name="itemList" property="firstPage" value="true">
-        <a class="Button" href="switchItemListPage.shtml?pageDirection=previous">&lt;&lt; Prev</a>
-      </logic:notEqual>
-      <logic:notEqual name="itemList" property="lastPage" value="true">
-        <a class="Button" href="switchItemListPage.shtml?pageDirection=next">Next &gt;&gt;</a>
-      </logic:notEqual>
-    </td></tr>
   </table>
 
 </div>

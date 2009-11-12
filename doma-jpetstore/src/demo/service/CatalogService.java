@@ -42,7 +42,6 @@ public class CatalogService {
     }
 
     public List<Product> getProductListByCategory(String categoryId) {
-        // TODO
         return productDao.getProductListByCategory(categoryId, SelectOptions
                 .get());
     }

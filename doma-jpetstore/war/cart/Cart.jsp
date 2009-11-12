@@ -34,7 +34,7 @@
               <bean:write name="cartItem" property="item.attribute3"/>
               <bean:write name="cartItem" property="item.attribute4"/>
               <bean:write name="cartItem" property="item.attribute5"/>
-              <bean:write name="cartItem" property="item.product.name"/>
+              <bean:write name="cartItem" property="item.productName"/>
             </td>
             <td><bean:write name="cartItem" property="inStock"/></td>
             <td>
@@ -57,12 +57,6 @@
           <td>&nbsp;</td>
         </tr>
       </table>
-      <logic:equal name="cart" property="cartItemList.previousPageAvailable" value="true">
-        <a class="Button" href="switchCartPage.shtml?pageDirection=previous">&lt;&lt; Prev</a>
-      </logic:equal>
-      <logic:equal name="cart" property="cartItemList.nextPageAvailable" value="true">
-        <a class="Button" href="switchCartPage.shtml?pageDirection=previous">Next &gt;&gt;</a>
-      </logic:equal>
     </html:form>
 
     <logic:notEqual name="cart" property="numberOfItems" value="0">

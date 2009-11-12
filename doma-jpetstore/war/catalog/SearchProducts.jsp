@@ -23,17 +23,6 @@
         <td><bean:write name="product" property="name"/></td>
       </tr>
     </logic:iterate>
-    <tr>
-      <td>
-        <logic:notEqual name="productList" property="firstPage" value="true">
-          <a href="switchSearchListPage.shtml?pageDirection=previous">&lt;&lt; Previous</a>
-        </logic:notEqual>
-        <logic:notEqual name="productList" property="lastPage" value="true">
-          <a href="switchSearchListPage.shtml?pageDirection=next">Next &gt;&gt;</a>
-        </logic:notEqual>
-      </td>
-    </tr>
-
   </table>
 
 </div>

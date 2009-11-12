@@ -1,5 +1,6 @@
 package demo.action;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,13 +13,10 @@ import demo.entity.Account;
 import demo.service.AccountService;
 import demo.service.CatalogService;
 
-public class AccountBean extends AbstractBean {
+public class AccountBean extends AbstractBean implements Serializable {
 
     private static final List LANGUAGE_LIST;
     private static final List CATEGORY_LIST;
-
-    private AccountService accountService;
-    private CatalogService catalogService;
 
     private Account account;
     private String repeatedPassword;
@@ -49,8 +47,6 @@ public class AccountBean extends AbstractBean {
     public AccountBean(AccountService accountService,
             CatalogService catalogService) {
         account = new Account();
-        this.accountService = accountService;
-        this.catalogService = catalogService;
     }
 
     public String getUsername() {
@@ -119,8 +115,8 @@ public class AccountBean extends AbstractBean {
 
     public String newAccount() {
         try {
-            accountService.insertAccount(account);
-            account = accountService.getAccount(account.getUsername());
+            getAccountService().insertAccount(account);
+            account = getAccountService().getAccount(account.getUsername());
             // TODO
             // myList =
             // catalogService.getProductListByCategory(account.getFavouriteCategoryId());
@@ -136,7 +132,7 @@ public class AccountBean extends AbstractBean {
 
     public String editAccountForm() {
         try {
-            account = accountService.getAccount(account.getUsername());
+            account = getAccountService().getAccount(account.getUsername());
             return SUCCESS;
         } catch (Exception e) {
             throw new BeanActionException(
@@ -147,8 +143,8 @@ public class AccountBean extends AbstractBean {
 
     public String editAccount() {
         try {
-            accountService.updateAccount(account);
-            account = accountService.getAccount(account.getUsername());
+            getAccountService().updateAccount(account);
+            account = getAccountService().getAccount(account.getUsername());
             // TODO
             // myList = catalogService.getProductListByCategory(account
             // .getFavouriteCategoryId());
@@ -171,8 +167,8 @@ public class AccountBean extends AbstractBean {
 
     public String signon() {
 
-        account = accountService.getAccount(account.getUsername(), account
-                .getPassword());
+        account = getAccountService().getAccount(account.getUsername(),
+                account.getPassword());
 
         if (account == null || account == null) {
             String value = "Invalid username or password.  Signon failed.";
@@ -217,6 +213,20 @@ public class AccountBean extends AbstractBean {
         pageDirection = null;
         myList = null;
         authenticated = false;
+    }
+
+    /**
+     * @return the accountService
+     */
+    private AccountService getAccountService() {
+        return new AccountService();
+    }
+
+    /**
+     * @return the catalogService
+     */
+    private CatalogService getCatalogService() {
+        return new CatalogService();
     }
 
 }

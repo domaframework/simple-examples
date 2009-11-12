@@ -7,9 +7,7 @@ import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Transient;
 
-import demo.config.NullNamingConvention;
-
-@Entity(namingConvention = NullNamingConvention.class)
+@Entity
 public class LineItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

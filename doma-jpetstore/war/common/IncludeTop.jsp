@@ -1,8 +1,3 @@
-<%@ page contentType="text/html" %>
-<%@ taglib uri="struts-logic" prefix="logic" %>
-<%@ taglib uri="struts-bean" prefix="bean" %>
-<%@ taglib uri="struts-html" prefix="html" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

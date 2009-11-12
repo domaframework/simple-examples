@@ -3,13 +3,11 @@ package demo.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
-import org.seasar.doma.Transient;
 
-import demo.config.NullNamingConvention;
-
-@Entity(namingConvention = NullNamingConvention.class)
+@Entity
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,6 +15,12 @@ public class Item implements Serializable {
     @Id
     String itemId;
     String productId;
+    @Column(insertable = false, updatable = false)
+    String productName;
+    @Column(insertable = false, updatable = false)
+    String productCategoryId;
+    @Column(insertable = false, updatable = false)
+    String productDescription;
     BigDecimal listPrice;
     BigDecimal unitCost;
     int supplierId;
@@ -26,8 +30,6 @@ public class Item implements Serializable {
     String attribute3;
     String attribute4;
     String attribute5;
-    @Transient
-    Product product;
     int quantity;
 
     public String getItemId() {
@@ -46,20 +48,36 @@ public class Item implements Serializable {
         this.quantity = quantity;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public String getProductId() {
         return productId;
     }
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(String productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public int getSupplierId() {

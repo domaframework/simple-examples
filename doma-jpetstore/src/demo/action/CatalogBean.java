@@ -1,13 +1,14 @@
 package demo.action;
 
-import com.ibatis.common.util.PaginatedList;
+import java.io.Serializable;
+import java.util.List;
 
 import demo.entity.Category;
 import demo.entity.Item;
 import demo.entity.Product;
 import demo.service.CatalogService;
 
-public class CatalogBean extends AbstractBean {
+public class CatalogBean extends AbstractBean implements Serializable {
 
     private CatalogService catalogService;
 
@@ -16,22 +17,17 @@ public class CatalogBean extends AbstractBean {
 
     private String categoryId;
     private Category category;
-    private PaginatedList categoryList;
+    private List<Category> categoryList;
 
     private String productId;
     private Product product;
-    private PaginatedList productList;
+    private List<Product> productList;
 
     private String itemId;
     private Item item;
-    private PaginatedList itemList;
+    private List<Item> itemList;
 
     public CatalogBean() {
-        this(new CatalogService());
-    }
-
-    public CatalogBean(CatalogService catalogService) {
-        this.catalogService = catalogService;
     }
 
     public String getKeyword() {
@@ -98,36 +94,36 @@ public class CatalogBean extends AbstractBean {
         this.item = item;
     }
 
-    public PaginatedList getCategoryList() {
+    public List<Category> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(PaginatedList categoryList) {
+    public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
 
-    public PaginatedList getProductList() {
+    public List<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(PaginatedList productList) {
+    public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
 
-    public PaginatedList getItemList() {
+    public List<Item> getItemList() {
         return itemList;
     }
 
-    public void setItemList(PaginatedList itemList) {
+    public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
     }
 
     public String viewCategory() {
         if (categoryId != null) {
             // TODO
-            // productList =
-            // catalogService.getProductListByCategory(categoryId);
-            category = catalogService.getCategory(categoryId);
+            productList = getCatalogService().getProductListByCategory(
+                    categoryId);
+            category = getCatalogService().getCategory(categoryId);
         }
         return SUCCESS;
     }
@@ -135,15 +131,15 @@ public class CatalogBean extends AbstractBean {
     public String viewProduct() {
         if (productId != null) {
             // TODO
-            // itemList = catalogService.getItemListByProduct(productId);
-            product = catalogService.getProduct(productId);
+            itemList = getCatalogService().getItemListByProduct(productId);
+            product = getCatalogService().getProduct(productId);
         }
         return SUCCESS;
     }
 
     public String viewItem() {
-        item = catalogService.getItem(itemId);
-        product = item.getProduct();
+        item = getCatalogService().getItem(itemId);
+        product = getCatalogService().getProduct(item.getProductId());
         return SUCCESS;
     }
 
@@ -153,27 +149,29 @@ public class CatalogBean extends AbstractBean {
             return FAILURE;
         } else {
             // TODO
-            // productList =
-            // catalogService.searchProductList(keyword.toLowerCase());
+            productList = getCatalogService().searchProductList(
+                    keyword.toLowerCase());
             return SUCCESS;
         }
     }
 
     public String switchProductListPage() {
-        if ("next".equals(pageDirection)) {
-            productList.nextPage();
-        } else if ("previous".equals(pageDirection)) {
-            productList.previousPage();
-        }
+        // TODO
+        // if ("next".equals(pageDirection)) {
+        // productList.nextPage();
+        // } else if ("previous".equals(pageDirection)) {
+        // productList.previousPage();
+        // }
         return SUCCESS;
     }
 
     public String switchItemListPage() {
-        if ("next".equals(pageDirection)) {
-            itemList.nextPage();
-        } else if ("previous".equals(pageDirection)) {
-            itemList.previousPage();
-        }
+        // TODO
+        // if ("next".equals(pageDirection)) {
+        // itemList.nextPage();
+        // } else if ("previous".equals(pageDirection)) {
+        // itemList.previousPage();
+        // }
         return SUCCESS;
     }
 
@@ -192,6 +190,13 @@ public class CatalogBean extends AbstractBean {
         itemId = null;
         item = null;
         itemList = null;
+    }
+
+    /**
+     * @return the catalogService
+     */
+    private CatalogService getCatalogService() {
+        return new CatalogService();
     }
 
 }

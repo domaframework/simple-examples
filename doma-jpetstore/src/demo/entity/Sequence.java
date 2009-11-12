@@ -5,9 +5,7 @@ import java.io.Serializable;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 
-import demo.config.NullNamingConvention;
-
-@Entity(namingConvention = NullNamingConvention.class)
+@Entity
 public class Sequence implements Serializable {
 
     private static final long serialVersionUID = 1L;

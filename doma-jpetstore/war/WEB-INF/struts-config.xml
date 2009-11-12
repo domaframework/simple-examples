@@ -7,10 +7,10 @@
 <struts-config>
 
   <form-beans>
-    <form-bean name="accountBean" type="com.ibatis.jpetstore.presentation.AccountBean"/>
-    <form-bean name="catalogBean" type="com.ibatis.jpetstore.presentation.CatalogBean"/>
-    <form-bean name="cartBean" type="com.ibatis.jpetstore.presentation.CartBean"/>
-    <form-bean name="orderBean" type="com.ibatis.jpetstore.presentation.OrderBean"/>
+    <form-bean name="accountBean" type="demo.action.AccountBean"/>
+    <form-bean name="catalogBean" type="demo.action.CatalogBean"/>
+    <form-bean name="cartBean" type="demo.action.CartBean"/>
+    <form-bean name="orderBean" type="demo.action.OrderBean"/>
   </form-beans>
 
   <global-exceptions>

@@ -22,14 +22,6 @@
         <td><bean:write name="product" property="name"/></td>
       </tr>
     </logic:iterate>
-    <tr><td colspan="2">
-      <logic:notEqual name="productList" property="firstPage" value="true">
-        <a class="Button" href="switchProductListPage.shtml?pageDirection=previous">&lt;&lt; Prev</a>
-      </logic:notEqual>
-      <logic:notEqual name="productList" property="lastPage" value="true">
-        <a class="Button" href="switchProductListPage.shtml?pageDirection=next">Next &gt;&gt;</a>
-      </logic:notEqual>
-    </td></tr>
   </table>
 
 </div>

@@ -2,6 +2,7 @@ package demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.seasar.doma.jdbc.SelectOptions;
 
@@ -47,9 +48,12 @@ public class CatalogService {
     }
 
     public List<Product> searchProductList(String keywords) {
-        // TODO
-        return productDao.searchProductList(new ArrayList<String>(),
-                SelectOptions.get());
+        List<String> keywordList = new ArrayList<String>();
+        for (StringTokenizer tokenizer = new StringTokenizer(keywords
+                .toLowerCase(), " ", false); tokenizer.hasMoreTokens();) {
+            keywordList.add(tokenizer.nextToken());
+        }
+        return productDao.searchProductList(keywordList, SelectOptions.get());
     }
 
     public List<Item> getItemListByProduct(String productId) {

@@ -6,4 +6,7 @@
   <include path="aop.dicon"/>
   <include path="j2ee.dicon"/>
   <component name="actionMessagesThrowsInterceptor" class="org.seasar.struts.interceptor.ActionMessagesThrowsInterceptor"/>
+  <component>
+    @demo.config.DatabaseInitializer@init()
+  </component>
 </components>

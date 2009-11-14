@@ -5,8 +5,8 @@ select
   CATEGORY as categoryId
 from PRODUCT
 where
-<dynamic prepend="WHERE">
-  <iterate property="keywordList" open="" close="" conjunction="OR">
-    lower(name) like #keywordList[]# OR lower(category) like #keywordList[]# OR lower(descn) like #keywordList[]#
-  </iterate>
-</dynamic>
+/*%if keywords.size() > 0 */
+  /*%for keyword : keywords */
+lower(name) like /* @contain(keyword.toLowerCase()) */'a' OR lower(category) like /* @contain(keyword.toLowerCase()) */'a' OR lower(descn) like /* @contain(keyword.toLowerCase()) */'a'--hasNext " or "--
+  /*%end*/
+/*%end*/

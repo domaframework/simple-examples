@@ -3,7 +3,6 @@ package demo.dao;
 import java.util.List;
 
 import org.seasar.doma.Dao;
-import org.seasar.doma.Delegate;
 import org.seasar.doma.Select;
 import org.seasar.doma.jdbc.SelectOptions;
 
@@ -20,7 +19,7 @@ public interface ProductDao {
     @Select
     Product getProduct(String productId);
 
-    @Delegate(to = ProductDaoDelegate.class)
+    @Select
     List<Product> searchProductList(List<String> keywords, SelectOptions options);
 
 }

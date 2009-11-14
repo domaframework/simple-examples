@@ -30,7 +30,7 @@
         <bean:write name="item" property="attribute3"/>
         <bean:write name="item" property="attribute4"/>
         <bean:write name="item" property="attribute5"/>
-        <bean:write name="item" property="product.name"/>
+        <bean:write name="item" property="productName"/>
       </font></b>
     </td></tr>
     <tr><td>

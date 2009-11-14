@@ -148,9 +148,7 @@ public class CatalogBean extends AbstractBean implements Serializable {
             setMessage("Please enter a keyword to search for, then press the search button.");
             return FAILURE;
         } else {
-            // TODO
-            productList = getCatalogService().searchProductList(
-                    keyword.toLowerCase());
+            productList = getCatalogService().searchProductList(keyword);
             return SUCCESS;
         }
     }

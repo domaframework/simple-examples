@@ -3,7 +3,7 @@
 <div id="Footer">
 
   <div id="PoweredBy">
-    <a href="http://ibatis.apache.org"><img src="../images/poweredby.gif"/></a>
+    <html:link page="/shop/index.shtml"><img src="../images/logo-topbar.gif"/></html:link>
   </div>
 
   <div id="Banner">

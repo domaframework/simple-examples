@@ -2,8 +2,6 @@ package demo.service;
 
 import java.util.List;
 
-import com.ibatis.dao.client.DaoException;
-
 import demo.dao.ItemDao;
 import demo.dao.LineItemDao;
 import demo.dao.OrderDao;
@@ -70,7 +68,7 @@ public class OrderService {
     public synchronized int getNextId(String key) {
         Sequence sequence = sequenceDao.getSequence(key);
         if (sequence == null) {
-            throw new DaoException(
+            throw new RuntimeException(
                     "Error: A null sequence was returned from the database (could not get next "
                             + key + " sequence).");
         }

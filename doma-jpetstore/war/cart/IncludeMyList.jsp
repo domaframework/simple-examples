@@ -14,18 +14,6 @@
     </logic:iterate>
   </ul>
 
-  <p>
-    <logic:notEqual name="myList" property="firstPage" value="true">
-      <a href="switchMyListPage.shtml?pageDirection=previous&account.listOption=<bean:write name="accountBean"
-          property="account.listOption"/>&account.bannerOption=< bean:write name="accountBean"
-                                                                 property="account.bannerOption"/>">&lt;&lt;Prev</a>
-    </logic:notEqual>
-    <logic:notEqual name="myList" property="lastPage" value="true">
-      <a href="switchMyListPage.shtml?pageDirection=next&account.listOption=<bean:write name="accountBean"
-          property="account.listOption"/>&account.bannerOption=< bean:write name="accountBean"
-                                                                 property="account.bannerOption"/>">Next &gt;&gt;</a>
-    </logic:notEqual>
-  </p>
 
 </logic:present>
 

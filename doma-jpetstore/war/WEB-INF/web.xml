@@ -7,7 +7,7 @@ version="2.4">
 
   <display-name>JPetStore</display-name>
   <description>Online Pet Store Sample Application</description>
-
+<!--  
   <filter>
         <filter-name>encodingfilter</filter-name>
         <filter-class>org.seasar.extension.filter.EncodingFilter</filter-class>
@@ -63,7 +63,7 @@ version="2.4">
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    
+-->
   <servlet>
     <servlet-name>action</servlet-name>
     <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>

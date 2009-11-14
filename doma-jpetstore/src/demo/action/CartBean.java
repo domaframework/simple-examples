@@ -1,8 +1,11 @@
 package demo.action;
 
 import java.io.Serializable;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.beanaction.ActionContext;
 
@@ -104,6 +107,15 @@ public class CartBean extends AbstractBean implements Serializable {
     }
 
     public String viewCart() {
+        HttpSession session = ActionContext.getActionContext().getRequest()
+                .getSession();
+        System.out.println("**********************");
+        for (Enumeration e = session.getAttributeNames(); e.hasMoreElements();) {
+            String name = (String) e.nextElement();
+            System.out.println(String.format("%s = %s", name, session
+                    .getAttribute(name)));
+        }
+        System.out.println("**********************");
         return SUCCESS;
     }
 

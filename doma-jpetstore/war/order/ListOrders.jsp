@@ -15,13 +15,6 @@
   </logic:iterate>
 </table>
 
-<logic:notEqual name="orderBean" property="orderList.firstPage" value="true">
-  <a href="switchOrderPage.shtml?pageDirection=previous">&lt;&lt; Previous</a>
-</logic:notEqual>
-<logic:notEqual name="orderBean" property="orderList.lastPage" value="true">
-  <a href="switchOrderPage.shtml?pageDirection=next">Next &gt;&gt;</a>
-</logic:notEqual>
-
 <%@ include file="../common/IncludeBottom.jsp" %>
 
 

@@ -34,7 +34,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/poi-3.0-FINAL.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/s2-extension-2.4.38.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/s2-framework-2.4.38.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/struts-1.2.9.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/struts-1.2.9.jar" sourcepath="libsrc/struts-1.2.9-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/s2-tiger-2.4.38.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/sa-struts-1.0.4-sp5.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>

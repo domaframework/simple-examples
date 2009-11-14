@@ -106,7 +106,7 @@
             <bean:write name="item" property="item.attribute3"/>
             <bean:write name="item" property="item.attribute4"/>
             <bean:write name="item" property="item.attribute5"/>
-            <bean:write name="item" property="item.product.name"/>
+            <bean:write name="item" property="item.productName"/>
           </logic:present>
           <logic:notPresent name="item" property="item">
             <i>{description unavailable}</i>

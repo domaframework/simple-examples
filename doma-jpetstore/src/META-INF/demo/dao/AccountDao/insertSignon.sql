@@ -1,2 +1,2 @@
-UPDATE SIGNON SET PASSWORD = /*account.password*/'password'
-WHERE USERNAME = /*account.username*/'username'
+INSERT INTO SIGNON (PASSWORD,USERNAME)
+VALUES (/*account.password*/'password', /*account.username*/'username')

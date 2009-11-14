@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.struts.beanaction.ActionContext;
 import org.apache.struts.beanaction.BeanActionException;
 
 import com.ibatis.common.util.PaginatedList;
 
 import demo.entity.Account;
+import demo.entity.Product;
 import demo.service.AccountService;
 import demo.service.CatalogService;
 
@@ -22,7 +24,7 @@ public class AccountBean extends AbstractBean implements Serializable {
     private String repeatedPassword;
     private String pageDirection;
     private String validation;
-    private PaginatedList myList;
+    private List<Product> myList;
     private boolean authenticated;
 
     static {
@@ -41,11 +43,6 @@ public class AccountBean extends AbstractBean implements Serializable {
     }
 
     public AccountBean() {
-        this(new AccountService(), new CatalogService());
-    }
-
-    public AccountBean(AccountService accountService,
-            CatalogService catalogService) {
         account = new Account();
     }
 
@@ -65,7 +62,7 @@ public class AccountBean extends AbstractBean implements Serializable {
         account.setPassword(password);
     }
 
-    public PaginatedList getMyList() {
+    public List<Product> getMyList() {
         return myList;
     }
 
@@ -117,9 +114,8 @@ public class AccountBean extends AbstractBean implements Serializable {
         try {
             getAccountService().insertAccount(account);
             account = getAccountService().getAccount(account.getUsername());
-            // TODO
-            // myList =
-            // catalogService.getProductListByCategory(account.getFavouriteCategoryId());
+            myList = getCatalogService().getProductListByCategory(
+                    account.getFavouriteCategoryId());
             authenticated = true;
             repeatedPassword = null;
             return SUCCESS;
@@ -145,9 +141,8 @@ public class AccountBean extends AbstractBean implements Serializable {
         try {
             getAccountService().updateAccount(account);
             account = getAccountService().getAccount(account.getUsername());
-            // TODO
-            // myList = catalogService.getProductListByCategory(account
-            // .getFavouriteCategoryId());
+            myList = getCatalogService().getProductListByCategory(
+                    account.getFavouriteCategoryId());
             return SUCCESS;
         } catch (Exception e) {
             throw new BeanActionException(
@@ -157,11 +152,11 @@ public class AccountBean extends AbstractBean implements Serializable {
     }
 
     public String switchMyListPage() {
-        if ("next".equals(pageDirection)) {
-            myList.nextPage();
-        } else if ("previous".equals(pageDirection)) {
-            myList.previousPage();
-        }
+        // if ("next".equals(pageDirection)) {
+        // myList.nextPage();
+        // } else if ("previous".equals(pageDirection)) {
+        // myList.previousPage();
+        // }
         return SUCCESS;
     }
 
@@ -178,9 +173,8 @@ public class AccountBean extends AbstractBean implements Serializable {
         } else {
             account.setPassword(null);
 
-            // TODO
-            // myList = catalogService.getProductListByCategory(account
-            // .getFavouriteCategoryId());
+            myList = getCatalogService().getProductListByCategory(
+                    account.getFavouriteCategoryId());
 
             authenticated = true;
 
@@ -189,7 +183,7 @@ public class AccountBean extends AbstractBean implements Serializable {
     }
 
     public String signoff() {
-        // ActionContext.getActionContext().getRequest().getSession().invalidate();
+        ActionContext.getActionContext().getRequest().getSession().invalidate();
         clear();
         return SUCCESS;
     }

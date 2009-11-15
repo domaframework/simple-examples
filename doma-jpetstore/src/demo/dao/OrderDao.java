@@ -18,7 +18,7 @@ public interface OrderDao {
     @Select
     Order getOrder(int orderId);
 
-    @Insert(sqlFile = true)
+    @Insert
     int insertOrder(Order order);
 
     @Insert(sqlFile = true)

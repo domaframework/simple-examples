@@ -1,3 +1,5 @@
+drop sequence orders_seq
+
 drop index productCat;
 drop index productName;
 drop index itemProd;
@@ -15,6 +17,8 @@ drop table account;
 drop table category;
 drop table supplier;
 drop table sequence;
+
+create sequence orders_seq as integer start with 1 increment by 10;
 
 create table supplier (
     suppid int not null,

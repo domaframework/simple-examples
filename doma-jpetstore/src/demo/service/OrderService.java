@@ -28,37 +28,29 @@ public class OrderService {
         lineItemDao = new LineItemDaoImpl();
     }
 
-    public void insertOrder(Order order) {
+    public void insertOrder(Order order, List<LineItem> lineItems) {
         // Get the next id within a separate transaction
-        order.setOrderId(getNextId("ordernum"));
+        order.orderId = getNextId("ordernum");
 
-        for (int i = 0; i < order.getLineItems().size(); i++) {
-            LineItem lineItem = (LineItem) order.getLineItems().get(i);
-            String itemId = lineItem.getItemId();
-            Integer increment = new Integer(lineItem.getQuantity());
-            itemDao.updateInventoryQuantity(itemId, increment);
+        for (LineItem lineItem : lineItems) {
+            itemDao.updateInventoryQuantity(lineItem.itemId, lineItem.quantity);
         }
 
         orderDao.insertOrder(order);
         orderDao.insertOrderStatus(order);
-        for (int i = 0; i < order.getLineItems().size(); i++) {
-            LineItem lineItem = (LineItem) order.getLineItems().get(i);
-            lineItem.setOrderId(order.getOrderId());
+        for (LineItem lineItem : lineItems) {
+            lineItem.orderId = order.orderId;
             lineItemDao.insertLineItem(lineItem);
         }
 
     }
 
     public Order getOrder(int orderId) {
-        Order order = orderDao.getOrder(orderId);
-        order.setLineItems(lineItemDao.getLineItemsByOrderId(orderId));
+        return orderDao.getOrder(orderId);
+    }
 
-        for (int i = 0; i < order.getLineItems().size(); i++) {
-            LineItem lineItem = (LineItem) order.getLineItems().get(i);
-            lineItem.setItem(itemDao.getItem(lineItem.getItemId()));
-        }
-
-        return order;
+    public List<LineItem> getOrderLineItems(int orderId) {
+        return lineItemDao.getLineItemsByOrderId(orderId);
     }
 
     public List<Order> getOrdersByUsername(String username) {
@@ -72,9 +64,9 @@ public class OrderService {
                     "Error: A null sequence was returned from the database (could not get next "
                             + key + " sequence).");
         }
-        sequence.setNextId(sequence.getNextId() + 1);
+        sequence.nextId = sequence.nextId + 1;
         sequenceDao.updateSequence(sequence);
-        return sequence.getNextId();
+        return sequence.nextId;
     }
 
 }

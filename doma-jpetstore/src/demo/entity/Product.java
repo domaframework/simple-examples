@@ -11,46 +11,12 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    String productId;
-    String categoryId;
-    String name;
-    String description;
+    public String productId;
 
-    public String getProductId() {
-        return productId;
-    }
+    public String categoryId;
 
-    public void setProductId(String productId) {
-        this.productId = productId.trim();
-    }
+    public String name;
 
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return getName();
-    }
+    public String description;
 
 }

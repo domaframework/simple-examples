@@ -9,7 +9,7 @@
       <br/>
       Password:<input type="password" name="password" value="j2ee"/>
     </p>
-    <input type="submit" name="submit" value="Login"/>
+    <input type="submit" name="signin" value="Singin"/>
 
   </html:form>
 

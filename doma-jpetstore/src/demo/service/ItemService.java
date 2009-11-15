@@ -20,7 +20,7 @@ public class ItemService {
     public Item getItem(String itemId) {
         Integer i = itemDao.getInventoryQuantity(itemId);
         Item item = itemDao.getItem(itemId);
-        item.setQuantity(i.intValue());
+        item.quantity = i.intValue();
         return item;
     }
 }

@@ -11,167 +11,40 @@ public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    String username;
-    String password;
-    String email;
-    String firstName;
-    String lastName;
-    String status;
-    String address1;
-    String address2;
-    String city;
-    String state;
-    String zip;
-    String country;
-    String phone;
-    String favouriteCategoryId;
-    String languagePreference;
-    boolean listOption;
-    boolean bannerOption;
-    String bannerName;
+    public String username;
 
-    public String getUsername() {
-        return username;
-    }
+    public String password;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public String email;
 
-    public String getPassword() {
-        return password;
-    }
+    public String firstName;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String lastName;
 
-    public String getEmail() {
-        return email;
-    }
+    public String status;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String address1;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String address2;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public String city;
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String state;
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public String zip;
 
-    public String getStatus() {
-        return status;
-    }
+    public String country;
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String phone;
 
-    public String getAddress1() {
-        return address1;
-    }
+    public String favouriteCategoryId;
 
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
+    public String languagePreference;
 
-    public String getAddress2() {
-        return address2;
-    }
+    public boolean listOption;
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
-    }
+    public boolean bannerOption;
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getFavouriteCategoryId() {
-        return favouriteCategoryId;
-    }
-
-    public void setFavouriteCategoryId(String favouriteCategoryId) {
-        this.favouriteCategoryId = favouriteCategoryId;
-    }
-
-    public String getLanguagePreference() {
-        return languagePreference;
-    }
-
-    public void setLanguagePreference(String languagePreference) {
-        this.languagePreference = languagePreference;
-    }
-
-    public boolean isListOption() {
-        return listOption;
-    }
-
-    public void setListOption(boolean listOption) {
-        this.listOption = listOption;
-    }
-
-    public boolean isBannerOption() {
-        return bannerOption;
-    }
-
-    public void setBannerOption(boolean bannerOption) {
-        this.bannerOption = bannerOption;
-    }
-
-    public String getBannerName() {
-        return bannerName;
-    }
-
-    public void setBannerName(String bannerName) {
-        this.bannerName = bannerName;
-    }
+    public String bannerName;
 
 }

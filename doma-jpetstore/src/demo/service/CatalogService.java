@@ -30,10 +30,6 @@ public class CatalogService {
         itemService = new ItemService();
     }
 
-    public List getCategoryList() {
-        return categoryDao.getCategoryList();
-    }
-
     public Category getCategory(String categoryId) {
         return categoryDao.getCategory(categoryId);
     }

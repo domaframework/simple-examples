@@ -3,9 +3,9 @@ package demo.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
-import org.seasar.doma.Transient;
 
 @Entity
 public class LineItem implements Serializable {
@@ -13,87 +13,41 @@ public class LineItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    int orderId;
+    public int orderId;
     @Id
-    int lineNumber;
-    int quantity;
-    String itemId;
-    BigDecimal unitPrice;
-    @Transient
-    Item item;
-    BigDecimal total;
+    public int lineNumber;
 
-    public LineItem() {
-    }
+    public int quantity;
 
-    public LineItem(int lineNumber, CartItem cartItem) {
-        this.lineNumber = lineNumber;
-        this.quantity = cartItem.getQuantity();
-        this.itemId = cartItem.getItem().getItemId();
-        this.unitPrice = cartItem.getItem().getListPrice();
-        this.item = cartItem.getItem();
-    }
+    public String itemId;
 
-    public int getOrderId() {
-        return orderId;
-    }
+    public BigDecimal unitPrice;
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    @Column(insertable = false, updatable = false)
+    public BigDecimal listPrice;
 
-    public int getLineNumber() {
-        return lineNumber;
-    }
+    @Column(insertable = false, updatable = false)
+    public String productName;
 
-    public void setLineNumber(int lineNumber) {
-        this.lineNumber = lineNumber;
-    }
+    @Column(insertable = false, updatable = false)
+    public String attribute1;
 
-    public String getItemId() {
-        return itemId;
-    }
+    @Column(insertable = false, updatable = false)
+    public String attribute2;
 
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
-    }
+    @Column(insertable = false, updatable = false)
+    public String attribute3;
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
+    @Column(insertable = false, updatable = false)
+    public String attribute4;
 
-    public void setUnitPrice(BigDecimal unitprice) {
-        this.unitPrice = unitprice;
-    }
+    @Column(insertable = false, updatable = false)
+    public String attribute5;
 
     public BigDecimal getTotal() {
-        return total;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-        calculateTotal();
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-        calculateTotal();
-    }
-
-    private void calculateTotal() {
-        if (item != null && item.getListPrice() != null) {
-            total = item.getListPrice().multiply(new BigDecimal(quantity));
-        } else {
-            total = null;
+        if (listPrice == null) {
+            return null;
         }
+        return listPrice.multiply(new BigDecimal(quantity));
     }
-
 }

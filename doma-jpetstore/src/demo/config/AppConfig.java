@@ -2,9 +2,10 @@ package demo.config;
 
 import javax.sql.DataSource;
 
-import org.seasar.doma.jdbc.DomaAbstractConfig;
+import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.RequiresNewController;
+import org.seasar.doma.jdbc.SqlFileRepository;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.HsqldbDialect;
 import org.seasar.extension.datasource.DataSourceFactory;
@@ -12,7 +13,9 @@ import org.seasar.extension.datasource.impl.SelectableDataSourceProxy;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
-public class AppConfig extends DomaAbstractConfig {
+public class AppConfig implements Config {
+
+    private static SqlFileRepository sqlfileRepository = new DisposableSqlFileRepository();
 
     private static JdbcLogger jdbcLogger = new CommonsLogger();
 
@@ -30,7 +33,7 @@ public class AppConfig extends DomaAbstractConfig {
                 return dataSourceFactory.getSelectableDataSourceName();
             }
         }
-        return super.getDataSourceName();
+        return getClass().getName();
     }
 
     @Override
@@ -56,6 +59,31 @@ public class AppConfig extends DomaAbstractConfig {
     @Override
     public JdbcLogger getJdbcLogger() {
         return jdbcLogger;
+    }
+
+    @Override
+    public SqlFileRepository getSqlFileRepository() {
+        return sqlfileRepository;
+    }
+
+    @Override
+    public int getBatchSize() {
+        return 10;
+    }
+
+    @Override
+    public int getFetchSize() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxRows() {
+        return 0;
+    }
+
+    @Override
+    public int getQueryTimeout() {
+        return 0;
     }
 
 }

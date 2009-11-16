@@ -1,4 +1,4 @@
-<%@ include file="../common/IncludeTop.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <div id="BackLink">
 
@@ -27,11 +27,11 @@
           ${f:h(item.productName)}
         </td>
         <td><fmt:formatNumber value="${item.listPrice}" pattern="$#,##0.00"/>
-        <td><s:link styleClass="Button" href="/cart/addItemToCart?itemId=${item.itemId}">Add to Cart</s:link></td>
+        <td><s:link styleClass="Button" href="/cart/addItemToCart/${item.itemId}">Add to Cart</s:link></td>
       </tr>
     </c:forEach>
   </table>
 
 </div>
 
-<%@ include file="../common/IncludeBottom.jsp" %>
+<%@ include file="../common/footer.jsp" %>

@@ -1,4 +1,4 @@
-<%@ include file="../common/IncludeTop.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <h2>My Orders</h2>
 
@@ -15,6 +15,6 @@
   </c:forEach>
 </table>
 
-<%@ include file="../common/IncludeBottom.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 

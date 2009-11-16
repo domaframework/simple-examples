@@ -1,4 +1,4 @@
-<%@ include file="../common/IncludeTop.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <div id="BackLink">
   <s:link href="viewCart">Return to Shopping Cart</s:link>
@@ -55,7 +55,7 @@
 
 </div>
 
-<%@ include file="../common/IncludeBottom.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 
 

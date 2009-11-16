@@ -15,9 +15,9 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class AppConfig implements Config {
 
-    private static SqlFileRepository sqlfileRepository = new DisposableSqlFileRepository();
+    private static SqlFileRepository sqlfileRepository = new SqlFileRepositoryProxy();
 
-    private static JdbcLogger jdbcLogger = new CommonsLogger();
+    private static JdbcLogger jdbcLogger = new CommonsJdbcLogger();
 
     private static RequiresNewController requiresNewController = new S2RequiresNewController();
 

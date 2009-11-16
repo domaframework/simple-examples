@@ -1,4 +1,5 @@
-UPDATE ACCOUNT SET
+UPDATE ACCOUNT 
+SET
   EMAIL =/*account.email*/'email',
   FIRSTNAME =/*account.firstName*/'firstname',
   LASTNAME =/*account.lastName*/'lastname',
@@ -10,4 +11,5 @@ UPDATE ACCOUNT SET
   ZIP =/*account.zip*/'zip',
   COUNTRY =/*account.country*/'country',
   PHONE =/*account.phone*/'phone'
-WHERE USERID =/*account.username*/'username'
+WHERE 
+  USERID =/*account.username*/'username'

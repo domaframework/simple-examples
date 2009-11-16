@@ -2,6 +2,7 @@ package demo.entity;
 
 import java.io.Serializable;
 
+import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 
@@ -23,8 +24,10 @@ public class Account implements Serializable {
 
     public String status;
 
+    @Column(name = "ADDR1")
     public String address1;
 
+    @Column(name = "ADDR2")
     public String address2;
 
     public String city;
@@ -37,12 +40,16 @@ public class Account implements Serializable {
 
     public String phone;
 
+    @Column(name = "FAVCATEGORY")
     public String favouriteCategoryId;
 
+    @Column(name = "LANGPREF")
     public String languagePreference;
 
+    @Column(name = "MYLISTOPT")
     public boolean listOption;
 
+    @Column(name = "BANNEROPT")
     public boolean bannerOption;
 
     public String bannerName;

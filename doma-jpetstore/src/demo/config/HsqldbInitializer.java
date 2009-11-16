@@ -11,7 +11,7 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import com.ibatis.common.jdbc.ScriptRunner;
 import com.ibatis.common.resources.Resources;
 
-public class DatabaseInitializer {
+public class HsqldbInitializer {
 
     public static void init() throws ServletException {
         try {

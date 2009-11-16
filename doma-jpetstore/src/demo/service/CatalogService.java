@@ -7,28 +7,17 @@ import java.util.StringTokenizer;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import demo.dao.CategoryDao;
-import demo.dao.ItemDao;
 import demo.dao.ProductDao;
 import demo.dao.impl.CategoryDaoImpl;
-import demo.dao.impl.ItemDaoImpl;
 import demo.dao.impl.ProductDaoImpl;
 import demo.entity.Category;
-import demo.entity.Item;
 import demo.entity.Product;
 
 public class CatalogService {
 
-    private CategoryDao categoryDao;
-    private ItemDao itemDao;
-    private ProductDao productDao;
-    private ItemService itemService;
+    private CategoryDao categoryDao = new CategoryDaoImpl();
 
-    public CatalogService() {
-        categoryDao = new CategoryDaoImpl();
-        productDao = new ProductDaoImpl();
-        itemDao = new ItemDaoImpl();
-        itemService = new ItemService();
-    }
+    private ProductDao productDao = new ProductDaoImpl();
 
     public Category getCategory(String categoryId) {
         return categoryDao.getCategory(categoryId);
@@ -39,7 +28,7 @@ public class CatalogService {
     }
 
     public List<Product> getProductListByCategory(String categoryId) {
-        return productDao.getProductListByCategory(categoryId, SelectOptions
+        return productDao.getProductsByCategory(categoryId, SelectOptions
                 .get());
     }
 
@@ -50,18 +39,6 @@ public class CatalogService {
             keywordList.add(tokenizer.nextToken());
         }
         return productDao.searchProductList(keywordList, SelectOptions.get());
-    }
-
-    public List<Item> getItemListByProduct(String productId) {
-        return itemDao.getItemListByProduct(productId);
-    }
-
-    public Item getItem(String itemId) {
-        return itemDao.getItem(itemId);
-    }
-
-    public boolean isItemInStock(String itemId) {
-        return itemService.isItemInStock(itemId);
     }
 
 }

@@ -13,10 +13,13 @@ import demo.entity.Item;
 import demo.entity.Product;
 import demo.form.CatalogForm;
 import demo.service.CatalogService;
+import demo.service.ItemService;
 
 public class CatalogAction {
 
     protected CatalogService catalogService = new CatalogService();
+
+    protected ItemService itemService = new ItemService();
 
     @ActionForm
     @Resource
@@ -48,13 +51,13 @@ public class CatalogAction {
     @Execute(urlPattern = "viewProduct/{productId}", validator = false, input = "/")
     public String viewProduct() {
         product = catalogService.getProduct(catalogForm.productId);
-        itemList = catalogService.getItemListByProduct(catalogForm.productId);
+        itemList = itemService.getItemsByProduct(catalogForm.productId);
         return "product.jsp";
     }
 
     @Execute(urlPattern = "viewItem/{itemId}", validator = false, input = "/")
     public String viewItem() {
-        item = catalogService.getItem(catalogForm.itemId);
+        item = itemService.getItem(catalogForm.itemId);
         return "item.jsp";
     }
 

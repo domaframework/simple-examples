@@ -6,15 +6,7 @@ import demo.entity.Account;
 
 public class AccountService {
 
-    private AccountDao accountDao;
-
-    public AccountService() {
-        this(new AccountDaoImpl());
-    }
-
-    public AccountService(AccountDao accountDao) {
-        this.accountDao = accountDao;
-    }
+    private AccountDao accountDao = new AccountDaoImpl();
 
     public Account getAccount(String username) {
         return accountDao.getAccountByUsername(username);
@@ -33,7 +25,6 @@ public class AccountService {
     public void updateAccount(Account account) {
         accountDao.updateAccount(account);
         accountDao.updateProfile(account);
-
         if (account.password != null && account.password.length() > 0) {
             accountDao.updateSignon(account);
         }

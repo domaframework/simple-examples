@@ -4,7 +4,13 @@
 <components namespace="jdbc">
 	<include path="jta.dicon"/>
 
+	<!-- Doma configuration  -->
 	<component name="config" class="demo.config.AppConfig"/>
+
+	<!-- Hsqldb initializer  -->
+	<component>
+		@demo.config.HsqldbInitializer@init()
+	</component>
 
 	<!-- for HSQLDB -->
 	<component name="xaDataSource"

@@ -1,4 +1,4 @@
-<%@ include file="../common/IncludeTop.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <div id="BackLink">
   <s:link page="/">Return to Main Menu</s:link>
@@ -127,7 +127,7 @@
 
 </div>
 
-<%@ include file="../common/IncludeBottom.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 
 

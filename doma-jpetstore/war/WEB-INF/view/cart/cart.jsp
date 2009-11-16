@@ -1,4 +1,4 @@
-<%@ include file="../common/IncludeTop.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <div id="BackLink">
   <s:link href="/">Return to Main Menu</s:link>
@@ -42,7 +42,7 @@
             <td><fmt:formatNumber value="${cartItem.item.listPrice}" pattern="$#,##0.00"/></td>
             <td><fmt:formatNumber value="${cartItem.total}" pattern="$#,##0.00"/></td>
             <td>
-              <s:link href="removeItemFromCart?itemId=${cartItem.item.itemId}" styleClass="Button">Remove</s:link>
+              <s:link href="removeItemFromCart/${cartItem.item.itemId}" styleClass="Button">Remove</s:link>
             </td>
           </tr>
           </c:forEach>
@@ -67,7 +67,7 @@
 </div>
 
 
-<%@ include file="../common/IncludeBottom.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 
 

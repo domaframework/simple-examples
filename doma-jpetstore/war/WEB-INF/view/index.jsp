@@ -1,4 +1,4 @@
-<%@ include file="common/IncludeTop.jsp" %>
+<%@ include file="common/header.jsp" %>
 
 <div id="Welcome">
   <div id="WelcomeContent">
@@ -59,5 +59,5 @@
   <div id="Separator">&nbsp;</div>
 </div>
 
-<%@ include file="common/IncludeBottom.jsp" %>
+<%@ include file="common/footer.jsp" %>
 

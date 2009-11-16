@@ -11,7 +11,7 @@ public final class ExternalContextUtil {
 
     public static void invalidateSession() {
         HttpSession session = SingletonS2Container
-                .getComponent(ContainerConstants.SESSION_NAME);
+                .getComponent(HttpSession.class);
         session.invalidate();
     }
 

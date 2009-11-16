@@ -1,6 +1,6 @@
 SELECT
   LI.ORDERID,
-  LI.LINENUM AS lineNumber,
+  LI.LINENUM,
   LI.ITEMID,
   LI.QUANTITY,
   LI.UNITPRICE,
@@ -12,8 +12,7 @@ SELECT
   I.attribute4,
   I.attribute5
 FROM 
-LINEITEM LI LEFT OUTER JOIN
-(
+LINEITEM LI LEFT OUTER JOIN (
   select
     I.ITEMID,
     I.LISTPRICE,
@@ -23,9 +22,14 @@ LINEITEM LI LEFT OUTER JOIN
     ATTR3 AS attribute3,
     ATTR4 AS attribute4,
     ATTR5 AS attribute5
-  from ITEM I, INVENTORY V, PRODUCT P
-  where P.PRODUCTID = I.PRODUCTID
-    and I.ITEMID = V.ITEMID
+  from 
+    ITEM I, INVENTORY V, PRODUCT P
+  where 
+    P.PRODUCTID = I.PRODUCTID
+    and 
+    I.ITEMID = V.ITEMID
 ) I 
-ON LI.ITEMID = I.ITEMID
-WHERE ORDERID = /*orderId*/1
+ON 
+  LI.ITEMID = I.ITEMID
+WHERE 
+  ORDERID = /*orderId*/1

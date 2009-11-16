@@ -15,6 +15,7 @@ public class Item implements Serializable {
     @Id
     public String itemId;
 
+    @Column(name = "PRODUCTID")
     public String productId;
 
     @Column(insertable = false, updatable = false)
@@ -30,20 +31,27 @@ public class Item implements Serializable {
 
     public BigDecimal unitCost;
 
+    @Column(name = "SUPPLIER")
     public int supplierId;
 
     public String status;
 
+    @Column(name = "ATTR1")
     public String attribute1;
 
+    @Column(name = "ATTR2")
     public String attribute2;
 
+    @Column(name = "ATTR3")
     public String attribute3;
 
+    @Column(name = "ATTR4")
     public String attribute4;
 
+    @Column(name = "ATTR5")
     public String attribute5;
 
-    public int quantity;
+    @Column(name = "QTY", insertable = false, updatable = false)
+    public Integer quantity;
 
 }

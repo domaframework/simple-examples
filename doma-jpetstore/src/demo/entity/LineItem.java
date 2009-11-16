@@ -14,7 +14,9 @@ public class LineItem implements Serializable {
 
     @Id
     public int orderId;
+
     @Id
+    @Column(name = "LINENUM")
     public int lineNumber;
 
     public int quantity;

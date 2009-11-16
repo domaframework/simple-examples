@@ -13,10 +13,10 @@ import demo.entity.Order;
 public interface OrderDao {
 
     @Select
-    List<Order> getOrdersByUsername(String username);
+    Order getOrder(int orderId);
 
     @Select
-    Order getOrder(int orderId);
+    List<Order> getOrdersByUsername(String username);
 
     @Insert
     int insertOrder(Order order);

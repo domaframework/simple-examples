@@ -12,6 +12,7 @@ import org.seasar.struts.exception.ActionMessagesException;
 import demo.entity.Item;
 import demo.form.CartForm;
 import demo.service.CatalogService;
+import demo.service.ItemService;
 import demo.session.Cart;
 import demo.session.CartItem;
 import demo.util.ExternalContextUtil;
@@ -20,6 +21,8 @@ public class CartAction {
 
     protected CatalogService catalogService = new CatalogService();
 
+    protected ItemService itemService = new ItemService();
+
     @ActionForm
     @Resource
     protected CartForm cartForm;
@@ -27,7 +30,7 @@ public class CartAction {
     // out
     public Cart cart;
 
-    @Execute(validator = false)
+    @Execute(urlPattern = "addItemToCart/{itemId}", validator = false)
     public String addItemToCart() {
         String workingItemId = cartForm.itemId;
         cart = Cart.get();
@@ -37,15 +40,15 @@ public class CartAction {
             // isInStock is a "real-time" property that must be updated
             // every time an item is added to the cart, even if other
             // item details are cached.
-            boolean isInStock = catalogService.isItemInStock(workingItemId);
-            Item item = catalogService.getItem(workingItemId);
+            boolean isInStock = itemService.isItemInStock(workingItemId);
+            Item item = itemService.getItem(workingItemId);
             cart.addItem(item, isInStock);
         }
         Cart.put(cart);
         return "viewCart?redirect=true";
     }
 
-    @Execute(validator = false, input = "cart.jsp")
+    @Execute(urlPattern = "removeItemFromCart/{itemId}", validator = false, input = "cart.jsp")
     public String removeItemFromCart() {
         String workingItemId = cartForm.itemId;
         cart = Cart.get();

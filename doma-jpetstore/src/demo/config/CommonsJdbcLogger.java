@@ -9,7 +9,7 @@ import org.seasar.doma.jdbc.Sql;
 import org.seasar.doma.jdbc.SqlExecutionSkipCause;
 import org.seasar.doma.jdbc.SqlFile;
 
-public class CommonsLogger implements JdbcLogger {
+public class CommonsJdbcLogger implements JdbcLogger {
 
     @Override
     public void logConnectionClosingFailure(String callerClassName,

@@ -1,6 +1,8 @@
 SELECT
-  CATID AS categoryId,
+  CATID,
   NAME,
-  DESCN AS description
-FROM CATEGORY
-WHERE CATID = /*categoryId*/'DOGS'
+  DESCN
+FROM 
+  CATEGORY
+WHERE
+  CATID = /*categoryId*/'DOGS'

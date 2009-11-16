@@ -1,8 +1,8 @@
-select
-  I.ITEMID,
-  I.LISTPRICE,
-  I.UNITCOST,
-  I.SUPPLIER,
+SELECT
+  ITEMID,
+  LISTPRICE,
+  UNITCOST,
+  SUPPLIER,
   I.PRODUCTID,
   NAME AS productName,
   DESCN AS productDescription,
@@ -12,15 +12,14 @@ select
   ATTR2,
   ATTR3,
   ATTR4,
-  ATTR5,
-  QTY
-from 
+  ATTR5
+FROM 
   ITEM I, 
   INVENTORY V, 
   PRODUCT P
-where 
+WHERE 
   P.PRODUCTID = I.PRODUCTID
-  and 
+  AND 
   I.ITEMID = V.ITEMID
-  and 
-  I.ITEMID = /*itemId*/'EST-2'
+  AND 
+  I.PRODUCTID = /*productId*/'FI-FW-02'

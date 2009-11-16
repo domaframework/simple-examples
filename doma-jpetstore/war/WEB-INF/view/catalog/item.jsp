@@ -1,4 +1,4 @@
-<%@ include file="../common/IncludeTop.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <div id="BackLink">
 
@@ -45,10 +45,10 @@
     </td></tr>
 
     <tr><td>
-      <s:link styleClass="Button" href="/cart/addItemToCart?itemId=${item.itemId}">Add to Cart</s:link>
+      <s:link styleClass="Button" href="/cart/addItemToCart/${item.itemId}">Add to Cart</s:link>
     </td></tr>
   </table>
 
 </div>
 
-<%@ include file="../common/IncludeBottom.jsp" %>
+<%@ include file="../common/footer.jsp" %>

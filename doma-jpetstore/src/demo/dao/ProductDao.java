@@ -13,11 +13,11 @@ import demo.entity.Product;
 public interface ProductDao {
 
     @Select
-    List<Product> getProductListByCategory(String categoryId,
-            SelectOptions options);
+    Product getProduct(String productId);
 
     @Select
-    Product getProduct(String productId);
+    List<Product> getProductsByCategory(String categoryId,
+            SelectOptions options);
 
     @Select
     List<Product> searchProductList(List<String> keywords, SelectOptions options);

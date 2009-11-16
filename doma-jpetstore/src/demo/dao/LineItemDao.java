@@ -15,6 +15,6 @@ public interface LineItemDao {
     @Select
     List<LineItem> getLineItemsByOrderId(int orderId);
 
-    @Insert(sqlFile = true)
+    @Insert
     int insertLineItem(LineItem lineItem);
 }

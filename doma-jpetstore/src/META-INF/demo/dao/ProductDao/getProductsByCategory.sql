@@ -6,4 +6,4 @@ SELECT
 FROM 
   PRODUCT
 WHERE 
-  PRODUCTID = /*productId*/'AV-CB-01'
+  CATEGORY = /*categoryId*/'DOGS'

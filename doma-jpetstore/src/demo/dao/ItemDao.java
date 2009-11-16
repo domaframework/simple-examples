@@ -19,9 +19,9 @@ public interface ItemDao {
     Integer getInventoryQuantity(String itemId);
 
     @Select
-    List<Item> getItemListByProduct(String productId);
+    Item getItem(String itemId);
 
     @Select
-    Item getItem(String itemId);
+    List<Item> getItemsByProduct(String productId);
 
 }

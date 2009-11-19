@@ -24,6 +24,10 @@ public class Cart implements Serializable {
         return itemList;
     }
 
+    public CartItem getCartItem(String itemId) {
+        return itemMap.get(itemId);
+    }
+
     public int getNumberOfItems() {
         return itemList.size();
     }

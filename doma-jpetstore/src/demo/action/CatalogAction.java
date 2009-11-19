@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
-import org.seasar.struts.exception.ActionMessagesException;
 
 import demo.entity.Category;
 import demo.entity.Item;
@@ -40,41 +39,24 @@ public class CatalogAction {
     // out
     public Item item;
 
-    @Execute(urlPattern = "viewCategory/{categoryId}", validator = false, input = "/")
+    @Execute(urlPattern = "viewCategory/{id}", validator = false, input = "/")
     public String viewCategory() {
-        category = catalogService.getCategory(catalogForm.categoryId);
-        productList = catalogService
-                .getProductListByCategory(catalogForm.categoryId);
+        category = catalogService.getCategory(catalogForm.id);
+        productList = catalogService.getProductListByCategory(catalogForm.id);
         return "category.jsp";
     }
 
-    @Execute(urlPattern = "viewProduct/{productId}", validator = false, input = "/")
+    @Execute(urlPattern = "viewProduct/{id}", validator = false, input = "/")
     public String viewProduct() {
-        product = catalogService.getProduct(catalogForm.productId);
-        itemList = itemService.getItemsByProduct(catalogForm.productId);
+        product = catalogService.getProduct(catalogForm.id);
+        itemList = itemService.getItemsByProduct(catalogForm.id);
         return "product.jsp";
     }
 
-    @Execute(urlPattern = "viewItem/{itemId}", validator = false, input = "/")
+    @Execute(urlPattern = "viewItem/{id}", validator = false, input = "/")
     public String viewItem() {
-        item = itemService.getItem(catalogForm.itemId);
+        item = itemService.getItem(catalogForm.id);
         return "item.jsp";
-    }
-
-    @Execute(input = "/")
-    public String searchProducts() {
-        String keyword = catalogForm.keyword;
-        if (keyword == null || keyword.length() < 1) {
-            throw new ActionMessagesException(
-                    "Please enter a keyword to search for, then press the search button.",
-                    false);
-        } else {
-            productList = catalogService.searchProductList(keyword);
-        }
-        return "searchProducts.jsp";
-    }
-
-    public void validateSearchKeyword(String keyword, String password) {
     }
 
 }

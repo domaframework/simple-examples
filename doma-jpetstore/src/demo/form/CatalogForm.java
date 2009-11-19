@@ -1,12 +1,10 @@
 package demo.form;
 
+import org.seasar.struts.annotation.Required;
+
 public class CatalogForm {
 
-    public String categoryId;
+    @Required
+    public String id;
 
-    public String productId;
-
-    public String itemId;
-
-    public String keyword;
 }

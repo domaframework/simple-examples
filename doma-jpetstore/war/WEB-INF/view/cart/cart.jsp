@@ -36,7 +36,7 @@
             </td>
             <td>${f:h(cartItem.inStock)}</td>
             <td>
-              <input type="text" size="3" name="${f:h(cartItem.item.itemId)}"
+              <input type="text" size="3" name="itemIds(${f:h(cartItem.item.itemId)})"
                      value="${f:h(cartItem.quantity)}"/>
             </td>
             <td><fmt:formatNumber value="${cartItem.item.listPrice}" pattern="$#,##0.00"/></td>

@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.Sql;
 import org.seasar.doma.jdbc.SqlExecutionSkipCause;
-import org.seasar.doma.jdbc.SqlFile;
 
 public class CommonsJdbcLogger implements JdbcLogger {
 
@@ -52,14 +51,9 @@ public class CommonsJdbcLogger implements JdbcLogger {
     public void logSql(String callerClassName, String callerMethodName,
             Sql<?> sql) {
         Log log = LogFactory.getLog(callerClassName);
-        log.info(sql.getFormattedSql());
-    }
-
-    @Override
-    public void logSqlFile(String callerClassName, String callerMethodName,
-            SqlFile sqlFile) {
-        Log log = LogFactory.getLog(callerClassName);
-        log.info(sqlFile.getPath());
+        String message = String.format("sqlFilePath=[%s]%n%s", sql
+                .getSqlFilePath(), sql.getFormattedSql());
+        log.info(message);
     }
 
 }

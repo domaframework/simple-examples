@@ -1,6 +1,5 @@
 package demo.action;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -15,7 +14,6 @@ import demo.service.CatalogService;
 import demo.service.ItemService;
 import demo.session.Cart;
 import demo.session.CartItem;
-import demo.util.ExternalContextUtil;
 
 public class CartAction {
 
@@ -30,7 +28,7 @@ public class CartAction {
     // out
     public Cart cart;
 
-    @Execute(urlPattern = "addItemToCart/{itemId}", validator = false)
+    @Execute(urlPattern = "addItemToCart/{itemId}", validator = true, input = "viewCart")
     public String addItemToCart() {
         String workingItemId = cartForm.itemId;
         cart = Cart.get();
@@ -48,7 +46,7 @@ public class CartAction {
         return "viewCart?redirect=true";
     }
 
-    @Execute(urlPattern = "removeItemFromCart/{itemId}", validator = false, input = "cart.jsp")
+    @Execute(urlPattern = "removeItemFromCart/{itemId}", validator = false, input = "viewCart")
     public String removeItemFromCart() {
         String workingItemId = cartForm.itemId;
         cart = Cart.get();
@@ -61,23 +59,26 @@ public class CartAction {
         return "viewCart?redirect=true";
     }
 
-    @Execute(validator = false, input = "cart.jsp")
+    @Execute(validator = false)
     public String updateCartQuantities() {
         cart = Cart.get();
-        Map<Object, Object> paramMap = ExternalContextUtil.getParamMap();
-        for (Iterator<CartItem> it = cart.getCartItemList().iterator(); it
-                .hasNext();) {
-            CartItem cartItem = it.next();
-            Item item = cartItem.getItem();
+        for (Map.Entry<String, String> entry : cartForm.itemIds.entrySet()) {
+            String itemId = entry.getKey();
+            CartItem cartItem = cart.getCartItem(entry.getKey());
+            if (cartItem == null) {
+                continue;
+            }
+            String quantity = entry.getValue();
+            int qty = 0;
             try {
-                int quantity = Integer.parseInt((String) paramMap
-                        .get(item.itemId));
-                cart.setQuantityByItemId(item.itemId, quantity);
-                if (quantity < 1) {
-                    it.remove();
-                }
-            } catch (Exception ignored) {
-                // ignore parse exceptions on purpose
+                qty = Integer.valueOf(quantity);
+            } catch (NumberFormatException e) {
+                continue;
+            }
+            if (qty < 1) {
+                cart.removeItemById(itemId);
+            } else {
+                cart.setQuantityByItemId(itemId, qty);
             }
         }
         Cart.put(cart);

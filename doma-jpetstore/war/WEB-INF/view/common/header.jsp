@@ -48,7 +48,7 @@
 
   <div id="Search">
     <div id="SearchContent">
-      <s:form method="post" action="/catalog/searchProducts">
+      <s:form method="post" action="/searchProducts/">
         <input name="keyword" size="14"/>&nbsp;<input type="submit" name="SearchButton"
         value="Search"/>
       </s:form>

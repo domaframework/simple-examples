@@ -8,11 +8,13 @@ import org.seasar.framework.beans.util.Beans;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
+import demo.annotation.Authorized;
 import demo.entity.Account;
 import demo.form.EditAccountForm;
 import demo.service.AccountService;
 import demo.session.User;
 
+@Authorized
 public class EditAccountAction {
 
     protected AccountService accountService = new AccountService();

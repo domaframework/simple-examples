@@ -29,8 +29,6 @@
           <html:link page="/editAccount/editAccountForm">My Account</html:link>
         </c:otherwise>
       </c:choose>
-      <img align="middle" src="${f:url('/images/separator.gif')}"/>
-      <html:link href="${f:url('/help.html')}">?</html:link>
     </div>
   </div>
 

@@ -6,6 +6,12 @@
 		<initMethod name="addRootPackageName">
 			<arg>"demo"</arg>
 		</initMethod>
+		<initMethod name="addIgnorePackageName">
+			<arg>"demo.annotation"</arg>
+		</initMethod>
+		<initMethod name="addIgnorePackageName">
+			<arg>"demo.session"</arg>
+		</initMethod>
 	</component>
 	<component class="org.seasar.framework.convention.impl.PersistenceConventionImpl"/>
 </components>

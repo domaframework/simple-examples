@@ -12,7 +12,7 @@ import demo.entity.Product;
 
 public class ProductService {
 
-    private ProductDao productDao = new ProductDaoImpl();
+    protected ProductDao productDao = new ProductDaoImpl();
 
     public Product getProduct(String productId) {
         return productDao.getProduct(productId);

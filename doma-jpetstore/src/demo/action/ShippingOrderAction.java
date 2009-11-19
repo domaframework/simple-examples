@@ -7,12 +7,13 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
+import demo.annotation.Authorized;
 import demo.entity.Order;
 import demo.form.ShippingOrderForm;
 import demo.session.Cart;
 import demo.session.PurchaseOrder;
-import demo.session.User;
 
+@Authorized
 public class ShippingOrderAction {
 
     @ActionForm
@@ -24,14 +25,8 @@ public class ShippingOrderAction {
 
     @Execute(validator = false, input = "/account/signinForm")
     public String newOrderForm() {
-        User user = User.get();
         Cart cart = Cart.get();
 
-        if (!user.isAuthenticated()) {
-            throw new ActionMessagesException(
-                    "You must sign on before attempting to check out.  Please sign on and try checking out again.",
-                    false);
-        }
         if (cart.getCartItemList().isEmpty()) {
             throw new ActionMessagesException(
                     "You must sign on before attempting to check out.  Please sign on and try checking out again.",

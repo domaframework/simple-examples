@@ -13,11 +13,11 @@ import demo.entity.OrderLineItem;
 
 public class OrderService {
 
-    private ItemDao itemDao = new ItemDaoImpl();
+    protected ItemDao itemDao = new ItemDaoImpl();
 
-    private OrderDao orderDao = new OrderDaoImpl();
+    protected OrderDao orderDao = new OrderDaoImpl();
 
-    private OrderLineItemDao orderLineItemDao = new OrderLineItemDaoImpl();
+    protected OrderLineItemDao orderLineItemDao = new OrderLineItemDaoImpl();
 
     public void insertOrder(Order order, List<OrderLineItem> lineItems) {
         for (OrderLineItem lineItem : lineItems) {

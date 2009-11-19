@@ -12,7 +12,7 @@ WHERE
   OR 
   lower(category) like /* @contain(keyword.toLowerCase()) */'a' 
   OR 
-  lower(descn) like /* @contain(keyword.toLowerCase()) */'a'/
-*%hasNext "  OR"*/
+  lower(descn) like /* @contain(keyword.toLowerCase()) */'a'
+/*%hasNext "  OR"*/
   /*%end*/
 /*%end*/

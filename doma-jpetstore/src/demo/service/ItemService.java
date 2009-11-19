@@ -8,7 +8,7 @@ import demo.entity.Item;
 
 public class ItemService {
 
-    private ItemDao itemDao = new ItemDaoImpl();
+    protected ItemDao itemDao = new ItemDaoImpl();
 
     public boolean isItemInStock(String itemId) {
         Integer i = itemDao.getInventoryQuantity(itemId);

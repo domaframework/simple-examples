@@ -6,7 +6,7 @@ import demo.entity.Category;
 
 public class CategoryService {
 
-    private CategoryDao categoryDao = new CategoryDaoImpl();
+    protected CategoryDao categoryDao = new CategoryDaoImpl();
 
     public Category getCategory(String categoryId) {
         return categoryDao.getCategory(categoryId);

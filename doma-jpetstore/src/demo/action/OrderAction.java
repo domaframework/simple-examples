@@ -11,6 +11,7 @@ import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 import org.seasar.struts.util.ActionMessagesUtil;
 
+import demo.annotation.Authorized;
 import demo.entity.Order;
 import demo.entity.OrderLineItem;
 import demo.form.OrderForm;
@@ -19,8 +20,8 @@ import demo.session.Cart;
 import demo.session.PurchaseOrder;
 import demo.session.User;
 import demo.util.ExternalContextUtil;
-import demo.util.NumberUtil;
 
+@Authorized
 public class OrderAction {
 
     protected OrderService orderService = new OrderService();
@@ -47,15 +48,13 @@ public class OrderAction {
 
     @Execute(urlPattern = "viewOrder/{orderId}", validator = true, input = "listOrders")
     public String viewOrder() {
-        if (!NumberUtil.isDigit(orderForm.orderId)) {
-            throw new ActionMessagesException("Illegal orderId.", false);
-        }
         int orderId = Integer.valueOf(orderForm.orderId);
         order = orderService.getOrder(orderId);
         lineItems = orderService.getOrderLineItems(orderId);
 
         if (order == null || lineItems == null) {
-            throw new ActionMessagesException("An error occurred.", false);
+            throw new ActionMessagesException(String.format(
+                    "orderId[%s] is not found.", orderId), false);
         }
 
         User user = User.get();

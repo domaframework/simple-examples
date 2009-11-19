@@ -11,7 +11,6 @@ import org.seasar.struts.annotation.Execute;
 import demo.entity.Account;
 import demo.form.NewAccountForm;
 import demo.service.AccountService;
-import demo.session.User;
 
 public class NewAccountAction {
 
@@ -41,11 +40,7 @@ public class NewAccountAction {
         Beans.copy(newAccountForm, account).execute();
         try {
             accountService.insertAccount(account);
-            User user = User.get();
-            user.setUsername(account.username);
-            user.setFirstName(account.firstName);
-            user.setAuthenticated(true);
-            return "/";
+            return "/signin/signinForm?redirect=true";
         } catch (Exception e) {
             throw new RuntimeException(
                     "There was a problem creating your Account Information.  Cause: "

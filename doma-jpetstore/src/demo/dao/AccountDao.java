@@ -20,19 +20,7 @@ public interface AccountDao {
     @Insert(sqlFile = true)
     int insertAccount(Account account);
 
-    @Insert(sqlFile = true)
-    int insertProfile(Account account);
-
-    @Insert(sqlFile = true)
-    int insertSignon(Account account);
-
     @Update(sqlFile = true)
     int updateAccount(Account account);
-
-    @Update(sqlFile = true)
-    int updateProfile(Account account);
-
-    @Update(sqlFile = true)
-    int updateSignon(Account account);
 
 }

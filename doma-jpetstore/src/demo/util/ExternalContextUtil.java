@@ -18,10 +18,6 @@ public final class ExternalContextUtil {
         return SingletonS2Container.getComponent(HttpSession.class);
     }
 
-    public static Map<Object, Object> getParamMap() {
-        return SingletonS2Container.getComponent(ContainerConstants.PARAM);
-    }
-
     public static Map<Object, Object> getRequestMap() {
         return SingletonS2Container
                 .getComponent(ContainerConstants.REQUEST_SCOPE);

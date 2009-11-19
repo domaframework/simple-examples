@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import demo.entity.LineItem;
+import demo.entity.OrderLineItem;
 import demo.entity.Order;
 import demo.util.ExternalContextUtil;
 
@@ -15,7 +15,7 @@ public class PurchaseOrder implements Serializable {
 
     protected Order order;
 
-    protected List<LineItem> lineItems = new ArrayList<LineItem>();
+    protected List<OrderLineItem> lineItems = new ArrayList<OrderLineItem>();
 
     public Order getOrder() {
         return order;
@@ -25,11 +25,11 @@ public class PurchaseOrder implements Serializable {
         this.order = order;
     }
 
-    public List<LineItem> getLineItems() {
+    public List<OrderLineItem> getLineItems() {
         return lineItems;
     }
 
-    public void setLineItems(List<LineItem> lineItems) {
+    public void setLineItems(List<OrderLineItem> lineItems) {
         this.lineItems = lineItems;
     }
 

@@ -36,7 +36,7 @@
 
     </table>
 
-    <input type="submit" name="newOrderWithShippingAddress" value="Continue">
+    <input type="submit" name="continueOrder" value="Continue">
 
   </s:form>
 

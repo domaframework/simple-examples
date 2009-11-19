@@ -11,12 +11,15 @@ import demo.entity.Category;
 import demo.entity.Item;
 import demo.entity.Product;
 import demo.form.CatalogForm;
-import demo.service.CatalogService;
+import demo.service.CategoryService;
 import demo.service.ItemService;
+import demo.service.ProductService;
 
 public class CatalogAction {
 
-    protected CatalogService catalogService = new CatalogService();
+    protected CategoryService categoryService = new CategoryService();
+
+    protected ProductService productService = new ProductService();
 
     protected ItemService itemService = new ItemService();
 
@@ -41,14 +44,14 @@ public class CatalogAction {
 
     @Execute(urlPattern = "viewCategory/{id}", validator = false, input = "/")
     public String viewCategory() {
-        category = catalogService.getCategory(catalogForm.id);
-        productList = catalogService.getProductListByCategory(catalogForm.id);
+        category = categoryService.getCategory(catalogForm.id);
+        productList = productService.getProductListByCategory(catalogForm.id);
         return "category.jsp";
     }
 
     @Execute(urlPattern = "viewProduct/{id}", validator = false, input = "/")
     public String viewProduct() {
-        product = catalogService.getProduct(catalogForm.id);
+        product = productService.getProduct(catalogForm.id);
         itemList = itemService.getItemsByProduct(catalogForm.id);
         return "product.jsp";
     }

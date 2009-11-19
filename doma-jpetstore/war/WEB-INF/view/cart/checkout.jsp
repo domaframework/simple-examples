@@ -44,7 +44,7 @@
             </td>
           </tr>
         </table>
-        <html:link styleClass="Button" page="/order/newOrderForm">Continue</html:link>
+        <html:link styleClass="Button" page="/billingOrder/newOrderForm">Continue</html:link>
       </td>
       <td>
         &nbsp;

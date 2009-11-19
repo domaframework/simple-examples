@@ -10,6 +10,6 @@
 <%@taglib prefix="f" uri="http://sastruts.seasar.org/functions" %>
 
 <% 
-Object signin = session.getAttribute(demo.session.SessionKeys.SIGNIN);
-pageContext.setAttribute("SIGNIN", signin); 
+Object user = session.getAttribute(demo.session.SessionKeys.USER);
+pageContext.setAttribute("USER", user); 
 %>

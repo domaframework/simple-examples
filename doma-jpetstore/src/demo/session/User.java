@@ -5,7 +5,7 @@ import java.util.Map;
 
 import demo.util.ExternalContextUtil;
 
-public class Signin implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,22 +39,22 @@ public class Signin implements Serializable {
         this.firstName = firstName;
     }
 
-    public static Signin get() {
+    public static User get() {
         Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        Signin signin = (Signin) sessionMap.get(SessionKeys.SIGNIN);
+        User signin = (User) sessionMap.get(SessionKeys.USER);
         if (signin == null) {
-            return new Signin();
+            return new User();
         }
         return signin;
     }
 
-    public static void put(Signin signin) {
+    public static void put(User signin) {
         Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.put(SessionKeys.SIGNIN, signin);
+        sessionMap.put(SessionKeys.USER, signin);
     }
 
     public static void clear() {
         Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.remove(SessionKeys.SIGNIN);
+        sessionMap.remove(SessionKeys.USER);
     }
 }

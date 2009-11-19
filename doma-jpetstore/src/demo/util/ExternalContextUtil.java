@@ -10,9 +10,12 @@ import org.seasar.framework.container.SingletonS2Container;
 public final class ExternalContextUtil {
 
     public static void invalidateSession() {
-        HttpSession session = SingletonS2Container
-                .getComponent(HttpSession.class);
+        HttpSession session = getSession();
         session.invalidate();
+    }
+
+    public static HttpSession getSession() {
+        return SingletonS2Container.getComponent(HttpSession.class);
     }
 
     public static Map<Object, Object> getParamMap() {

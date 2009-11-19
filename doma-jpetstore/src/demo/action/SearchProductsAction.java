@@ -9,11 +9,11 @@ import org.seasar.struts.annotation.Execute;
 
 import demo.entity.Product;
 import demo.form.SearchProductsForm;
-import demo.service.CatalogService;
+import demo.service.ProductService;
 
 public class SearchProductsAction {
 
-    protected CatalogService catalogService = new CatalogService();
+    protected ProductService productService = new ProductService();
 
     @Resource
     @ActionForm
@@ -25,7 +25,7 @@ public class SearchProductsAction {
     @Execute(input = "productsjsp")
     public String search() {
         String keyword = searchProductsForm.keyword;
-        productList = catalogService.searchProductList(keyword);
+        productList = productService.searchProductList(keyword);
         return "products.jsp";
     }
 

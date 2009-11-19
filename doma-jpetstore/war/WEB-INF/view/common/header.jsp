@@ -1,20 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<link rel="stylesheet" type="text/css" href="${f:url('/css/jpetstore.css')}"/>
-
+<html>
 <head>
-  <meta name="generator"
-        content="HTML Tidy for Linux/x86 (vers 1st November 2002), see www.w3.org"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>JPetStore Demo</title>
-  <meta content="text/html; charset=windows-1252" http-equiv="Content-Type"/>
-  <meta http-equiv="Cache-Control" content="max-age=0"/>
-  <meta http-equiv="Cache-Control" content="no-cache"/>
-  <meta http-equiv="expires" content="0"/>
-  <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
-  <meta http-equiv="Pragma" content="no-cache"/>
+  <link rel="stylesheet" type="text/css" href="${f:url('/css/jpetstore.css')}"/>
 </head>
 
 <body>
@@ -32,13 +20,13 @@
       <s:link href="/cart/viewCart"><img align="middle" name="img_cart" src="${f:url('/images/cart.gif')}"/></s:link>
       <img align="middle" src="${f:url('/images/separator.gif')}"/>
       <c:choose>
-        <c:when test="${empty SIGNIN || !SIGNIN.authenticated}">
-          <html:link page="/account/signinForm">Sign In</html:link>
+        <c:when test="${empty USER || !USER.authenticated}">
+          <html:link page="/signin/signinForm">Sign In</html:link>
         </c:when>
         <c:otherwise>
-          <html:link page="/account/signout">Sign Out</html:link>
+          <html:link page="/signin/signout">Sign Out</html:link>
           <img align="middle" src="${f:url('/images/separator.gif')}"/>
-          <html:link page="/account/editAccountForm">My Account</html:link>
+          <html:link page="/editAccount/editAccountForm">My Account</html:link>
         </c:otherwise>
       </c:choose>
       <img align="middle" src="${f:url('/images/separator.gif')}"/>

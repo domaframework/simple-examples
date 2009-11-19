@@ -2,7 +2,7 @@ package demo.form;
 
 import org.seasar.struts.annotation.Required;
 
-public class AccountForm {
+public class NewAccountForm {
 
     @Required
     public String username;

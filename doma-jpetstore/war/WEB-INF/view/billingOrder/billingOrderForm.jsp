@@ -55,7 +55,7 @@
 
     </table>
 
-    <input type="submit" name="newOrder" value="Continue">
+    <input type="submit" name="continueOrder" value="Continue">
 
   </s:form>
 

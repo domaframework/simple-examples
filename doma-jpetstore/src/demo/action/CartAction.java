@@ -10,14 +10,11 @@ import org.seasar.struts.exception.ActionMessagesException;
 
 import demo.entity.Item;
 import demo.form.CartForm;
-import demo.service.CatalogService;
 import demo.service.ItemService;
 import demo.session.Cart;
 import demo.session.CartItem;
 
 public class CartAction {
-
-    protected CatalogService catalogService = new CatalogService();
 
     protected ItemService itemService = new ItemService();
 

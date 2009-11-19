@@ -7,14 +7,14 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 
 import demo.config.AppConfig;
-import demo.entity.LineItem;
+import demo.entity.OrderLineItem;
 
 @Dao(config = AppConfig.class)
-public interface LineItemDao {
+public interface OrderLineItemDao {
 
     @Select
-    List<LineItem> getLineItemsByOrderId(int orderId);
+    List<OrderLineItem> getLineItemsByOrderId(int orderId);
 
     @Insert
-    int insertLineItem(LineItem lineItem);
+    int insertLineItem(OrderLineItem lineItem);
 }

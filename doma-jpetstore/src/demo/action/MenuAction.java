@@ -2,10 +2,10 @@ package demo.action;
 
 import org.seasar.struts.annotation.Execute;
 
-public class IndexAction {
+public class MenuAction {
 
     @Execute(validator = false)
     public String index() {
-        return "/menu?redirect=true";
+        return "index.jsp";
     }
 }

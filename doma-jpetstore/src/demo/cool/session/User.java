@@ -1,4 +1,4 @@
-package demo.session;
+package demo.cool.session;
 
 import java.io.Serializable;
 import java.util.Map;

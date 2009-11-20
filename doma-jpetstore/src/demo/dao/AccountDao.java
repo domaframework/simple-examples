@@ -5,7 +5,7 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
-import demo.config.AppConfig;
+import demo.cool.config.AppConfig;
 import demo.entity.Account;
 
 @Dao(config = AppConfig.class)

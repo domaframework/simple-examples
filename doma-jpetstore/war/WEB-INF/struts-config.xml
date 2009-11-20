@@ -32,7 +32,7 @@
     <controller
         maxFileSize="1024K"
         bufferSize="1024"
-        processorClass="demo.action.JPetStoreRequestProcessor"
+        processorClass="demo.cool.action.JPetStoreRequestProcessor"
         multipartClass="org.seasar.struts.upload.S2MultipartRequestHandler"/>
 
 

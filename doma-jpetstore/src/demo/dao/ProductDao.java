@@ -6,7 +6,7 @@ import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
 import org.seasar.doma.jdbc.SelectOptions;
 
-import demo.config.AppConfig;
+import demo.cool.config.AppConfig;
 import demo.entity.Product;
 
 @Dao(config = AppConfig.class)

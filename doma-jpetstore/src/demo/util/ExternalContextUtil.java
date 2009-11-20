@@ -2,6 +2,7 @@ package demo.util;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.seasar.framework.container.ContainerConstants;
@@ -12,6 +13,10 @@ public final class ExternalContextUtil {
     public static void invalidateSession() {
         HttpSession session = getSession();
         session.invalidate();
+    }
+
+    public static HttpServletRequest getRequest() {
+        return SingletonS2Container.getComponent(HttpServletRequest.class);
     }
 
     public static HttpSession getSession() {

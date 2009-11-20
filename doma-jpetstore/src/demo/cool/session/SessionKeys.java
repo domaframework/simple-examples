@@ -1,4 +1,4 @@
-package demo.session;
+package demo.cool.session;
 
 public final class SessionKeys {
 

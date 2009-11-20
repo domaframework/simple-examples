@@ -1,4 +1,4 @@
-package demo.config;
+package demo.cool.config;
 
 import org.seasar.doma.jdbc.AbstractSqlFileRepository;
 import org.seasar.doma.jdbc.GreedyCacheSqlFileRepository;

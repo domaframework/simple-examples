@@ -11,17 +11,18 @@ import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 import org.seasar.struts.util.ActionMessagesUtil;
 
-import demo.annotation.Authorized;
+import demo.cool.annotation.Authorize;
+import demo.cool.session.Cart;
+import demo.cool.session.PurchaseOrder;
+import demo.cool.session.User;
 import demo.entity.Order;
 import demo.entity.OrderLineItem;
 import demo.form.OrderForm;
 import demo.service.OrderService;
-import demo.session.Cart;
-import demo.session.PurchaseOrder;
-import demo.session.User;
 import demo.util.ExternalContextUtil;
+import demo.util.TokenUtil;
 
-@Authorized
+@Authorize
 public class OrderAction {
 
     protected OrderService orderService = new OrderService();
@@ -65,7 +66,7 @@ public class OrderAction {
                 false);
     }
 
-    @Execute(validator = false, input = "/account/signinForm")
+    @Execute(validator = false, validate = "validateToken", input = "confirmOrderForm.jsp")
     public String confirm() {
         PurchaseOrder purchaseOrder = PurchaseOrder.get();
         Order order = purchaseOrder.getOrder();
@@ -83,6 +84,10 @@ public class OrderAction {
         ActionMessagesUtil.addMessages(ExternalContextUtil.getSession(),
                 messages);
         return "/";
+    }
+
+    public ActionMessages validateToken() {
+        return TokenUtil.validate();
     }
 
 }

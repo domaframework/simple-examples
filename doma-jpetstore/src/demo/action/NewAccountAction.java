@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.struts.action.ActionMessages;
 import org.seasar.framework.beans.util.Beans;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
@@ -11,6 +12,7 @@ import org.seasar.struts.annotation.Execute;
 import demo.entity.Account;
 import demo.form.NewAccountForm;
 import demo.service.AccountService;
+import demo.util.TokenUtil;
 
 public class NewAccountAction {
 
@@ -31,10 +33,13 @@ public class NewAccountAction {
 
     @Execute(validator = false)
     public String newAccountForm() {
+
+        TokenUtil.save();
+
         return "newAccountForm.jsp";
     }
 
-    @Execute(validator = true, input = "newAccountForm.jsp")
+    @Execute(validator = true, validate = "validateToken", input = "newAccountForm.jsp")
     public String newAccount() {
         account = new Account();
         Beans.copy(newAccountForm, account).execute();
@@ -46,6 +51,10 @@ public class NewAccountAction {
                     "There was a problem creating your Account Information.  Cause: "
                             + e, e);
         }
+    }
+
+    public ActionMessages validateToken() {
+        return TokenUtil.validate();
     }
 
 }

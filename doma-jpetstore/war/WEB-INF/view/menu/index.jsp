@@ -5,9 +5,6 @@
     <c:if test="${not empty USER && USER.authenticated}">
       Welcome ${f:h(USER.firstName)}!<br/>
     </c:if>
-    <html:messages id="message" message="true">
-      ${message}
-    </html:messages>
   </div>
 </div>
 

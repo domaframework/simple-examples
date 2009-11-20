@@ -1,4 +1,4 @@
-<project name="doma-tutorial" default="dist" basedir=".">
+<project name="doma-jpetstore" default="dist" basedir=".">
 
 	<target name="copy">
 		<copy todir="war/WEB-INF/lib" file="../doma/target/doma-${ver}.jar"/>
@@ -7,8 +7,8 @@
 
 	<target name="dist" depends="copy">
 		<mkdir dir="${zipDir}"/>
-		<zip zipfile="${zipDir}/doma-sastruts-demo-${ver}.zip">
-			<zipfileset prefix="doma-sastruts-demo" dir=".">
+		<zip zipfile="${zipDir}/doma-jpetstore-${ver}.zip">
+			<zipfileset prefix="doma-jpetstore" dir=".">
 				<exclude name="**/WEB-INF/classes/**"/>
 				<exclude name="work/**"/>
 				<exclude name="**/.apt_generated/**"/>

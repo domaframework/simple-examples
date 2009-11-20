@@ -4,17 +4,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.struts.action.ActionMessages;
 import org.seasar.framework.beans.util.Beans;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
-import demo.annotation.Authorized;
+import demo.cool.annotation.Authorize;
+import demo.cool.session.User;
 import demo.entity.Account;
 import demo.form.EditAccountForm;
 import demo.service.AccountService;
-import demo.session.User;
+import demo.util.TokenUtil;
 
-@Authorized
+@Authorize
 public class EditAccountAction {
 
     protected AccountService accountService = new AccountService();
@@ -56,6 +58,9 @@ public class EditAccountAction {
         try {
             account = accountService.getAccount(signin.getUsername());
             Beans.copy(account, editAccountForm).execute();
+
+            TokenUtil.save();
+
             return "editAccountForm.jsp";
         } catch (Exception e) {
             throw new RuntimeException(
@@ -64,7 +69,7 @@ public class EditAccountAction {
         }
     }
 
-    @Execute(validator = true, input = "editAccountForm.jsp")
+    @Execute(validator = true, validate = "validateToken", input = "editAccountForm.jsp")
     public String editAccount() {
         account = new Account();
         Beans.copy(editAccountForm, account).execute();
@@ -80,6 +85,10 @@ public class EditAccountAction {
                     "There was a problem updating your Account Information. Cause: "
                             + e, e);
         }
+    }
+
+    public ActionMessages validateToken() {
+        return TokenUtil.validate();
     }
 
 }

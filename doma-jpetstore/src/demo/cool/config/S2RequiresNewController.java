@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package demo.config;
+package demo.cool.config;
 
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.extension.tx.TransactionCallback;

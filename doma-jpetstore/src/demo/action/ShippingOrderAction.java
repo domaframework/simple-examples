@@ -7,13 +7,14 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
-import demo.annotation.Authorized;
+import demo.cool.annotation.Authorize;
+import demo.cool.session.Cart;
+import demo.cool.session.PurchaseOrder;
 import demo.entity.Order;
 import demo.form.ShippingOrderForm;
-import demo.session.Cart;
-import demo.session.PurchaseOrder;
+import demo.util.TokenUtil;
 
-@Authorized
+@Authorize
 public class ShippingOrderAction {
 
     @ActionForm
@@ -51,7 +52,10 @@ public class ShippingOrderAction {
         Beans.copy(shippingOrderForm, order).excludesNull()
                 .excludesWhitespace().execute();
         PurchaseOrder.put(purchaseOrder);
-        return "/order/confirmOrder.jsp";
+
+        TokenUtil.save();
+
+        return "/order/confirmOrderForm.jsp";
     }
 
 }

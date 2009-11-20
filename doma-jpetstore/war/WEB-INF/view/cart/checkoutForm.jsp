@@ -44,7 +44,9 @@
             </td>
           </tr>
         </table>
-        <html:link styleClass="Button" page="/billingOrder/newOrderForm">Continue</html:link>
+        <s:form>
+          <input type="submit" name="continueCheckout" value="Continue">
+        </s:form>
       </td>
       <td>
         &nbsp;

@@ -4,15 +4,17 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.struts.action.ActionMessages;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
+import demo.cool.session.Cart;
+import demo.cool.session.CartItem;
 import demo.entity.Item;
 import demo.form.CartForm;
 import demo.service.ItemService;
-import demo.session.Cart;
-import demo.session.CartItem;
+import demo.util.TokenUtil;
 
 public class CartAction {
 
@@ -83,15 +85,27 @@ public class CartAction {
     }
 
     @Execute(validator = false)
-    public String checkout() {
-        cart = Cart.get();
-        return "checkout.jsp";
-    }
-
-    @Execute(validator = false)
     public String viewCart() {
         cart = Cart.get();
         return "cart.jsp";
+    }
+
+    @Execute(validator = false)
+    public String checkout() {
+        cart = Cart.get();
+
+        TokenUtil.save();
+
+        return "checkoutForm.jsp";
+    }
+
+    @Execute(validator = false, validate = "validateToken", input = "checkoutForm.jsp")
+    public String continueCheckout() {
+        return "/billingOrder/newOrderForm";
+    }
+
+    public ActionMessages validateToken() {
+        return TokenUtil.validate();
     }
 
 }

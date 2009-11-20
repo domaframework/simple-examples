@@ -1,4 +1,4 @@
-package demo.config;
+package demo.cool.config;
 
 import java.sql.Connection;
 

@@ -71,8 +71,9 @@
 
   </table>
 
-
-  <s:link styleClass="Button" href="confirm">Confirm</s:link>
+  <s:form>
+    <input type="submit" name="confirm" value="Confirm">
+  </s:form>
 
 </div>
 

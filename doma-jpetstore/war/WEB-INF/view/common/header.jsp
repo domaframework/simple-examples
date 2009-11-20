@@ -62,3 +62,6 @@
 
 <div id="Content">
 <html:errors/>
+<html:messages id="message" message="true">
+  ${message}
+</html:messages>

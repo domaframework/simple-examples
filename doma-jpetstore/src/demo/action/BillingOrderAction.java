@@ -11,18 +11,19 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
-import demo.annotation.Authorized;
+import demo.cool.annotation.Authorize;
+import demo.cool.session.Cart;
+import demo.cool.session.CartItem;
+import demo.cool.session.PurchaseOrder;
+import demo.cool.session.User;
 import demo.entity.Account;
 import demo.entity.Order;
 import demo.entity.OrderLineItem;
 import demo.form.BillingOrderForm;
 import demo.service.AccountService;
-import demo.session.Cart;
-import demo.session.CartItem;
-import demo.session.PurchaseOrder;
-import demo.session.User;
+import demo.util.TokenUtil;
 
-@Authorized
+@Authorize
 public class BillingOrderAction {
 
     protected AccountService accountService = new AccountService();
@@ -77,7 +78,10 @@ public class BillingOrderAction {
             Beans.copy(order, billingOrderForm).execute();
             return "/shippingOrder/newOrderForm";
         }
-        return "/order/confirmOrder.jsp";
+
+        TokenUtil.save();
+
+        return "/order/confirmOrderForm.jsp";
     }
 
     protected Order createOrder(Account account, Cart cart) {

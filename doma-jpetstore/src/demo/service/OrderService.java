@@ -28,9 +28,8 @@ public class OrderService {
         orderDao.insertOrderStatus(order);
         for (OrderLineItem lineItem : lineItems) {
             lineItem.orderId = order.orderId;
-            orderLineItemDao.insertLineItem(lineItem);
         }
-
+        orderLineItemDao.insertLineItem(lineItems);
     }
 
     public Order getOrder(int orderId) {

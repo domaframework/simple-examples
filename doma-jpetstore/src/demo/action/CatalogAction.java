@@ -42,21 +42,21 @@ public class CatalogAction {
     // out
     public Item item;
 
-    @Execute(urlPattern = "viewCategory/{id}", validator = false, input = "/")
+    @Execute(urlPattern = "viewCategory/{id}", validator = true, input = "/")
     public String viewCategory() {
         category = categoryService.getCategory(catalogForm.id);
         productList = productService.getProductListByCategory(catalogForm.id);
         return "category.jsp";
     }
 
-    @Execute(urlPattern = "viewProduct/{id}", validator = false, input = "/")
+    @Execute(urlPattern = "viewProduct/{id}", validator = true, input = "/")
     public String viewProduct() {
         product = productService.getProduct(catalogForm.id);
         itemList = itemService.getItemsByProduct(catalogForm.id);
         return "product.jsp";
     }
 
-    @Execute(urlPattern = "viewItem/{id}", validator = false, input = "/")
+    @Execute(urlPattern = "viewItem/{id}", validator = true, input = "/")
     public String viewItem() {
         item = itemService.getItem(catalogForm.id);
         return "item.jsp";

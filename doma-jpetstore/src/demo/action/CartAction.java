@@ -45,7 +45,7 @@ public class CartAction {
         return "viewCart?redirect=true";
     }
 
-    @Execute(urlPattern = "removeItemFromCart/{itemId}", validator = false, input = "viewCart")
+    @Execute(urlPattern = "removeItemFromCart/{itemId}", validator = true, input = "viewCart")
     public String removeItemFromCart() {
         String workingItemId = cartForm.itemId;
         cart = Cart.get();
@@ -63,7 +63,7 @@ public class CartAction {
         cart = Cart.get();
         for (Map.Entry<String, String> entry : cartForm.itemIds.entrySet()) {
             String itemId = entry.getKey();
-            CartItem cartItem = cart.getCartItem(entry.getKey());
+            CartItem cartItem = cart.getCartItem(itemId);
             if (cartItem == null) {
                 continue;
             }

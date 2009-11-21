@@ -16,8 +16,7 @@ public interface ProductDao {
     Product getProduct(String productId);
 
     @Select
-    List<Product> getProductsByCategory(String categoryId,
-            SelectOptions options);
+    List<Product> getProductsByCategory(String categoryId, SelectOptions options);
 
     @Select
     List<Product> searchProductList(List<String> keywords, SelectOptions options);

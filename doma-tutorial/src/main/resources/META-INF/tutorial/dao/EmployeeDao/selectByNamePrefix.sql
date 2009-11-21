@@ -1,0 +1,1 @@
+select * from employee where name like /* @startWith(prefix) */'X%'

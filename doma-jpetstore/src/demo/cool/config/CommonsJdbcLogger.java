@@ -51,7 +51,7 @@ public class CommonsJdbcLogger implements JdbcLogger {
     public void logSql(String callerClassName, String callerMethodName,
             Sql<?> sql) {
         Log log = LogFactory.getLog(callerClassName);
-        String message = String.format("sqlFilePath=[%s]%n%s", sql
+        String message = String.format("SQL log. sqlFilePath=[%s],%n%s", sql
                 .getSqlFilePath(), sql.getFormattedSql());
         log.info(message);
     }

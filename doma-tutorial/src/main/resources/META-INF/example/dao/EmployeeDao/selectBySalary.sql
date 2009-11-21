@@ -1,1 +1,0 @@
-select * from employee where salary > /*salary*/0

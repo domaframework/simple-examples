@@ -5,8 +5,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 version="2.4">
 
-    <display-name>JPetStore</display-name>
-    <description>Online Pet Store Sample Application</description>
+    <display-name>Doma JPetStore</display-name>
+    <description>Online Pet Store Domo Application</description>
 
     <context-param>
         <param-name>sastruts.VIEW_PREFIX</param-name>

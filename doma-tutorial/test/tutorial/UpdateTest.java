@@ -3,13 +3,17 @@ package tutorial;
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
 import tutorial.entity.Employee;
+import tutorial.entity.JobType;
 
-public class DeleteTest extends TutorialTestCase {
+public class UpdateTest extends TutorialTestCase {
 
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
-    public void testDelete() throws Exception {
+    public void testUpdate() throws Exception {
         Employee employee = dao.selectById(1);
-        dao.delete(employee);
+        employee.setName("hoge");
+        employee.setJobType(JobType.PRESIDENT);
+
+        dao.update(employee);
     }
 }

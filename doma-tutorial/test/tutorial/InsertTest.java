@@ -16,6 +16,7 @@ public class InsertTest extends TutorialTestCase {
         employee.setAge(50);
         employee.setSalary(new Salary(300));
         employee.setJobType(JobType.PRESIDENT);
+
         dao.insert(employee);
     }
 }

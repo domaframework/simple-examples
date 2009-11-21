@@ -33,7 +33,6 @@ import org.seasar.doma.jdbc.SelectOptions;
 import tutorial.AppConfig;
 import tutorial.domain.Salary;
 import tutorial.entity.Employee;
-import tutorial.entity.JobType;
 
 @Dao(config = AppConfig.class)
 public interface EmployeeDao {
@@ -45,28 +44,22 @@ public interface EmployeeDao {
     List<Employee> selectByAgeRange(Integer min, Integer max);
 
     @Select
-    List<Employee> selectByName(String name);
+    List<Employee> selectByAges(List<Integer> ages);
 
     @Select
     List<Employee> selectByNames(List<String> names);
 
     @Select
-    List<Employee> selectByNamePrefix(String prefix);
+    List<Employee> selectByNameWithPrefixMatching(String prefix);
 
     @Select
-    List<Employee> selectByNameSuffix(String suffix);
+    List<Employee> selectByNameWithSuffixMatching(String suffix);
 
     @Select
-    List<Employee> selectByFuzzyName(String fuzzyName);
+    List<Employee> selectByNameWithInsideMatching(String inside);
 
     @Select
     List<Employee> selectByHiredateRange(Timestamp from, Timestamp to);
-
-    @Select
-    List<Employee> selectByJobType(JobType jobType);
-
-    @Select
-    List<JobType> selectAllJobTypes();
 
     @Select
     List<Employee> selectBySalary(Salary salary);
@@ -84,7 +77,7 @@ public interface EmployeeDao {
     List<Employee> selectAll(SelectOptions options);
 
     @Select(iterate = true)
-    <R> R selectAll(IterationCallback<R, Employee> callback);
+    <R> R selectByAge(int age, IterationCallback<R, Employee> callback);
 
     @Delegate(to = EmployeeDaoDelegate.class)
     int count();

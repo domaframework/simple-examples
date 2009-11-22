@@ -1,4 +1,4 @@
-package demo.cool.session;
+package demo.session;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import demo.cool.session.SessionKeys;
 import demo.entity.Item;
 import demo.util.ExternalContextUtil;
 

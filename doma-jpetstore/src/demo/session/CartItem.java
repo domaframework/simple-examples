@@ -1,4 +1,4 @@
-package demo.cool.session;
+package demo.session;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

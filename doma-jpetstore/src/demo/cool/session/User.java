@@ -41,11 +41,11 @@ public class User implements Serializable {
 
     public static User get() {
         Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        User signin = (User) sessionMap.get(SessionKeys.USER);
-        if (signin == null) {
+        User user = (User) sessionMap.get(SessionKeys.USER);
+        if (user == null) {
             return new User();
         }
-        return signin;
+        return user;
     }
 
     public static void put(User signin) {

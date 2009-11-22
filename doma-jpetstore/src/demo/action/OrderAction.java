@@ -12,13 +12,13 @@ import org.seasar.struts.exception.ActionMessagesException;
 import org.seasar.struts.util.ActionMessagesUtil;
 
 import demo.cool.annotation.Authorize;
-import demo.cool.session.Cart;
-import demo.cool.session.PurchaseOrder;
 import demo.cool.session.User;
 import demo.entity.Order;
 import demo.entity.OrderLineItem;
 import demo.form.OrderForm;
 import demo.service.OrderService;
+import demo.session.Cart;
+import demo.session.PurchaseOrder;
 import demo.util.ExternalContextUtil;
 import demo.util.TokenUtil;
 

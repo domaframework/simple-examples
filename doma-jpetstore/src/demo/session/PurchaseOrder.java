@@ -1,10 +1,11 @@
-package demo.cool.session;
+package demo.session;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import demo.cool.session.SessionKeys;
 import demo.entity.OrderLineItem;
 import demo.entity.Order;
 import demo.util.ExternalContextUtil;

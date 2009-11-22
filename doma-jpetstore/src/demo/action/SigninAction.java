@@ -6,12 +6,12 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
-import demo.cool.session.Cart;
-import demo.cool.session.PurchaseOrder;
 import demo.cool.session.User;
 import demo.entity.Account;
 import demo.form.SigninForm;
 import demo.service.AccountService;
+import demo.session.Cart;
+import demo.session.PurchaseOrder;
 import demo.util.ExternalContextUtil;
 
 public class SigninAction {

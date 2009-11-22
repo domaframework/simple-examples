@@ -8,10 +8,10 @@ import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
 import demo.cool.annotation.Authorize;
-import demo.cool.session.Cart;
-import demo.cool.session.PurchaseOrder;
 import demo.entity.Order;
 import demo.form.ShippingOrderForm;
+import demo.session.Cart;
+import demo.session.PurchaseOrder;
 import demo.util.TokenUtil;
 
 @Authorize

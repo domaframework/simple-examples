@@ -9,11 +9,11 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
-import demo.cool.session.Cart;
-import demo.cool.session.CartItem;
 import demo.entity.Item;
 import demo.form.CartForm;
 import demo.service.ItemService;
+import demo.session.Cart;
+import demo.session.CartItem;
 import demo.util.TokenUtil;
 
 public class CartAction {

@@ -22,7 +22,7 @@ public class SearchProductsAction {
     // out
     public List<Product> productList;
 
-    @Execute(validator = true, input = "productsjsp")
+    @Execute(validator = true, input = "products.jsp")
     public String search() {
         String keyword = searchProductsForm.keyword;
         productList = productService.searchProductList(keyword);

@@ -4,10 +4,11 @@
 <components>
 	<component class="org.seasar.framework.convention.impl.NamingConventionImpl">
 		<initMethod name="addRootPackageName">
-			<arg>"demo"</arg>
+			<arg>"demo.smart"</arg>
 		</initMethod>
-		<initMethod name="addIgnorePackageName">
-			<arg>"demo.cool"</arg>
+		<initMethod name="addRootPackageName">
+			<arg>"demo"</arg>
+			<arg>false</arg>
 		</initMethod>
 	</component>
 	<component class="org.seasar.framework.convention.impl.PersistenceConventionImpl"/>

@@ -6,7 +6,7 @@
 
 	<!-- Hsqldb initializer  -->
 	<component>
-		@demo.cool.config.HsqldbInitializer@init()
+		@demo.config.HsqldbInitializer@init()
 	</component>
 
 	<!-- for HSQLDB -->

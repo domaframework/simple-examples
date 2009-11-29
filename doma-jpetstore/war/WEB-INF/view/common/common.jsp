@@ -8,6 +8,6 @@
 <%@taglib prefix="f" uri="http://sastruts.seasar.org/functions" %>
 
 <% 
-Object user = session.getAttribute(demo.cool.session.SessionKeys.USER);
+Object user = session.getAttribute(demo.session.SessionKeys.USER);
 pageContext.setAttribute("USER", user); 
 %>

@@ -1,6 +1,7 @@
 package demo.action;
 
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,14 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.container.SingletonS2Container;
 import org.seasar.struts.action.S2RequestProcessor;
 import org.seasar.struts.config.S2ActionMapping;
+import org.seasar.struts.config.S2ExecuteConfig;
 import org.seasar.struts.util.ActionMessagesUtil;
 
-import demo.session.User;
-
 public class JPetStoreRequestProcessor extends S2RequestProcessor {
+
+    public static final String RETURN_URL = JPetStoreRequestProcessor.class
+            .getName()
+            + "_returnURL";
 
     @Override
     protected boolean processValidate(HttpServletRequest request,
@@ -32,19 +36,33 @@ public class JPetStoreRequestProcessor extends S2RequestProcessor {
         BeanDesc actionBeanDesc = s2ActionMapping.getActionBeanDesc();
         Class<?> actionClass = actionBeanDesc.getBeanClass();
         if (actionClass.isAnnotationPresent(Authorize.class)) {
-            User user = User.get();
-            if (!user.isAuthenticated()) {
+            if (!isAuthorized()) {
                 ActionMessages messages = new ActionMessages();
                 messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
                         "Please signin.", false));
                 ActionMessagesUtil.addErrors(SingletonS2Container
                         .getComponent(HttpSession.class), messages);
-                ActionForward forward = new ActionForward("/signin/signinForm",
-                        true);
+                S2ExecuteConfig executeConfig = s2ActionMapping
+                        .findExecuteConfig(request);
+                String returnURL = s2ActionMapping.getPath() + "/"
+                        + executeConfig.getMethod().getName();
+                request.setAttribute(RETURN_URL, returnURL);
+                ActionForward forward = s2ActionMapping
+                        .createForward("/signin/signinForm");
                 processForwardConfig(request, response, forward);
                 return false;
             }
         }
         return super.processValidate(request, response, form, mapping);
+    }
+
+    protected boolean isAuthorized() {
+        Callable<Boolean> authorizationHelper = SingletonS2Container
+                .getComponent("authorizationHelper");
+        try {
+            return authorizationHelper.call();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

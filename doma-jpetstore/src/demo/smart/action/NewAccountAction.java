@@ -16,7 +16,8 @@ import demo.smart.util.TokenUtil;
 
 public class NewAccountAction {
 
-    protected AccountService accountService = new AccountService();
+    @Resource
+    protected AccountService accountService;
 
     @ActionForm
     @Resource

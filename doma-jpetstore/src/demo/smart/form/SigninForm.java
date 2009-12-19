@@ -10,4 +10,6 @@ public class SigninForm {
     @Required
     public String password;
 
+    public String returnURL;
+
 }

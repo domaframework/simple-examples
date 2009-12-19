@@ -6,17 +6,19 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
-import demo.session.User;
+import demo.action.JPetStoreRequestProcessor;
 import demo.smart.entity.Account;
 import demo.smart.form.SigninForm;
 import demo.smart.service.AccountService;
 import demo.smart.session.Cart;
 import demo.smart.session.PurchaseOrder;
-import demo.util.ExternalContextUtil;
+import demo.smart.session.User;
+import demo.smart.util.ExternalContextUtil;
 
 public class SigninAction {
 
-    protected AccountService accountService = new AccountService();
+    @Resource
+    protected AccountService accountService;
 
     @ActionForm
     @Resource
@@ -25,8 +27,13 @@ public class SigninAction {
     // out
     public Account account;
 
+    // out
+    public String returnURL;
+
     @Execute(validator = false)
     public String signinForm() {
+        returnURL = (String) ExternalContextUtil.getRequest().getAttribute(
+                JPetStoreRequestProcessor.RETURN_URL);
         return "signinForm.jsp";
     }
 
@@ -47,10 +54,14 @@ public class SigninAction {
         User user = new User();
         user.setUsername(account.username);
         user.setFirstName(account.firstName);
-        user.setAuthenticated(true);
+        user.setAuthorized(true);
         User.put(user);
         Cart.put(cart);
         PurchaseOrder.put(purchaseOrder);
+        if (signinForm.returnURL != null
+                && signinForm.returnURL.startsWith("/")) {
+            return signinForm.returnURL + "?redirect=true";
+        }
         return "/";
     }
 

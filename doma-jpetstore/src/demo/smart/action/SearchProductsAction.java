@@ -13,7 +13,8 @@ import demo.smart.service.ProductService;
 
 public class SearchProductsAction {
 
-    protected ProductService productService = new ProductService();
+    @Resource
+    protected ProductService productService;
 
     @Resource
     @ActionForm

@@ -2,7 +2,7 @@
 
 
 <div id="BackLink">
-  <html:link href="/">Return to Main Menu</html:link>
+  <s:link href="/">Return to Main Menu</s:link>
 </div>
 
 <div id="Catalog">

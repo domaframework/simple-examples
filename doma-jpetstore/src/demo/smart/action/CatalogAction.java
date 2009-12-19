@@ -17,11 +17,14 @@ import demo.smart.service.ProductService;
 
 public class CatalogAction {
 
-    protected CategoryService categoryService = new CategoryService();
+    @Resource
+    protected CategoryService categoryService;
 
-    protected ProductService productService = new ProductService();
+    @Resource
+    protected ProductService productService;
 
-    protected ItemService itemService = new ItemService();
+    @Resource
+    protected ItemService itemService;
 
     @ActionForm
     @Resource

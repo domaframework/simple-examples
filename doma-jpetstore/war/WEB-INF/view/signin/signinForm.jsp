@@ -10,6 +10,7 @@
       Password:<input type="password" name="password" value="j2ee"/>
     </p>
     <input type="submit" name="signin" value="Singin"/>
+    <input type="hidden" name="returnURL" value="${returnURL}"/>
 
   </s:form>
 

@@ -1,4 +1,4 @@
-package demo.util;
+package demo.smart.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

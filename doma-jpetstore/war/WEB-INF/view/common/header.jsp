@@ -20,7 +20,7 @@
       <s:link href="/cart/viewCart"><img align="middle" name="img_cart" src="${f:url('/images/cart.gif')}"/></s:link>
       <img align="middle" src="${f:url('/images/separator.gif')}"/>
       <c:choose>
-        <c:when test="${empty USER || !USER.authenticated}">
+        <c:when test="${empty USER || !USER.authorized}">
           <html:link page="/signin/signinForm">Sign In</html:link>
         </c:when>
         <c:otherwise>

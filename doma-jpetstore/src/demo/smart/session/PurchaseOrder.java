@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.session.SessionKeys;
 import demo.smart.entity.Order;
 import demo.smart.entity.OrderLineItem;
-import demo.util.ExternalContextUtil;
+import demo.smart.util.ExternalContextUtil;
 
 public class PurchaseOrder implements Serializable {
 

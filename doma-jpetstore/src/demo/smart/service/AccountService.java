@@ -1,24 +1,26 @@
 package demo.smart.service;
 
+import javax.annotation.Resource;
+
 import org.seasar.framework.beans.util.Beans;
 
 import demo.smart.dao.AccountDao;
 import demo.smart.dao.ProfileDao;
 import demo.smart.dao.SignonDao;
-import demo.smart.dao.impl.AccountDaoImpl;
-import demo.smart.dao.impl.ProfileDaoImpl;
-import demo.smart.dao.impl.SignonDaoImpl;
 import demo.smart.entity.Account;
 import demo.smart.entity.Profile;
 import demo.smart.entity.Signon;
 
 public class AccountService {
 
-    protected AccountDao accountDao = new AccountDaoImpl();
+    @Resource
+    protected AccountDao accountDao;
 
-    protected ProfileDao profileDao = new ProfileDaoImpl();
+    @Resource
+    protected ProfileDao profileDao;
 
-    protected SignonDao signonDao = new SignonDaoImpl();
+    @Resource
+    protected SignonDao signonDao;
 
     public Account getAccount(String username) {
         return accountDao.getAccountByUsername(username);

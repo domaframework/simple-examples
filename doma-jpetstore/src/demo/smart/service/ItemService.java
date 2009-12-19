@@ -2,13 +2,15 @@ package demo.smart.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import demo.smart.dao.ItemDao;
-import demo.smart.dao.impl.ItemDaoImpl;
 import demo.smart.entity.Item;
 
 public class ItemService {
 
-    protected ItemDao itemDao = new ItemDaoImpl();
+    @Resource
+    protected ItemDao itemDao;
 
     public boolean isItemInStock(String itemId) {
         Integer i = itemDao.getInventoryQuantity(itemId);

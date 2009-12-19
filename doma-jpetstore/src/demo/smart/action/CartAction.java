@@ -18,7 +18,8 @@ import demo.smart.util.TokenUtil;
 
 public class CartAction {
 
-    protected ItemService itemService = new ItemService();
+    @Resource
+    protected ItemService itemService;
 
     @ActionForm
     @Resource

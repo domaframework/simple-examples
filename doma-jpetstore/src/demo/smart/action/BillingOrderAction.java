@@ -12,7 +12,6 @@ import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.exception.ActionMessagesException;
 
 import demo.action.Authorize;
-import demo.session.User;
 import demo.smart.entity.Account;
 import demo.smart.entity.Order;
 import demo.smart.entity.OrderLineItem;
@@ -21,12 +20,14 @@ import demo.smart.service.AccountService;
 import demo.smart.session.Cart;
 import demo.smart.session.CartItem;
 import demo.smart.session.PurchaseOrder;
+import demo.smart.session.User;
 import demo.smart.util.TokenUtil;
 
 @Authorize
 public class BillingOrderAction {
 
-    protected AccountService accountService = new AccountService();
+    @Resource
+    protected AccountService accountService;
 
     @ActionForm
     @Resource

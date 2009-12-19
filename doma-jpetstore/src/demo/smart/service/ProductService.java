@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.annotation.Resource;
+
 import org.seasar.doma.jdbc.SelectOptions;
 
 import demo.smart.dao.ProductDao;
-import demo.smart.dao.impl.ProductDaoImpl;
 import demo.smart.entity.Product;
 
 public class ProductService {
 
-    protected ProductDao productDao = new ProductDaoImpl();
+    @Resource
+    protected ProductDao productDao;
 
     public Product getProduct(String productId) {
         return productDao.getProduct(productId);

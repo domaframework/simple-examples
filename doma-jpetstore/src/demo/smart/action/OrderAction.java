@@ -12,20 +12,21 @@ import org.seasar.struts.exception.ActionMessagesException;
 import org.seasar.struts.util.ActionMessagesUtil;
 
 import demo.action.Authorize;
-import demo.session.User;
 import demo.smart.entity.Order;
 import demo.smart.entity.OrderLineItem;
 import demo.smart.form.OrderForm;
 import demo.smart.service.OrderService;
 import demo.smart.session.Cart;
 import demo.smart.session.PurchaseOrder;
+import demo.smart.session.User;
+import demo.smart.util.ExternalContextUtil;
 import demo.smart.util.TokenUtil;
-import demo.util.ExternalContextUtil;
 
 @Authorize
 public class OrderAction {
 
-    protected OrderService orderService = new OrderService();
+    @Resource
+    protected OrderService orderService;
 
     @ActionForm
     @Resource
@@ -59,7 +60,7 @@ public class OrderAction {
         }
 
         User user = User.get();
-        if (user.isAuthenticated() && user.getUsername().equals(order.username)) {
+        if (user.isAuthorized() && user.getUsername().equals(order.username)) {
             return "viewOrder.jsp";
         }
         throw new ActionMessagesException("You may only view your own orders.",

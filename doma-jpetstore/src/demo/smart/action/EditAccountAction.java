@@ -10,16 +10,17 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
 import demo.action.Authorize;
-import demo.session.User;
 import demo.smart.entity.Account;
 import demo.smart.form.EditAccountForm;
 import demo.smart.service.AccountService;
+import demo.smart.session.User;
 import demo.smart.util.TokenUtil;
 
 @Authorize
 public class EditAccountAction {
 
-    protected AccountService accountService = new AccountService();
+    @Resource
+    protected AccountService accountService;
 
     @ActionForm
     @Resource
@@ -43,7 +44,7 @@ public class EditAccountAction {
             User user = User.get();
             user.setUsername(account.username);
             user.setFirstName(account.firstName);
-            user.setAuthenticated(true);
+            user.setAuthorized(true);
             return "/";
         } catch (Exception e) {
             throw new RuntimeException(
@@ -78,7 +79,7 @@ public class EditAccountAction {
             User user = User.get();
             user.setUsername(account.username);
             user.setFirstName(account.firstName);
-            user.setAuthenticated(true);
+            user.setAuthorized(true);
             return "/?redirect=true";
         } catch (Exception e) {
             throw new RuntimeException(

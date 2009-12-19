@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import demo.session.SessionKeys;
 import demo.smart.domain.Amount;
 import demo.smart.entity.Item;
-import demo.util.ExternalContextUtil;
+import demo.smart.util.ExternalContextUtil;
 
 public class Cart implements Serializable {
 

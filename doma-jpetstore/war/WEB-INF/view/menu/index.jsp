@@ -2,7 +2,7 @@
 
 <div id="Welcome">
   <div id="WelcomeContent">
-    <c:if test="${not empty USER && USER.authenticated}">
+    <c:if test="${not empty USER && USER.authorized}">
       Welcome ${f:h(USER.firstName)}!<br/>
     </c:if>
   </div>

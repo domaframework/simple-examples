@@ -2,22 +2,24 @@ package demo.smart.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import demo.smart.dao.ItemDao;
 import demo.smart.dao.OrderDao;
 import demo.smart.dao.OrderLineItemDao;
-import demo.smart.dao.impl.ItemDaoImpl;
-import demo.smart.dao.impl.OrderDaoImpl;
-import demo.smart.dao.impl.OrderLineItemDaoImpl;
 import demo.smart.entity.Order;
 import demo.smart.entity.OrderLineItem;
 
 public class OrderService {
 
-    protected ItemDao itemDao = new ItemDaoImpl();
+    @Resource
+    protected ItemDao itemDao;
 
-    protected OrderDao orderDao = new OrderDaoImpl();
+    @Resource
+    protected OrderDao orderDao;
 
-    protected OrderLineItemDao orderLineItemDao = new OrderLineItemDaoImpl();
+    @Resource
+    protected OrderLineItemDao orderLineItemDao;
 
     public void insertOrder(Order order, List<OrderLineItem> lineItems) {
         for (OrderLineItem lineItem : lineItems) {

@@ -1,8 +1,8 @@
-package demo.session;
+package demo.smart.session;
 
 import java.io.Serializable;
 
-import demo.util.ExternalContextUtil;
+import demo.smart.util.ExternalContextUtil;
 
 public class User implements Serializable {
 
@@ -10,7 +10,7 @@ public class User implements Serializable {
 
     private String username;
 
-    private boolean authenticated;
+    private boolean authorized;
 
     private String firstName;
 
@@ -22,12 +22,12 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public boolean isAuthenticated() {
-        return authenticated && username != null;
+    public boolean isAuthorized() {
+        return authorized && username != null;
     }
 
-    public void setAuthenticated(boolean authenticated) {
-        this.authenticated = authenticated;
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
     }
 
     public String getFirstName() {

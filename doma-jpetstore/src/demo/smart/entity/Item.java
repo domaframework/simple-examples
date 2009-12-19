@@ -7,6 +7,8 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 
+import demo.smart.domain.Amount;
+
 @Entity
 public class Item implements Serializable {
 
@@ -27,7 +29,7 @@ public class Item implements Serializable {
     @Column(insertable = false, updatable = false)
     public String productDescription;
 
-    public BigDecimal listPrice;
+    public Amount listPrice;
 
     public BigDecimal unitCost;
 

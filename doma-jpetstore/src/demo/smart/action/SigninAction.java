@@ -12,7 +12,7 @@ import demo.smart.form.SigninForm;
 import demo.smart.service.AccountService;
 import demo.smart.session.Cart;
 import demo.smart.session.PurchaseOrder;
-import demo.smart.util.ExternalContextUtil;
+import demo.util.ExternalContextUtil;
 
 public class SigninAction {
 

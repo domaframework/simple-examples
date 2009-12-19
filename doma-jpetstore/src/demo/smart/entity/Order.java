@@ -1,7 +1,6 @@
 package demo.smart.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.seasar.doma.Column;
@@ -11,6 +10,8 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.SequenceGenerator;
 import org.seasar.doma.Table;
+
+import demo.smart.domain.Amount;
 
 @Entity
 @Table(name = "ORDERS")
@@ -58,7 +59,7 @@ public class Order implements Serializable {
 
     public String courier;
 
-    public BigDecimal totalPrice;
+    public Amount totalPrice;
 
     public String billToFirstName;
 

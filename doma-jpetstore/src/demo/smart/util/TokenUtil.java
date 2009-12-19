@@ -4,6 +4,8 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.util.TokenProcessor;
 
+import demo.util.ExternalContextUtil;
+
 public class TokenUtil {
 
     public static void save() {

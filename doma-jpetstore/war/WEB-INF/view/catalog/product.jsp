@@ -26,7 +26,7 @@
           ${f:h(item.attribute5)}
           ${f:h(item.productName)}
         </td>
-        <td><fmt:formatNumber value="${item.listPrice}" pattern="$#,##0.00"/>
+        <td><fmt:formatNumber value="${item.listPrice.value}" pattern="$#,##0.00"/>
         <td><s:link styleClass="Button" href="/cart/addItemToCart/${item.itemId}">Add to Cart</s:link></td>
       </tr>
     </c:forEach>

@@ -112,12 +112,12 @@
         </td>
 
         <td>${f:h(item.quantity)}</td>
-        <td><fmt:formatNumber value="${item.unitPrice}" pattern="$#,##0.00"/></td>
-        <td><fmt:formatNumber value="${item.total}" pattern="$#,##0.00"/></td>
+        <td><fmt:formatNumber value="${item.unitPrice.value}" pattern="$#,##0.00"/></td>
+        <td><fmt:formatNumber value="${item.total.value}" pattern="$#,##0.00"/></td>
       </tr>
     </c:forEach>
     <tr>
-      <th colspan="5">Total: <fmt:formatNumber value="${order.totalPrice}" pattern="$#,##0.00"/>
+      <th colspan="5">Total: <fmt:formatNumber value="${order.totalPrice.value}" pattern="$#,##0.00"/>
       </th>
     </tr>
   </table>

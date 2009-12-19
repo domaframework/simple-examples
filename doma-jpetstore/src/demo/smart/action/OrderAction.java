@@ -19,8 +19,8 @@ import demo.smart.form.OrderForm;
 import demo.smart.service.OrderService;
 import demo.smart.session.Cart;
 import demo.smart.session.PurchaseOrder;
-import demo.smart.util.ExternalContextUtil;
 import demo.smart.util.TokenUtil;
+import demo.util.ExternalContextUtil;
 
 @Authorize
 public class OrderAction {

@@ -1,9 +1,8 @@
 package demo.session;
 
 import java.io.Serializable;
-import java.util.Map;
 
-import demo.smart.util.ExternalContextUtil;
+import demo.util.ExternalContextUtil;
 
 public class User implements Serializable {
 
@@ -40,8 +39,8 @@ public class User implements Serializable {
     }
 
     public static User get() {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        User user = (User) sessionMap.get(SessionKeys.USER);
+        User user = (User) ExternalContextUtil.getSession().getAttribute(
+                SessionKeys.USER);
         if (user == null) {
             return new User();
         }
@@ -49,12 +48,11 @@ public class User implements Serializable {
     }
 
     public static void put(User signin) {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.put(SessionKeys.USER, signin);
+        ExternalContextUtil.getSession().setAttribute(SessionKeys.USER, signin);
     }
 
     public static void clear() {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.remove(SessionKeys.USER);
+        ExternalContextUtil.getSession().removeAttribute(SessionKeys.USER);
     }
+
 }

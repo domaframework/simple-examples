@@ -1,8 +1,8 @@
 package demo.smart.session;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
+import demo.smart.domain.Amount;
 import demo.smart.entity.Item;
 
 public class CartItem implements Serializable {
@@ -12,7 +12,7 @@ public class CartItem implements Serializable {
     private Item item;
     private int quantity;
     private boolean inStock;
-    private BigDecimal total;
+    private Amount total;
 
     public boolean isInStock() {
         return inStock;
@@ -22,7 +22,7 @@ public class CartItem implements Serializable {
         this.inStock = inStock;
     }
 
-    public BigDecimal getTotal() {
+    public Amount getTotal() {
         return total;
     }
 
@@ -51,7 +51,7 @@ public class CartItem implements Serializable {
 
     private void calculateTotal() {
         if (item != null && item.listPrice != null) {
-            total = item.listPrice.multiply(new BigDecimal(quantity));
+            total = item.listPrice.multiply(quantity);
         } else {
             total = null;
         }

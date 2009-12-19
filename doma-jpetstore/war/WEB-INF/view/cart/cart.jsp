@@ -39,8 +39,8 @@
               <input type="text" size="3" name="itemIds(${f:h(cartItem.item.itemId)})"
                      value="${f:h(cartItem.quantity)}"/>
             </td>
-            <td><fmt:formatNumber value="${cartItem.item.listPrice}" pattern="$#,##0.00"/></td>
-            <td><fmt:formatNumber value="${cartItem.total}" pattern="$#,##0.00"/></td>
+            <td><fmt:formatNumber value="${cartItem.item.listPrice.value}" pattern="$#,##0.00"/></td>
+            <td><fmt:formatNumber value="${cartItem.total.value}" pattern="$#,##0.00"/></td>
             <td>
               <s:link href="removeItemFromCart/${cartItem.item.itemId}" styleClass="Button">Remove</s:link>
             </td>
@@ -48,7 +48,7 @@
           </c:forEach>
         <tr>
           <td colspan="7">
-            Sub Total: <fmt:formatNumber value="${cart.subTotal}" pattern="$#,##0.00"/>
+            Sub Total: <fmt:formatNumber value="${cart.subTotal.value}" pattern="$#,##0.00"/>
             <input type="submit" name="updateCartQuantities" value="Update Cart"/>
           </td>
           <td>&nbsp;</td>

@@ -10,7 +10,7 @@
       <td><s:link href="viewOrder/${order.orderId}">
         ${f:h(order.orderId)}</s:link></td>
       <td><fmt:formatDate value="${order.orderDate}" pattern="yyyy/MM/dd hh:mm:ss"/></td>
-      <td><fmt:formatNumber value="${order.totalPrice}" pattern="$#,##0.00"/></td>
+      <td><fmt:formatNumber value="${order.totalPrice.value}" pattern="$#,##0.00"/></td>
     </tr>
   </c:forEach>
 </table>

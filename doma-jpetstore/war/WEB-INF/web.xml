@@ -28,15 +28,15 @@ version="2.4">
     </filter>
 
     <filter>
-        <filter-name>hotdeployfilter</filter-name>
-        <filter-class>org.seasar.framework.container.hotdeploy.HotdeployFilter</filter-class>
-    </filter>
-    
-    <filter>
         <filter-name>s2filter</filter-name>
         <filter-class>org.seasar.framework.container.filter.S2ContainerFilter</filter-class>
     </filter>
 
+    <filter>
+        <filter-name>hotdeployfilter</filter-name>
+        <filter-class>org.seasar.framework.container.hotdeploy.HotdeployFilter</filter-class>
+    </filter>
+    
     <filter>
         <filter-name>routingfilter</filter-name>
         <filter-class>org.seasar.struts.filter.RoutingFilter</filter-class>
@@ -50,9 +50,9 @@ version="2.4">
         <filter-name>encodingfilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
+    
     <filter-mapping>
-        <filter-name>hotdeployfilter</filter-name>
+        <filter-name>s2filter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
@@ -61,7 +61,7 @@ version="2.4">
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>s2filter</filter-name>
+        <filter-name>hotdeployfilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>

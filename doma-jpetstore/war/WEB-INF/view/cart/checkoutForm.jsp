@@ -34,13 +34,13 @@
               <td>
                 ${f:h(cartItem.quantity)}
               </td>
-              <td><fmt:formatNumber value="${cartItem.item.listPrice}" pattern="$#,##0.00"/></td>
-              <td><fmt:formatNumber value="${cartItem.total}" pattern="$#,##0.00"/></td>
+              <td><fmt:formatNumber value="${cartItem.item.listPrice.value}" pattern="$#,##0.00"/></td>
+              <td><fmt:formatNumber value="${cartItem.total.value}" pattern="$#,##0.00"/></td>
             </tr>
           </c:forEach>
           <tr>
             <td colspan="7">
-              Sub Total: <fmt:formatNumber value="${cart.subTotal}" pattern="$#,##0.00"/>
+              Sub Total: <fmt:formatNumber value="${cart.subTotal.value}" pattern="$#,##0.00"/>
             </td>
           </tr>
         </table>

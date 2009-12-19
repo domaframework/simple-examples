@@ -3,12 +3,11 @@ package demo.smart.session;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import demo.session.SessionKeys;
 import demo.smart.entity.Order;
 import demo.smart.entity.OrderLineItem;
-import demo.smart.util.ExternalContextUtil;
+import demo.util.ExternalContextUtil;
 
 public class PurchaseOrder implements Serializable {
 
@@ -35,9 +34,8 @@ public class PurchaseOrder implements Serializable {
     }
 
     public static PurchaseOrder get() {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        PurchaseOrder purchaseOrder = (PurchaseOrder) sessionMap
-                .get(SessionKeys.PURCHASE_ORDER);
+        PurchaseOrder purchaseOrder = (PurchaseOrder) ExternalContextUtil
+                .getSession().getAttribute(SessionKeys.PURCHASE_ORDER);
         if (purchaseOrder == null) {
             return new PurchaseOrder();
         }
@@ -45,13 +43,13 @@ public class PurchaseOrder implements Serializable {
     }
 
     public static void put(PurchaseOrder purchaseOrder) {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.put(SessionKeys.PURCHASE_ORDER, purchaseOrder);
+        ExternalContextUtil.getSession().setAttribute(
+                SessionKeys.PURCHASE_ORDER, purchaseOrder);
     }
 
     public static void clear() {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.remove(SessionKeys.PURCHASE_ORDER);
+        ExternalContextUtil.getSession().removeAttribute(
+                SessionKeys.PURCHASE_ORDER);
     }
 
 }

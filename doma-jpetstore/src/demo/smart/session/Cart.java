@@ -1,7 +1,6 @@
 package demo.smart.session;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,8 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import demo.session.SessionKeys;
+import demo.smart.domain.Amount;
 import demo.smart.entity.Item;
-import demo.smart.util.ExternalContextUtil;
+import demo.util.ExternalContextUtil;
 
 public class Cart implements Serializable {
 
@@ -70,21 +70,19 @@ public class Cart implements Serializable {
         cartItem.setQuantity(quantity);
     }
 
-    public BigDecimal getSubTotal() {
-        BigDecimal subTotal = BigDecimal.ZERO;
+    public Amount getSubTotal() {
+        Amount subTotal = Amount.ZERO;
         for (CartItem cartItem : itemList) {
             Item item = cartItem.getItem();
-            BigDecimal listPrice = item.listPrice;
-            BigDecimal quantity = new BigDecimal(String.valueOf(cartItem
-                    .getQuantity()));
-            subTotal = subTotal.add(listPrice.multiply(quantity));
+            Amount listPrice = item.listPrice;
+            subTotal = subTotal.add(listPrice.multiply(cartItem.getQuantity()));
         }
         return subTotal;
     }
 
     public static Cart get() {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        Cart cart = (Cart) sessionMap.get(SessionKeys.CART);
+        Cart cart = (Cart) ExternalContextUtil.getSession().getAttribute(
+                SessionKeys.CART);
         if (cart == null) {
             return new Cart();
         }
@@ -92,12 +90,10 @@ public class Cart implements Serializable {
     }
 
     public static void put(Cart cart) {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.put(SessionKeys.CART, cart);
+        ExternalContextUtil.getSession().setAttribute(SessionKeys.CART, cart);
     }
 
     public static void clear() {
-        Map<Object, Object> sessionMap = ExternalContextUtil.getSessionMap();
-        sessionMap.remove(SessionKeys.CART);
+        ExternalContextUtil.getSession().removeAttribute(SessionKeys.CART);
     }
 }

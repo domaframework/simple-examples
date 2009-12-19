@@ -41,7 +41,7 @@
       </c:if>
     </td></tr>
     <tr><td>
-      <fmt:formatNumber value="${item.listPrice}" pattern="$#,##0.00"/>
+      <fmt:formatNumber value="${item.listPrice.value}" pattern="$#,##0.00"/>
     </td></tr>
 
     <tr><td>

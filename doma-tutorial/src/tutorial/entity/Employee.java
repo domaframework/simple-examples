@@ -15,7 +15,6 @@
  */
 package tutorial.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -61,7 +60,7 @@ public class Employee {
     Timestamp updateTimestamp;
 
     @OriginalStates
-    Serializable originalStates;
+    Employee originalStates;
 
     public Integer getId() {
         return id;

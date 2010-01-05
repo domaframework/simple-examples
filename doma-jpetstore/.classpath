@@ -9,7 +9,7 @@
 	<classpathentry kind="lib" path="lib/geronimo-jsp_2.0_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/geronimo-servlet_2.4_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/ibatis-common-2.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/doma-0.9.11.jar" sourcepath="libsrc/doma-0.9.11-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/doma-0.9.12-SNAPSHOT.jar" sourcepath="libsrc/doma-0.9.12-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/geronimo-ejb_3.0_spec-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/antlr-2.7.7.jar"/>

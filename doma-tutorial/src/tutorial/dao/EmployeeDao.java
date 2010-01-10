@@ -85,11 +85,20 @@ public interface EmployeeDao {
     @Insert
     int insert(Employee employee);
 
+    @Insert(sqlFile = true)
+    int insertWithSqlFile(Employee employee);
+
     @Update
     int update(Employee employee);
 
+    @Update(sqlFile = true)
+    int updateWithSqlFile(Employee employee);
+
     @Delete
     int delete(Employee employee);
+
+    @Delete(sqlFile = true)
+    int deleteWithSqlFile(Employee employee);
 
     @BatchInsert
     int[] batchInsert(List<Employee> employees);

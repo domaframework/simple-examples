@@ -102,6 +102,38 @@ public class Employee {
         this.jobType = jobType;
     }
 
+    public Date getHiredate() {
+        return hiredate;
+    }
+
+    public void setHiredate(Date hiredate) {
+        this.hiredate = hiredate;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public Timestamp getInsertTimestamp() {
+        return insertTimestamp;
+    }
+
+    public void setInsertTimestamp(Timestamp insertTimestamp) {
+        this.insertTimestamp = insertTimestamp;
+    }
+
+    public Timestamp getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Timestamp updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
     public Integer getVersion() {
         return version;
     }
@@ -114,10 +146,9 @@ public class Employee {
     public String toString() {
         return "Employee [departmentId=" + departmentId + ", hiredate="
                 + hiredate + ", id=" + id + ", jobType=" + jobType + ", name="
-                + name + ", originalStates=" + originalStates + ", salary="
-                + salary + ", version=" + version + ", insertTimestamp="
-                + insertTimestamp + ", updateTimestamp=" + updateTimestamp
-                + "]";
+                + name + ", salary=" + salary + ", version=" + version
+                + ", insertTimestamp=" + insertTimestamp + ", updateTimestamp="
+                + updateTimestamp + "]";
     }
 
 }

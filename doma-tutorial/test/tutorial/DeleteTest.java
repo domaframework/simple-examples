@@ -13,4 +13,10 @@ public class DeleteTest extends TutorialTestCase {
 
         dao.delete(employee);
     }
+
+    public void testDeleteWithSqlFile() throws Exception {
+        Employee employee = dao.selectById(1);
+
+        dao.deleteWithSqlFile(employee);
+    }
 }

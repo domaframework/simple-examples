@@ -13,6 +13,6 @@ WHERE
   OR 
   lower(descn) like /* @contain(keyword.toLowerCase()) */'a'
   /*%if keyword_has_next */
-  OR
+  /*# "OR" */
   /*%end*/
 /*%end*/

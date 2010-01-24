@@ -14,6 +14,7 @@
 				<exclude name="**/.apt_generated/**"/>
 				<exclude name="**/target/**"/>
 				<exclude name="**/site/**"/>
+				<exclude name="pom.xml"/>
 				<exclude name="build.xml"/>
 			</zipfileset>
 		</zip>

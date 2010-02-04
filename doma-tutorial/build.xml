@@ -1,21 +1,37 @@
-<project name="doma-tutorial" default="dist" basedir=".">
+<project name="doma-tutorial" default="jar" basedir=".">
 
-	<target name="copy">
-		<copy todir="lib" file="../doma/target/doma-${ver}.jar"/>
-		<copy todir="libsrc" file="../doma/target/doma-${ver}-sources.jar"/>
-	</target>
+    <property name="build" value="target/build"/>
+    <property name="apt_generated" value="target/apt_generated"/>
+    <property name="src" value="src/main/java"/>
+    <property name="resources" value="src/main/resources"/>
 
-	<target name="dist" depends="copy">
-		<mkdir dir="${zipDir}"/>
-		<zip zipfile="${zipDir}/doma-tutorial-${ver}.zip">
-			<zipfileset prefix="doma-tutorial" dir=".">
-				<exclude name="**/bin/**"/>
-				<exclude name="**/.apt_generated/**"/>
-				<exclude name="**/target/**"/>
-				<exclude name="**/site/**"/>
-				<exclude name="build.xml"/>
-			</zipfileset>
-		</zip>
-	</target>
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
 
+    <target name="jar" depends="clean,copy,compile">
+        <jar jarfile="target/doma-tutorial.jar" basedir="${build}" />
+    </target>
+
+    <target name="clean">
+        <delete dir="target" failonerror="false"/>
+        <mkdir dir="target"/>
+        <mkdir dir="${build}"/>
+        <mkdir dir="${apt_generated}"/>
+    </target>
+
+    <target name="compile">
+        <javac fork="yes" compiler="javac1.6" debug="on" encoding="UTF-8"
+            classpathref="classpath" srcdir="${src}" destdir="${build}">
+            <compilerarg line="-s ${apt_generated}" />
+        </javac>
+    </target>
+
+    <target name="copy">
+        <copy todir="${build}" filtering="true">
+            <fileset dir="${resources}">
+                <include name="META-INF/**" />
+            </fileset>
+        </copy>
+    </target>
 </project>

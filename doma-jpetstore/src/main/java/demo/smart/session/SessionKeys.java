@@ -17,9 +17,9 @@ package demo.smart.session;
 
 public final class SessionKeys {
 
-    public static final String CART = Cart.class.getName();
+    public static final String CART = "demo.smart.session.cart";
 
-    public static final String USER = User.class.getName();
+    public static final String USER = "demo.smart.session.use";
 
-    public static final String PURCHASE_ORDER = PurchaseOrder.class.getName();
+    public static final String PURCHASE_ORDER = "demo.smart.session.purchaseOrder";
 }

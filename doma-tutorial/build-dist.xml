@@ -13,7 +13,7 @@
 				<exclude name="**/.apt_generated/**"/>
 				<exclude name="**/target/**"/>
 				<exclude name="**/site/**"/>
-				<exclude name="dist-build.xml"/>
+				<exclude name="build-dist.xml"/>
 			</zipfileset>
 		</zip>
 	</target>

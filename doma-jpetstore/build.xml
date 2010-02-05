@@ -1,0 +1,43 @@
+<project name="doma-jpetstore" default="war" basedir=".">
+
+    <property name="build" value="target/build"/>
+    <property name="apt_generated" value="target/apt_generated"/>
+    <property name="src" value="src/main/java"/>
+    <property name="resources" value="src/main/resources"/>
+    <property name="webapp" value="src/main/webapp"/>
+
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar"/>
+        <fileset dir="src/main/webapp/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="war" depends="clean,copy,compile">
+        <war warfile="target/doma-jpetstore.war" basedir="${build}"
+            webxml="${webapp}/WEB-INF/web.xml">
+        </war>
+    </target>
+
+    <target name="clean">
+        <delete dir="target" failonerror="false"/>
+        <mkdir dir="target"/>
+        <mkdir dir="${build}"/>
+        <mkdir dir="${apt_generated}"/>
+    </target>
+
+    <target name="compile">
+        <javac fork="yes" compiler="javac1.6" debug="on" encoding="UTF-8"
+            classpathref="classpath" srcdir="${src}" destdir="${build}">
+            <compilerarg line="-s ${apt_generated} -Adao.subpackage=impl -Adao.suffix=Impl" />
+        </javac>
+    </target>
+
+    <target name="copy">
+        <copy todir="${build}" filtering="true">
+            <fileset dir="${resources}">
+                <include name="*/**" />
+            </fileset>
+        </copy>
+    </target>
+</project>

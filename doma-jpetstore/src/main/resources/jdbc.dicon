@@ -4,11 +4,6 @@
 <components namespace="jdbc">
 	<include path="jta.dicon"/>
 
-	<!-- Hsqldb initializer  -->
-	<component>
-		@demo.config.HsqldbInitializer@init()
-	</component>
-
 	<!-- for HSQLDB -->
 	<component name="xaDataSource"
 		class="org.seasar.extension.dbcp.impl.XADataSourceImpl">
@@ -16,7 +11,9 @@
 			"org.hsqldb.jdbcDriver"
 		</property>
 		<property name="URL">
-			"jdbc:hsqldb:mem:jpetstore"
+			"jdbc:hsqldb:file:"
+				+ @org.seasar.framework.util.ResourceUtil@getBuildDir("jdbc.dicon").getCanonicalPath()
+				+ "/data-hsqldb/demo"
 		</property>
 		<property name="user">"sa"</property>
 		<property name="password">""</property>

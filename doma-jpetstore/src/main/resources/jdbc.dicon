@@ -4,38 +4,20 @@
 <components namespace="jdbc">
 	<include path="jta.dicon"/>
 
-	<!-- for HSQLDB -->
-	<component name="xaDataSource"
-		class="org.seasar.extension.dbcp.impl.XADataSourceImpl">
-		<property name="driverClassName">
-			"org.hsqldb.jdbcDriver"
-		</property>
-		<property name="URL">
-			"jdbc:hsqldb:file:"
-				+ @org.seasar.framework.util.ResourceUtil@getBuildDir("jdbc.dicon").getCanonicalPath()
-				+ "/data-hsqldb/demo"
-		</property>
-		<property name="user">"sa"</property>
-		<property name="password">""</property>
-	</component>
-	
 	<!-- for H2 -->
-	<!--
 	<component name="xaDataSource"
 		class="org.seasar.extension.dbcp.impl.XADataSourceImpl">
 		<property name="driverClassName">
 			"org.h2.Driver"
 		</property>
 		<property name="URL">
-			"jdbc:h2:tcp://localhost:9092/demo"
+			"jdbc:h2:file:"
+				+ @org.seasar.framework.util.ResourceUtil@getBuildDir("jdbc.dicon").getCanonicalPath()
+				+ "/data-h2/demo;DB_CLOSE_ON_EXIT=FALSE"
 		</property>
 		<property name="user">"sa"</property>
 		<property name="password">""</property>
-		<destroyMethod>
-			@org.seasar.framework.util.DriverManagerUtil@deregisterAllDrivers()
-		</destroyMethod>
 	</component>
-	-->
 	
 	<!-- for Oracle -->
 	<!--

@@ -23,7 +23,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-validator-1.2.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/geronimo-jta_1.1_spec-1.0.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/hsqldb-1.8.0.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jakarta-oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jakarta-taglibs-standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javassist-3.4.ga.jar"/>
@@ -37,5 +36,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sa-struts-1.0.4-sp6.jar" sourcepath="libsrc/sa-struts-1.0.4-sp6-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-extension-2.4.40.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sa-struts-1.0.4-sp7.jar" sourcepath="libsrc/sa-struts-1.0.4-sp7-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-1.2.126.jar"/>
 	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
 </classpath>

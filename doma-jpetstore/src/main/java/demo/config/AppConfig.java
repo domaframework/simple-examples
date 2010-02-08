@@ -22,7 +22,7 @@ import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.SqlFileRepository;
 import org.seasar.doma.jdbc.dialect.Dialect;
-import org.seasar.doma.jdbc.dialect.HsqldbDialect;
+import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.extension.datasource.DataSourceFactory;
 import org.seasar.extension.datasource.impl.SelectableDataSourceProxy;
 import org.seasar.framework.container.S2Container;
@@ -36,7 +36,7 @@ public class AppConfig implements Config {
 
     private static RequiresNewController requiresNewController = new S2RequiresNewController();
 
-    private static Dialect dialect = new HsqldbDialect();
+    private static Dialect dialect = new H2Dialect();
 
     @Override
     public String getDataSourceName() {

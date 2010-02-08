@@ -8,14 +8,16 @@
 
     <path id="classpath">
         <fileset dir="lib" includes="*.jar"/>
-        <fileset dir="src/main/webapp/WEB-INF/lib">
+        <fileset dir="${webapp}/WEB-INF/lib">
             <include name="*.jar"/>
         </fileset>
     </path>
 
     <target name="war" depends="clean,copy,compile">
-        <war warfile="target/doma-jpetstore.war" basedir="${build}"
+        <war destfile="target/doma-jpetstore.war" basedir="${webapp}"
             webxml="${webapp}/WEB-INF/web.xml">
+            <exclude name="WEB-INF/classes/**"/>
+            <classes dir="${build}"/>
         </war>
     </target>
 

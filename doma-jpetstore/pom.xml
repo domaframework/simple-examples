@@ -150,9 +150,15 @@
 						<phase>compile</phase>
 						<configuration>
 							<tasks>
-								<ant antfile="pom-compile.xml" target="compile">
-									<property name="classpath" refid="maven.compile.classpath"/>
-								</ant>
+								<property name="dest" value="target/classes"/>
+								<property name="apt_generated" value="target/apt_generated"/>
+								<property name="src" value="src/main/java"/>
+								<delete dir="${apt_generated}" failonerror="false"/>
+								<mkdir dir="${apt_generated}"/>
+								<javac fork="yes" compiler="javac1.6" debug="on" encoding="UTF-8"
+									classpathref="maven.compile.classpath" srcdir="${src}" destdir="${dest}">
+									<compilerarg line="-s ${apt_generated} -Adao.subpackage=impl -Adao.suffix=Impl" />
+								</javac>
 							</tasks>
 						</configuration>
 						<goals>

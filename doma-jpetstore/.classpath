@@ -33,7 +33,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/struts-1.2.9.jar" sourcepath="libsrc/struts-1.2.9-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-framework-2.4.40.jar" sourcepath="libsrc/s2-framework-2.4.40-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-tiger-2.4.40.jar" sourcepath="libsrc/s2-tiger-2.4.40-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sa-struts-1.0.4-sp6.jar" sourcepath="libsrc/sa-struts-1.0.4-sp6-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-extension-2.4.40.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sa-struts-1.0.4-sp7.jar" sourcepath="libsrc/sa-struts-1.0.4-sp7-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-1.2.126.jar"/>

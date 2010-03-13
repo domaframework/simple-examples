@@ -71,4 +71,34 @@ public class CommonsJdbcLogger implements JdbcLogger {
         log.info(message);
     }
 
+    @Override
+    public void logLocalTransactionBegun(String callerClassName,
+            String callerMethodName, String transactionId) {
+    }
+
+    @Override
+    public void logLocalTransactionCommitted(String callerClassName,
+            String callerMethodName, String transactionId) {
+    }
+
+    @Override
+    public void logLocalTransactionRolledback(String callerClassName,
+            String callerMethodName, String transactionId) {
+    }
+
+    @Override
+    public void logLocalTransactionSavepointCreated(String callerClassName,
+            String callerMethodName, String transactionId, String savepointName) {
+    }
+
+    @Override
+    public void logLocalTransactionSavepointReleased(String callerClassName,
+            String callerMethodName, String transactionId, String savepointName) {
+    }
+
+    @Override
+    public void logLocalTransactionSavepointRolledback(String callerClassName,
+            String callerMethodName, String transactionId, String savepointName) {
+    }
+
 }

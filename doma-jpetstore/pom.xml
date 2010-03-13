@@ -197,7 +197,7 @@
 		<dependency>
 			<groupId>org.seasar.sastruts</groupId>
 			<artifactId>sa-struts</artifactId>
-			<version>1.0.4-sp7</version>
+			<version>1.0.4-sp8</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>

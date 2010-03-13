@@ -21,10 +21,12 @@ import org.seasar.doma.jdbc.DomaAbstractConfig;
 import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.HsqldbDialect;
+import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionalDataSource;
 
 public class AppConfig extends DomaAbstractConfig {
 
-    protected static final DataSource dataSource = createDataSource();
+    protected static final LocalTransactionalDataSource dataSource = createDataSource();
 
     protected static final Dialect dialect = new HsqldbDialect();
 
@@ -38,11 +40,15 @@ public class AppConfig extends DomaAbstractConfig {
         return dialect;
     }
 
-    protected static DataSource createDataSource() {
+    protected static LocalTransactionalDataSource createDataSource() {
         SimpleDataSource dataSource = new SimpleDataSource();
         dataSource.setUrl("jdbc:hsqldb:mem:tutorial");
         dataSource.setUser("sa");
-        return dataSource;
+        return new LocalTransactionalDataSource(dataSource);
+    }
+
+    public static LocalTransaction getLocalTransaction() {
+        return dataSource.getLocalTransaction(defaultJdbcLogger);
     }
 
 }

@@ -2,6 +2,8 @@ package tutorial;
 
 import java.sql.Timestamp;
 
+import org.seasar.doma.jdbc.tx.LocalTransaction;
+
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
 import tutorial.domain.Salary;
@@ -13,25 +15,42 @@ public class InsertTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testInsert() throws Exception {
-        Employee employee = new Employee();
-        employee.setName("test");
-        employee.setAge(50);
-        employee.setSalary(new Salary(300));
-        employee.setJobType(JobType.PRESIDENT);
+        LocalTransaction tx = AppConfig.getLocalTransaction();
+        try {
+            tx.begin();
 
-        dao.insert(employee);
+            Employee employee = new Employee();
+            employee.setName("test");
+            employee.setAge(50);
+            employee.setSalary(new Salary(300));
+            employee.setJobType(JobType.PRESIDENT);
+            dao.insert(employee);
+
+            tx.commit();
+        } finally {
+            tx.rollback();
+        }
     }
 
     public void testInsertWithSqlFile() throws Exception {
-        Employee employee = new Employee();
-        employee.setId(100);
-        employee.setName("test");
-        employee.setAge(50);
-        employee.setSalary(new Salary(300));
-        employee.setJobType(JobType.PRESIDENT);
-        employee.setInsertTimestamp(new Timestamp(System.currentTimeMillis()));
-        employee.setVersion(1);
+        LocalTransaction tx = AppConfig.getLocalTransaction();
+        try {
+            tx.begin();
 
-        dao.insertWithSqlFile(employee);
+            Employee employee = new Employee();
+            employee.setId(100);
+            employee.setName("test");
+            employee.setAge(50);
+            employee.setSalary(new Salary(300));
+            employee.setJobType(JobType.PRESIDENT);
+            employee.setInsertTimestamp(new Timestamp(System
+                    .currentTimeMillis()));
+            employee.setVersion(1);
+            dao.insertWithSqlFile(employee);
+
+            tx.commit();
+        } finally {
+            tx.rollback();
+        }
     }
 }

@@ -41,6 +41,17 @@ public class CommonsJdbcLogger implements JdbcLogger {
     }
 
     @Override
+    public void logAutoCommitEnablingFailure(String callerClassName,
+            String callerMethodName, SQLException e) {
+    }
+
+    @Override
+    public void logTransactionIsolationSettingFailuer(String callerClassName,
+            String callerMethodName, int transactionIsolationLevel,
+            SQLException e) {
+    }
+
+    @Override
     public void logDaoMethodEntering(String callerClassName,
             String callerMethodName, Object... parameters) {
         Log log = LogFactory.getLog(callerClassName);
@@ -99,6 +110,16 @@ public class CommonsJdbcLogger implements JdbcLogger {
     @Override
     public void logLocalTransactionSavepointRolledback(String callerClassName,
             String callerMethodName, String transactionId, String savepointName) {
+    }
+
+    @Override
+    public void logLocalTransactionRollbackFailure(String callerClassName,
+            String callerMethodName, String transactionId, SQLException e) {
+    }
+
+    @Override
+    public void logLocalTransactionEnded(String callerClassName,
+            String callerMethodName, String transactionId) {
     }
 
 }

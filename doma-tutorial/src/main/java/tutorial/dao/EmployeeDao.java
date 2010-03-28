@@ -50,6 +50,9 @@ public interface EmployeeDao {
     List<Employee> selectByNames(List<String> names);
 
     @Select
+    List<Employee> selectByNotEmptyName(String name);
+
+    @Select
     List<Employee> selectByNameWithPrefixMatching(String prefix);
 
     @Select

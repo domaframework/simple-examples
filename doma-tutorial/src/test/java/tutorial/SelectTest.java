@@ -66,6 +66,26 @@ public class SelectTest extends TutorialTestCase {
         }
     }
 
+    public void testIsNotEmptyFunction() {
+        LocalTransaction tx = AppConfig.getLocalTransaction();
+        try {
+            tx.begin();
+
+            List<Employee> list = dao.selectByNotEmptyName("SMITH");
+            assertEquals(1, list.size());
+            list = dao.selectByNotEmptyName(null);
+            assertEquals(14, list.size());
+            list = dao.selectByNotEmptyName("");
+            assertEquals(14, list.size());
+            list = dao.selectByNotEmptyName("    ");
+            assertEquals(0, list.size());
+
+            tx.commit();
+        } finally {
+            tx.rollback();
+        }
+    }
+
     public void testLikePredicate_prefix() throws Exception {
         LocalTransaction tx = AppConfig.getLocalTransaction();
         try {

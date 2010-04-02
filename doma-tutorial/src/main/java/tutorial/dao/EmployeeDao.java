@@ -33,6 +33,7 @@ import org.seasar.doma.jdbc.SelectOptions;
 import tutorial.AppConfig;
 import tutorial.domain.Salary;
 import tutorial.entity.Employee;
+import tutorial.entity.EmployeeDepartment;
 
 @Dao(config = AppConfig.class)
 public interface EmployeeDao {
@@ -84,6 +85,9 @@ public interface EmployeeDao {
 
     @Delegate(to = EmployeeDaoDelegate.class)
     int count();
+
+    @Select
+    List<EmployeeDepartment> selectAllEmployeeDepartment();
 
     @Insert
     int insert(Employee employee);

@@ -22,7 +22,15 @@ public abstract class TutorialTestCase extends TestCase {
                     statement
                             .execute("create sequence employee_seq as integer start with 100 increment by 1;");
                     statement
+                            .execute("create table department (id integer not null primary key,name varchar(255) not null, version integer not null)");
+                    statement
                             .execute("create table employee (id integer not null primary key,name varchar(255) not null,age integer not null,salary integer,job_type varchar(20),hiredate timestamp, department_id integer, version integer not null, insertTimestamp timestamp, updateTimestamp timestamp)");
+                    statement
+                            .execute("insert into department values(1,'ACCOUNTING',1)");
+                    statement
+                            .execute("insert into department values(2,'RESEARCH',1)");
+                    statement
+                            .execute("insert into department values(3,'SALES',1)");
                     statement
                             .execute("insert into employee values(1,'ALLEN',30,1600,'SALESMAN','2008-01-20 12:34:56',1,1,CURRENT_TIMESTAMP,null)");
                     statement
@@ -74,6 +82,7 @@ public abstract class TutorialTestCase extends TestCase {
                 try {
                     statement.execute("drop sequence employee_seq;");
                     statement.execute("drop table employee;");
+                    statement.execute("drop table department;");
                 } finally {
                     statement.close();
                 }

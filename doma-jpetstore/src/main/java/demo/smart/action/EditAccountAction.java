@@ -50,24 +50,6 @@ public class EditAccountAction {
     // out
     public Account account;
 
-    @Execute(validator = true, input = "newAccountForm.jsp")
-    public String newAccount() {
-        account = new Account();
-        Beans.copy(editAccountForm, account).execute();
-        try {
-            accountService.insertAccount(account);
-            User user = User.get();
-            user.setUsername(account.username);
-            user.setFirstName(account.firstName);
-            user.setAuthorized(true);
-            return "/";
-        } catch (Exception e) {
-            throw new RuntimeException(
-                    "There was a problem creating your Account Information.  Cause: "
-                            + e, e);
-        }
-    }
-
     @Execute(validator = false)
     public String editAccountForm() {
         User signin = User.get();

@@ -52,6 +52,22 @@ public class SelectTest extends TutorialTestCase {
         }
     }
 
+    public void testConditinalSelect2() {
+        LocalTransaction tx = AppConfig.getLocalTransaction();
+        try {
+            tx.begin();
+
+            List<Employee> list = dao.selectByName("SMITH");
+            assertEquals(1, list.size());
+            list = dao.selectByName(null);
+            assertEquals(0, list.size());
+
+            tx.commit();
+        } finally {
+            tx.rollback();
+        }
+    }
+
     public void testLoopSelect() {
         LocalTransaction tx = AppConfig.getLocalTransaction();
         try {

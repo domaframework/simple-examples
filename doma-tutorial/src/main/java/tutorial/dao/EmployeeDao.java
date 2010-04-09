@@ -48,6 +48,9 @@ public interface EmployeeDao {
     List<Employee> selectByAges(List<Integer> ages);
 
     @Select
+    List<Employee> selectByName(String name);
+
+    @Select
     List<Employee> selectByNames(List<String> names);
 
     @Select

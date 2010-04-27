@@ -66,6 +66,14 @@ public class CommonsJdbcLogger implements JdbcLogger {
     }
 
     @Override
+    public void logDaoMethodThrowing(String callerClassName,
+            String callerMethodName, RuntimeException e) {
+        Log log = LogFactory.getLog(callerClassName);
+        log.info("END   " + callerClassName + "#" + callerMethodName
+                + " RuntimeException: " + e);
+    }
+
+    @Override
     public void logSqlExecutionSkipping(String callerClassName,
             String callerMethodName, SqlExecutionSkipCause cause) {
         Log log = LogFactory.getLog(callerClassName);

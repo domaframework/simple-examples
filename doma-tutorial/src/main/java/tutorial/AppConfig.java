@@ -20,15 +20,15 @@ import javax.sql.DataSource;
 import org.seasar.doma.jdbc.DomaAbstractConfig;
 import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
-import org.seasar.doma.jdbc.dialect.HsqldbDialect;
+import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.LocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransactionalDataSource;
 
 public class AppConfig extends DomaAbstractConfig {
 
-    protected static final LocalTransactionalDataSource dataSource = createDataSource();
+    private static final LocalTransactionalDataSource dataSource = createDataSource();
 
-    protected static final Dialect dialect = new HsqldbDialect();
+    private static final Dialect dialect = new H2Dialect();
 
     @Override
     public DataSource getDataSource() {
@@ -42,7 +42,7 @@ public class AppConfig extends DomaAbstractConfig {
 
     protected static LocalTransactionalDataSource createDataSource() {
         SimpleDataSource dataSource = new SimpleDataSource();
-        dataSource.setUrl("jdbc:hsqldb:mem:tutorial");
+        dataSource.setUrl("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1");
         dataSource.setUser("sa");
         return new LocalTransactionalDataSource(dataSource);
     }

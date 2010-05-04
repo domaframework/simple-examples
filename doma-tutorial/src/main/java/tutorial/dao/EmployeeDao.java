@@ -120,4 +120,10 @@ public interface EmployeeDao {
     @BatchDelete
     int[] batchDelete(List<Employee> employees);
 
+    @Script
+    void create();
+
+    @Script
+    void drop();
+
 }

@@ -26,13 +26,15 @@ import org.seasar.doma.jdbc.tx.LocalTransactionalDataSource;
 
 public class AppConfig extends DomaAbstractConfig {
 
-    private static final LocalTransactionalDataSource dataSource = createDataSource();
+    private static final DataSource originalDataSource = createDataSource();
+
+    private static final LocalTransactionalDataSource localTxDataSource = createLocalTxDataSource();
 
     private static final Dialect dialect = new H2Dialect();
 
     @Override
     public DataSource getDataSource() {
-        return dataSource;
+        return originalDataSource;
     }
 
     @Override
@@ -40,15 +42,22 @@ public class AppConfig extends DomaAbstractConfig {
         return dialect;
     }
 
-    protected static LocalTransactionalDataSource createDataSource() {
+    protected static DataSource createDataSource() {
         SimpleDataSource dataSource = new SimpleDataSource();
         dataSource.setUrl("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1");
         dataSource.setUser("sa");
-        return new LocalTransactionalDataSource(dataSource);
+        return dataSource;
+    }
+
+    protected static LocalTransactionalDataSource createLocalTxDataSource() {
+        return new LocalTransactionalDataSource(originalDataSource);
     }
 
     public static LocalTransaction getLocalTransaction() {
-        return dataSource.getLocalTransaction(defaultJdbcLogger);
+        return localTxDataSource.getLocalTransaction(defaultJdbcLogger);
     }
 
+    public static DataSource getOriginalDataSource() {
+        return originalDataSource;
+    }
 }

@@ -25,7 +25,6 @@ import org.seasar.doma.Dao;
 import org.seasar.doma.Delegate;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
-import org.seasar.doma.Script;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 import org.seasar.doma.jdbc.IterationCallback;
@@ -119,11 +118,5 @@ public interface EmployeeDao {
 
     @BatchDelete
     int[] batchDelete(List<Employee> employees);
-
-    @Script
-    void create();
-
-    @Script
-    void drop();
 
 }

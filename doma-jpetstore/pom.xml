@@ -6,7 +6,7 @@
 	<!-- The Basics -->
 	<groupId>org.seasar.doma</groupId>
 	<artifactId>doma-jpetstore</artifactId>
-	<version>1.7.0</version>
+	<version>1.7.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<!-- More Project Information -->
@@ -191,7 +191,7 @@
 		<dependency>
 			<groupId>org.seasar.doma</groupId>
 			<artifactId>doma</artifactId>
-			<version>1.7.0</version>
+			<version>1.7.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>

@@ -1,0 +1,1 @@
+select 'aaa' from Employee

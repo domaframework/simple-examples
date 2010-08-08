@@ -34,7 +34,7 @@ public class AppConfig extends DomaAbstractConfig {
 
     @Override
     public DataSource getDataSource() {
-        return originalDataSource;
+        return localTxDataSource;
     }
 
     @Override

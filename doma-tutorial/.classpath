@@ -11,7 +11,7 @@
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/junit-3.8.2.jar"/>
-	<classpathentry kind="lib" path="lib/doma-1.13.1-SNAPSHOT.jar" sourcepath="libsrc/doma-1.13.1-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="lib/doma-1.14.0-SNAPSHOT.jar" sourcepath="libsrc/doma-1.14.0-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="lib" path="lib/h2-1.2.126.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

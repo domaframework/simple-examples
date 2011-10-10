@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -9,9 +8,10 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/junit-3.8.2.jar"/>
-	<classpathentry kind="lib" path="lib/doma-1.18.0.jar" sourcepath="libsrc/doma-1.18.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/doma-1.19.0-SNAPSHOT.jar" sourcepath="libsrc/doma-1.19.0-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="lib" path="lib/h2-1.2.126.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

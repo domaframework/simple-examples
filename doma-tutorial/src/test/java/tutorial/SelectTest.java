@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.IterationContext;
+import org.seasar.doma.jdbc.PostIterationCallback;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.tx.LocalTransaction;
 
@@ -273,6 +274,40 @@ public class SelectTest extends TutorialTestCase {
                         }
                     });
             assertEquals(new Integer(10725), sum.getValue());
+
+            tx.commit();
+        } finally {
+            tx.rollback();
+        }
+    }
+
+    public void testIterate_post() throws Exception {
+        LocalTransaction tx = AppConfig.getLocalTransaction();
+        try {
+            tx.begin();
+
+            Salary sum = dao.selectByAge(30,
+                    new PostIterationCallback<Salary, Employee>() {
+
+                        private Salary sum = new Salary(0);
+
+                        @Override
+                        public Salary iterate(Employee target,
+                                IterationContext context) {
+                            Salary salary = target.getSalary();
+                            if (salary != null) {
+                                sum = sum.add(salary);
+                            }
+                            return sum;
+                        }
+
+                        public Salary postIterate(Salary salary,
+                                IterationContext context) {
+                            return salary.add(new Salary(10000));
+                        }
+
+                    });
+            assertEquals(new Integer(31975), sum.getValue());
 
             tx.commit();
         } finally {

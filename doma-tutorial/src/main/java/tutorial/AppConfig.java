@@ -21,6 +21,7 @@ import org.seasar.doma.jdbc.DomaAbstractConfig;
 import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
+import org.seasar.doma.jdbc.tx.KeepAliveLocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransactionalDataSource;
 
@@ -55,6 +56,11 @@ public class AppConfig extends DomaAbstractConfig {
 
     public static LocalTransaction getLocalTransaction() {
         return localTxDataSource.getLocalTransaction(defaultJdbcLogger);
+    }
+
+    public static KeepAliveLocalTransaction getKeepAliveLocalTransaction() {
+        return localTxDataSource
+                .getKeepAliveLocalTransaction(defaultJdbcLogger);
     }
 
     public static DataSource getOriginalDataSource() {

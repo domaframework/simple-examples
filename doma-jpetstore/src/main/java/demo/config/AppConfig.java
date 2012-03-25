@@ -18,6 +18,7 @@ package demo.config;
 import javax.sql.DataSource;
 
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.ExceptionSqlLogType;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.SqlFileRepository;
@@ -79,6 +80,11 @@ public class AppConfig implements Config {
     @Override
     public SqlFileRepository getSqlFileRepository() {
         return sqlfileRepository;
+    }
+
+    @Override
+    public ExceptionSqlLogType getExceptionSqlLogType() {
+        return ExceptionSqlLogType.FORMATTED_SQL;
     }
 
     @Override

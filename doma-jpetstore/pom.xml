@@ -165,6 +165,7 @@
 						<configuration>
 							<outputDirectory>${project.build.directory}/apt_generated</outputDirectory>
 							<compilerArguments>-Adao.subpackage=impl -Adao.suffix=Impl</compilerArguments>
+							<failOnError>false</failOnError>
 						</configuration>
 					</execution>
 				</executions>

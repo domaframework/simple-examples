@@ -164,16 +164,10 @@
 						<phase>process-resources</phase>
 						<configuration>
 							<outputDirectory>${project.build.directory}/apt_generated</outputDirectory>
+							<failOnError>false</failOnError>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerArgument>-proc:none</compilerArgument>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>

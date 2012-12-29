@@ -17,7 +17,9 @@ package demo.config;
 
 import javax.sql.DataSource;
 
+import org.seasar.doma.jdbc.ClassHelper;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.DefaultClassHelper;
 import org.seasar.doma.jdbc.ExceptionSqlLogType;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.RequiresNewController;
@@ -38,6 +40,8 @@ public class AppConfig implements Config {
     private static RequiresNewController requiresNewController = new S2RequiresNewController();
 
     private static Dialect dialect = new H2Dialect();
+
+    private static ClassHelper classHelper = new DefaultClassHelper();
 
     @Override
     public String getDataSourceName() {
@@ -80,6 +84,11 @@ public class AppConfig implements Config {
     @Override
     public SqlFileRepository getSqlFileRepository() {
         return sqlfileRepository;
+    }
+
+    @Override
+    public ClassHelper getClassHelper() {
+        return classHelper;
     }
 
     @Override

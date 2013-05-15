@@ -15,6 +15,7 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-framework-2.4.41.jar" sourcepath="libsrc/s2-framework-2.4.41-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-tiger-2.4.41.jar" sourcepath="libsrc/s2-tiger-2.4.41-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sa-struts-1.0.4-sp8.jar" sourcepath="libsrc/sa-struts-1.0.4-sp8-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-1.3.171.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/aopalliance-1.0.jar"/>
@@ -35,7 +36,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ognl-2.6.9-patch-20090427.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/poi-3.0-FINAL.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/struts-1.2.9.jar" sourcepath="libsrc/struts-1.2.9-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-1.2.126.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>

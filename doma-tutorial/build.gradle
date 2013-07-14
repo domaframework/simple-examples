@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+sourceCompatibility = targetCompatibility = 1.6
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+processResources.destinationDir = compileJava.destinationDir
+compileJava.dependsOn processResources
+
+def aptGeneratePath = 'build/apt_generated'
+compileJava.options.compilerArgs = ['-s', aptGeneratePath]
+new File(aptGeneratePath).mkdirs()
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven {url 'http://maven.seasar.org/maven2'}
+}
+
+dependencies {
+  compile 'org.seasar.doma:doma:1.31.0-SNAPSHOT'
+  compile 'com.h2database:h2:1.3.171'
+  testCompile 'junit:junit:3.8.2'
+}

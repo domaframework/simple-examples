@@ -25,20 +25,20 @@ import org.seasar.doma.jdbc.entity.PreDeleteContext;
 import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
 
-public class EmployeeListener implements EntityListener<Employee> {
+public class EmployeeListener<E extends Employee> implements EntityListener<E> {
 
     @Override
-    public void preDelete(Employee employee, PreDeleteContext context) {
+    public void preDelete(E employee, PreDeleteContext<E> context) {
     }
 
     @Override
-    public void preInsert(Employee employee, PreInsertContext context) {
+    public void preInsert(E employee, PreInsertContext<E> context) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         employee.setInsertTimestamp(timestamp);
     }
 
     @Override
-    public void preUpdate(Employee employee, PreUpdateContext context) {
+    public void preUpdate(E employee, PreUpdateContext<E> context) {
         if (context.isEntityChanged()) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             employee.setUpdateTimestamp(timestamp);
@@ -46,15 +46,15 @@ public class EmployeeListener implements EntityListener<Employee> {
     }
 
     @Override
-    public void postInsert(Employee entity, PostInsertContext context) {
+    public void postInsert(E entity, PostInsertContext<E> context) {
     }
 
     @Override
-    public void postUpdate(Employee entity, PostUpdateContext context) {
+    public void postUpdate(E entity, PostUpdateContext<E> context) {
     }
 
     @Override
-    public void postDelete(Employee entity, PostDeleteContext context) {
+    public void postDelete(E entity, PostDeleteContext<E> context) {
     }
 
 }

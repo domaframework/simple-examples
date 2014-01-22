@@ -1,1 +1,1 @@
-select * from employee where name like /* @contain(inside) */'%X%' escape '$'
+select * from employee where name like /* @infix(inside) */'%X%' escape '$'

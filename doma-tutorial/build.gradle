@@ -1,22 +1,37 @@
 apply plugin: 'java'
-
-sourceCompatibility = targetCompatibility = 1.6
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+ 
+version = '2.0-beta-2-SNAPSHOT'
 processResources.destinationDir = compileJava.destinationDir
 compileJava.dependsOn processResources
-
-def aptGeneratePath = 'build/apt_generated'
-compileJava.options.compilerArgs = ['-s', aptGeneratePath]
-new File(aptGeneratePath).mkdirs()
-
+ 
+compileJava {
+    options.encoding = 'UTF-8'
+}
+ 
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+ 
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Doma-Tutorial', 'Implementation-Version': version
+    }
+}
+ 
+test {
+    scanForTestClasses = false
+    includes = ['**/*Test.class']
+}
+ 
 repositories {
-  mavenLocal()
-  mavenCentral()
-  maven {url 'http://maven.seasar.org/maven2'}
+    mavenCentral()
+    mavenLocal()
+}
+ 
+dependencies {
+    compile "org.seasar.doma:doma:${version}"
+    testCompile 'com.h2database:h2:1.3.171'
+    testCompile 'junit:junit:3.8.2'
 }
 
-dependencies {
-  compile 'org.seasar.doma:doma:1.36.0-SNAPSHOT'
-  compile 'com.h2database:h2:1.3.171'
-  testCompile 'junit:junit:3.8.2'
-}
+apply from:'eclipse.gradle'

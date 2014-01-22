@@ -22,13 +22,15 @@ import org.seasar.doma.BatchDelete;
 import org.seasar.doma.BatchInsert;
 import org.seasar.doma.BatchUpdate;
 import org.seasar.doma.Dao;
-import org.seasar.doma.Delegate;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
+import org.seasar.doma.ResultHandlerType;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.SelectOptions;
+import org.seasar.doma.jdbc.builder.SelectBuilder;
 
 import tutorial.AppConfig;
 import tutorial.domain.Salary;
@@ -83,11 +85,15 @@ public interface EmployeeDao {
     @Select
     List<Employee> selectAll(SelectOptions options);
 
-    @Select(iterate = true)
-    <R> R selectByAge(int age, IterationCallback<R, Employee> callback);
+    @Select(resultHandler = ResultHandlerType.ITERATION)
+    <R> R selectByAge(int age, IterationCallback<Employee, R> callback);
 
-    @Delegate(to = EmployeeDaoDelegate.class)
-    int count();
+    default int count() {
+        Config config = Config.get(this);
+        SelectBuilder builder = SelectBuilder.newInstance(config);
+        builder.sql("select count(*) from employee");
+        return builder.getScalarSingleResult(int.class);
+    }
 
     @Select
     List<EmployeeDepartment> selectAllEmployeeDepartment();

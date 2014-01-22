@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.IterationContext;
-import org.seasar.doma.jdbc.PostIterationCallback;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.tx.LocalTransaction;
 
@@ -227,7 +226,7 @@ public class SelectTest extends TutorialTestCase {
             tx.begin();
 
             Salary sum = dao.selectByAge(30,
-                    new IterationCallback<Salary, Employee>() {
+                    new IterationCallback<Employee, Salary>() {
 
                         private Salary sum = new Salary(0);
 
@@ -255,7 +254,7 @@ public class SelectTest extends TutorialTestCase {
             tx.begin();
 
             Salary sum = dao.selectByAge(30,
-                    new IterationCallback<Salary, Employee>() {
+                    new IterationCallback<Employee, Salary>() {
 
                         private Salary sum = new Salary(0);
 
@@ -287,7 +286,7 @@ public class SelectTest extends TutorialTestCase {
             tx.begin();
 
             Salary sum = dao.selectByAge(30,
-                    new PostIterationCallback<Salary, Employee>() {
+                    new IterationCallback<Employee, Salary>() {
 
                         private Salary sum = new Salary(0);
 

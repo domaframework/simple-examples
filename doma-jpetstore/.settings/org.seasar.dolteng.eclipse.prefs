@@ -1,9 +1,0 @@
-#Sun Sep 06 04:44:36 JST 2009
-DaoType=S2JDBC
-DefaultResourcePath=/doma-sastruts-demo/src/main/resources
-DefaultRootPackage=demo
-DefaultSrcPath=/doma-sastruts-demo/src/main/java
-ServletPath=/doma-sastruts-demo
-ViewType=SA-Struts
-WebContentsRoot=src/main/webapp/
-eclipse.preferences.version=1

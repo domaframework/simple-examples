@@ -1,3 +1,7 @@
-doma-tutorial/.classpath
-doma-tutorial/.factorypath
-doma-tutorial/.project
+.classpath
+.factorypath
+.project
+.settings
+/.apt_generated
+/bin
+/build

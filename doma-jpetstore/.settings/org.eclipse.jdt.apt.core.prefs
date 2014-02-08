@@ -1,8 +1,0 @@
-#Sun Dec 20 04:52:29 JST 2009
-eclipse.preferences.version=1
-org.eclipse.jdt.apt.aptEnabled=true
-org.eclipse.jdt.apt.genSrcDir=.apt_generated
-org.eclipse.jdt.apt.processorOptions/dao.subpackage=impl
-org.eclipse.jdt.apt.processorOptions/dao.suffix=Impl
-org.eclipse.jdt.apt.processorOptions/debug=false
-org.eclipse.jdt.apt.reconcileEnabled=false

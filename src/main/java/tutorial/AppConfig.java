@@ -18,6 +18,8 @@ package tutorial;
 import javax.sql.DataSource;
 
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.ConfigSupport;
+import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
@@ -26,6 +28,8 @@ import org.seasar.doma.jdbc.tx.LocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransactionalDataSource;
 
 public class AppConfig implements Config {
+
+    private static final JdbcLogger jdbcLogger = ConfigSupport.defaultJdbcLogger;
 
     private static final DataSource originalDataSource = createDataSource();
 
@@ -55,33 +59,11 @@ public class AppConfig implements Config {
     }
 
     public static LocalTransaction getLocalTransaction() {
-        // TODO
-        return localTxDataSource.getLocalTransaction(new Config() {
-            @Override
-            public DataSource getDataSource() {
-                return null;
-            }
-
-            @Override
-            public Dialect getDialect() {
-                return null;
-            }
-        }.getJdbcLogger());
+        return localTxDataSource.getLocalTransaction(jdbcLogger);
     }
 
     public static KeepAliveLocalTransaction getKeepAliveLocalTransaction() {
-        // TODO
-        return localTxDataSource.getKeepAliveLocalTransaction(new Config() {
-            @Override
-            public DataSource getDataSource() {
-                return null;
-            }
-
-            @Override
-            public Dialect getDialect() {
-                return null;
-            }
-        }.getJdbcLogger());
+        return localTxDataSource.getKeepAliveLocalTransaction(jdbcLogger);
     }
 
     public static DataSource getOriginalDataSource() {

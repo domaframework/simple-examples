@@ -18,7 +18,7 @@ eclipseJdt {
     clos += {
         fp.withWriter {
             def domaJar = configurations.compile.find {
-                it.name.contains('doma-')
+                it.name.startsWith('doma-2')
             }
             new groovy.xml.MarkupBuilder(it).factorypath() {
                 factorypathentry(kind:'EXTJAR', id:domaJar, enabled:true, runInBatchMode:false)

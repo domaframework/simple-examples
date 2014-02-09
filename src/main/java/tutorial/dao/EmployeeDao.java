@@ -24,8 +24,8 @@ import org.seasar.doma.BatchUpdate;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
-import org.seasar.doma.ResultHandlerType;
 import org.seasar.doma.Select;
+import org.seasar.doma.SelectStrategyType;
 import org.seasar.doma.Update;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.IterationCallback;
@@ -85,7 +85,7 @@ public interface EmployeeDao {
     @Select
     List<Employee> selectAll(SelectOptions options);
 
-    @Select(resultHandler = ResultHandlerType.ITERATION)
+    @Select(strategy = SelectStrategyType.ITERATE)
     <R> R selectByAge(int age, IterationCallback<Employee, R> callback);
 
     default int count() {

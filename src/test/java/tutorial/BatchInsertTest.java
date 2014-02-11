@@ -2,7 +2,7 @@ package tutorial;
 
 import java.util.Arrays;
 
-import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
@@ -14,10 +14,8 @@ public class BatchInsertTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testBatchInsert() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee1 = new Employee();
             employee1.setName("test-1");
             employee1.setAge(30);
@@ -29,10 +27,6 @@ public class BatchInsertTest extends TutorialTestCase {
             employee2.setSalary(new Salary(500));
 
             dao.batchInsert(Arrays.asList(employee1, employee2));
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 }

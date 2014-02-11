@@ -1,6 +1,6 @@
 package tutorial;
 
-import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
@@ -12,34 +12,22 @@ public class UpdateTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testUpdate() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee = dao.selectById(1);
             employee.setName("hoge");
             employee.setJobType(JobType.PRESIDENT);
             dao.update(employee);
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 
     public void testUpdateWithSqlFile() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee = dao.selectById(1);
             employee.setName("hoge");
             employee.setJobType(JobType.PRESIDENT);
             dao.updateWithSqlFile(employee);
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 }

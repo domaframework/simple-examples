@@ -2,7 +2,7 @@ package tutorial;
 
 import java.sql.Timestamp;
 
-import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
@@ -15,28 +15,20 @@ public class InsertTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testInsert() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee = new Employee();
             employee.setName("test");
             employee.setAge(50);
             employee.setSalary(new Salary(300));
             employee.setJobType(JobType.PRESIDENT);
             dao.insert(employee);
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 
     public void testInsertWithSqlFile() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee = new Employee();
             employee.setId(100);
             employee.setName("test");
@@ -47,10 +39,6 @@ public class InsertTest extends TutorialTestCase {
                     .currentTimeMillis()));
             employee.setVersion(1);
             dao.insertWithSqlFile(employee);
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 }

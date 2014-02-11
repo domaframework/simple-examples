@@ -1,6 +1,6 @@
 package tutorial;
 
-import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
@@ -11,30 +11,19 @@ public class DeleteTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testDelete() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee = dao.selectById(1);
             dao.delete(employee);
+        });
 
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
     }
 
     public void testDeleteWithSqlFile() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             Employee employee = dao.selectById(1);
             dao.deleteWithSqlFile(employee);
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 }

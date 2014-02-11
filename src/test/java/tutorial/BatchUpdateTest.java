@@ -2,7 +2,7 @@ package tutorial;
 
 import java.util.List;
 
-import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
 import tutorial.dao.EmployeeDaoImpl;
@@ -14,10 +14,8 @@ public class BatchUpdateTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testBatchUpdate() throws Exception {
-        LocalTransaction tx = AppConfig.getLocalTransaction();
-        try {
-            tx.begin();
-
+        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        tx.required(() -> {
             List<Employee> list = dao.selectAll();
             for (Employee employee : list) {
                 Salary salary = employee.getSalary();
@@ -26,10 +24,6 @@ public class BatchUpdateTest extends TutorialTestCase {
                 }
             }
             dao.batchUpdate(list);
-
-            tx.commit();
-        } finally {
-            tx.rollback();
-        }
+        });
     }
 }

@@ -1,9 +1,14 @@
 package tutorial;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Rule;
+import org.junit.Test;
 import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.IterationContext;
 import org.seasar.doma.jdbc.SelectOptions;
@@ -15,10 +20,14 @@ import tutorial.domain.Salary;
 import tutorial.entity.Employee;
 import tutorial.entity.EmployeeDepartment;
 
-public class SelectTest extends TutorialTestCase {
+public class SelectTest {
+
+    @Rule
+    public final DbResource dbResource = new DbResource();
 
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
+    @Test
     public void testSimpleSelect() {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -29,6 +38,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testConditinalSelect() {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -44,6 +54,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testConditinalSelect2() {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -56,6 +67,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testLoopSelect() {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -67,6 +79,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testIsNotEmptyFunction() {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -83,6 +96,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testLikePredicate_prefix() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -93,6 +107,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testLikePredicate_suffix() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -103,6 +118,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testLikePredicate_inside() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -113,6 +129,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testInPredicate() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -124,6 +141,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testSelectByTimestampRange() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -136,6 +154,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testSelectByDomain() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -146,6 +165,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testSelectDomain() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -156,6 +176,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testSelectByEntity() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -168,6 +189,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testIterate() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -192,6 +214,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testIterate_exit() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -220,6 +243,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testIterate_post() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -250,6 +274,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testOffsetLimit() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -261,6 +286,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testCount() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -274,6 +300,7 @@ public class SelectTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testSelectJoinedResult() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();

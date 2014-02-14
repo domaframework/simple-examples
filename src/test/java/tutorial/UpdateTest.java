@@ -1,5 +1,7 @@
 package tutorial;
 
+import org.junit.Rule;
+import org.junit.Test;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
@@ -7,10 +9,14 @@ import tutorial.dao.EmployeeDaoImpl;
 import tutorial.entity.Employee;
 import tutorial.entity.JobType;
 
-public class UpdateTest extends TutorialTestCase {
+public class UpdateTest {
+
+    @Rule
+    public final DbResource dbResource = new DbResource();
 
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
+    @Test
     public void testUpdate() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -23,6 +29,7 @@ public class UpdateTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testUpdateWithSqlFile() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();

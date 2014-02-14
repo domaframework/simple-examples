@@ -1,5 +1,7 @@
 package tutorial;
 
+import org.junit.Rule;
+import org.junit.Test;
 import org.seasar.doma.jdbc.tx.KeepAliveLocalTransaction;
 
 import tutorial.dao.EmployeeDao;
@@ -8,10 +10,14 @@ import tutorial.domain.Salary;
 import tutorial.entity.Employee;
 import tutorial.entity.JobType;
 
-public class KeepAliveLocalTransactionTest extends TutorialTestCase {
+public class KeepAliveLocalTransactionTest {
+
+    @Rule
+    public final DbResource dbResource = new DbResource();
 
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
+    @Test
     public void testInsert() throws Exception {
         KeepAliveLocalTransaction tx = AppConfig.singleton()
                 .getKeepAliveLocalTransaction();

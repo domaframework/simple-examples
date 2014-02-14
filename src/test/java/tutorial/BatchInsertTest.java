@@ -2,6 +2,8 @@ package tutorial;
 
 import java.util.Arrays;
 
+import org.junit.Rule;
+import org.junit.Test;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
@@ -9,10 +11,14 @@ import tutorial.dao.EmployeeDaoImpl;
 import tutorial.domain.Salary;
 import tutorial.entity.Employee;
 
-public class BatchInsertTest extends TutorialTestCase {
+public class BatchInsertTest {
+
+    @Rule
+    public final DbResource dbResource = new DbResource();
 
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
+    @Test
     public void testBatchInsert() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();

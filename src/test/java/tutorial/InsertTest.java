@@ -2,6 +2,8 @@ package tutorial;
 
 import java.sql.Timestamp;
 
+import org.junit.Rule;
+import org.junit.Test;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 import tutorial.dao.EmployeeDao;
@@ -10,10 +12,14 @@ import tutorial.domain.Salary;
 import tutorial.entity.Employee;
 import tutorial.entity.JobType;
 
-public class InsertTest extends TutorialTestCase {
+public class InsertTest {
+
+    @Rule
+    public final DbResource dbResource = new DbResource();
 
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
+    @Test
     public void testInsert() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
@@ -28,6 +34,7 @@ public class InsertTest extends TutorialTestCase {
         });
     }
 
+    @Test
     public void testInsertWithSqlFile() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();

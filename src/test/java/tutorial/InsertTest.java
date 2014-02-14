@@ -15,7 +15,9 @@ public class InsertTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testInsert() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = new Employee();
             employee.setName("test");
@@ -27,7 +29,9 @@ public class InsertTest extends TutorialTestCase {
     }
 
     public void testInsertWithSqlFile() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = new Employee();
             employee.setId(100);

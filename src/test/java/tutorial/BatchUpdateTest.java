@@ -14,7 +14,9 @@ public class BatchUpdateTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testBatchUpdate() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectAll();
             for (Employee employee : list) {

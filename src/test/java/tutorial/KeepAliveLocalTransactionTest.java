@@ -13,7 +13,9 @@ public class KeepAliveLocalTransactionTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testInsert() throws Exception {
-        KeepAliveLocalTransaction tx = AppConfig.getKeepAliveLocalTransaction();
+        KeepAliveLocalTransaction tx = AppConfig.singleton()
+                .getKeepAliveLocalTransaction();
+
         tx.init();
         try {
             try {

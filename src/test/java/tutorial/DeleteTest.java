@@ -11,7 +11,9 @@ public class DeleteTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testDelete() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = dao.selectById(1);
             dao.delete(employee);
@@ -20,7 +22,9 @@ public class DeleteTest extends TutorialTestCase {
     }
 
     public void testDeleteWithSqlFile() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = dao.selectById(1);
             dao.deleteWithSqlFile(employee);

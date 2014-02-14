@@ -13,7 +13,9 @@ public class BatchDeleteTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testBatchDelete() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectAll();
             dao.batchDelete(list);

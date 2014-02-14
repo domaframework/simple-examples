@@ -17,33 +17,41 @@ package tutorial;
 
 import javax.sql.DataSource;
 
+import org.seasar.doma.SingletonConfig;
 import org.seasar.doma.jdbc.Config;
-import org.seasar.doma.jdbc.ConfigSupport;
-import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.KeepAliveLocalTransaction;
-import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
-import org.seasar.doma.jdbc.tx.LocalTransactionalDataSource;
 
+@SingletonConfig
 public class AppConfig implements Config {
 
-    private static final JdbcLogger jdbcLogger = ConfigSupport.defaultJdbcLogger;
+    private static final AppConfig CONFIG = new AppConfig();
 
-    private static final DataSource originalDataSource = createDataSource();
+    private final Dialect dialect;
 
-    private static final LocalTransactionalDataSource localTxDataSource = createLocalTxDataSource();
+    private final DataSource originalDataSource;
 
-    private static final LocalTransactionManager localTxManager = new LocalTransactionManager(
-            localTxDataSource.getLocalTransaction(jdbcLogger));
+    private final LocalTransactionDataSource dataSource;
 
-    private static final Dialect dialect = new H2Dialect();
+    private final LocalTransactionManager transactionManager;
 
-    @Override
-    public DataSource getDataSource() {
-        return localTxDataSource;
+    private AppConfig() {
+        dialect = new H2Dialect();
+        originalDataSource = createDataSource();
+        dataSource = new LocalTransactionDataSource(originalDataSource);
+        transactionManager = new LocalTransactionManager(
+                dataSource.getLocalTransaction(getJdbcLogger()));
+    }
+
+    private DataSource createDataSource() {
+        SimpleDataSource dataSource = new SimpleDataSource();
+        dataSource.setUrl("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1");
+        dataSource.setUser("sa");
+        return dataSource;
     }
 
     @Override
@@ -51,30 +59,25 @@ public class AppConfig implements Config {
         return dialect;
     }
 
-    protected static DataSource createDataSource() {
-        SimpleDataSource dataSource = new SimpleDataSource();
-        dataSource.setUrl("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1");
-        dataSource.setUser("sa");
+    @Override
+    public DataSource getDataSource() {
         return dataSource;
     }
 
-    protected static LocalTransactionalDataSource createLocalTxDataSource() {
-        return new LocalTransactionalDataSource(originalDataSource);
+    @Override
+    public LocalTransactionManager getLocalTransactionManager() {
+        return transactionManager;
     }
 
-    public static LocalTransaction getLocalTransaction() {
-        return localTxDataSource.getLocalTransaction(jdbcLogger);
+    public KeepAliveLocalTransaction getKeepAliveLocalTransaction() {
+        return dataSource.getKeepAliveLocalTransaction(getJdbcLogger());
     }
 
-    public static KeepAliveLocalTransaction getKeepAliveLocalTransaction() {
-        return localTxDataSource.getKeepAliveLocalTransaction(jdbcLogger);
-    }
-
-    public static DataSource getOriginalDataSource() {
+    public DataSource getOriginalDataSource() {
         return originalDataSource;
     }
 
-    public static LocalTransactionManager getLocalTransactionManager() {
-        return localTxManager;
+    public static AppConfig singleton() {
+        return CONFIG;
     }
 }

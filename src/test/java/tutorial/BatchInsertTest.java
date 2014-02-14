@@ -14,7 +14,9 @@ public class BatchInsertTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testBatchInsert() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee1 = new Employee();
             employee1.setName("test-1");

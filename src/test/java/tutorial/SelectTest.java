@@ -20,7 +20,9 @@ public class SelectTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testSimpleSelect() {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = dao.selectById(1);
             assertNotNull(employee);
@@ -28,7 +30,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testConditinalSelect() {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectByAgeRange(30, 40);
             list = dao.selectByAgeRange(30, null);
@@ -41,7 +45,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testConditinalSelect2() {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectByName("SMITH");
             assertEquals(1, list.size());
@@ -51,7 +57,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testLoopSelect() {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Integer> ages = Arrays.asList(30, 40, 50, 60);
             List<Employee> list = dao.selectByAges(ages);
@@ -60,7 +68,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testIsNotEmptyFunction() {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectByNotEmptyName("SMITH");
             assertEquals(1, list.size());
@@ -74,7 +84,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testLikePredicate_prefix() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectByNameWithPrefixMatching("S");
             assertEquals(2, list.size());
@@ -82,7 +94,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testLikePredicate_suffix() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectByNameWithSuffixMatching("S");
             assertEquals(3, list.size());
@@ -90,7 +104,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testLikePredicate_inside() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectByNameWithInsideMatching("A");
             assertEquals(7, list.size());
@@ -98,7 +114,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testInPredicate() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<String> names = Arrays.asList("JONES", "SCOTT", "XXX");
             List<Employee> list = dao.selectByNames(names);
@@ -107,7 +125,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testSelectByTimestampRange() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Timestamp from = Timestamp.valueOf("2008-01-20 12:34:56");
             Timestamp to = Timestamp.valueOf("2008-03-20 12:34:56");
@@ -117,7 +137,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testSelectByDomain() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<Employee> list = dao.selectBySalary(new Salary(2900));
             assertEquals(4, list.size());
@@ -125,7 +147,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testSelectDomain() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Salary salary = dao.selectSummedSalary();
             assertNotNull(salary);
@@ -133,7 +157,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testSelectByEntity() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee e = new Employee();
             e.setName("SMITH");
@@ -143,7 +169,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testIterate() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Salary sum = dao.selectByAge(30,
                     new IterationCallback<Employee, Salary>() {
@@ -165,7 +193,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testIterate_exit() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Salary sum = dao.selectByAge(30,
                     new IterationCallback<Employee, Salary>() {
@@ -191,7 +221,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testIterate_post() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Salary sum = dao.selectByAge(30,
                     new IterationCallback<Employee, Salary>() {
@@ -219,7 +251,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testOffsetLimit() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             SelectOptions options = SelectOptions.get().offset(5).limit(3);
             List<Employee> list = dao.selectAll(options);
@@ -228,7 +262,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testCount() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             SelectOptions options = SelectOptions.get().offset(5).limit(3)
                     .count();
@@ -239,7 +275,9 @@ public class SelectTest extends TutorialTestCase {
     }
 
     public void testSelectJoinedResult() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             List<EmployeeDepartment> list = dao.selectAllEmployeeDepartment();
             assertEquals(14, list.size());

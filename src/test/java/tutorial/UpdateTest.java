@@ -12,7 +12,9 @@ public class UpdateTest extends TutorialTestCase {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     public void testUpdate() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = dao.selectById(1);
             employee.setName("hoge");
@@ -22,7 +24,9 @@ public class UpdateTest extends TutorialTestCase {
     }
 
     public void testUpdateWithSqlFile() throws Exception {
-        LocalTransactionManager tx = AppConfig.getLocalTransactionManager();
+        LocalTransactionManager tx = AppConfig.singleton()
+                .getLocalTransactionManager();
+
         tx.required(() -> {
             Employee employee = dao.selectById(1);
             employee.setName("hoge");

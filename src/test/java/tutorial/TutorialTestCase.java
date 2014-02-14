@@ -10,7 +10,7 @@ public abstract class TutorialTestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Connection connection = AppConfig.getOriginalDataSource()
+        Connection connection = AppConfig.singleton().getOriginalDataSource()
                 .getConnection();
         try {
             Statement statement = connection.createStatement();
@@ -64,7 +64,7 @@ public abstract class TutorialTestCase extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        Connection connection = AppConfig.getOriginalDataSource()
+        Connection connection = AppConfig.singleton().getOriginalDataSource()
                 .getConnection();
         try {
             Statement statement = connection.createStatement();

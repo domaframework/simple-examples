@@ -34,7 +34,7 @@ repositories {
  
 dependencies {
     compile "org.seasar.doma:doma:${version}"
-    testCompile 'com.h2database:h2:1.3.171'
+    testCompile 'com.h2database:h2:1.3.175'
     testCompile 'junit:junit:4.11'
 }
 

@@ -1,4 +1,4 @@
-Doma Tutorial
+Doma Tutorial [![Build Status](https://travis-ci.org/seasarorg/doma-tutorial.png?branch=master)](https://travis-ci.org/seasarorg/doma-tutorial)
 ========================================
 
 This is a tutorial for [Doma](https://github.com/seasarorg/doma).

@@ -19,7 +19,6 @@ import javax.sql.DataSource;
 
 import org.seasar.doma.SingletonConfig;
 import org.seasar.doma.jdbc.Config;
-import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
@@ -38,16 +37,10 @@ public class AppConfig implements Config {
 
     private AppConfig() {
         dialect = new H2Dialect();
-        dataSource = new LocalTransactionDataSource(createDataSource());
+        dataSource = new LocalTransactionDataSource(
+                "jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null);
         transactionManager = new LocalTransactionManager(
                 dataSource.getLocalTransaction(getJdbcLogger()));
-    }
-
-    private DataSource createDataSource() {
-        SimpleDataSource dataSource = new SimpleDataSource();
-        dataSource.setUrl("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1");
-        dataSource.setUser("sa");
-        return dataSource;
     }
 
     @Override

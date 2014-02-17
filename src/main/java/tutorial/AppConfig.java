@@ -22,7 +22,6 @@ import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
-import org.seasar.doma.jdbc.tx.KeepAliveLocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
@@ -33,16 +32,13 @@ public class AppConfig implements Config {
 
     private final Dialect dialect;
 
-    private final DataSource originalDataSource;
-
     private final LocalTransactionDataSource dataSource;
 
     private final LocalTransactionManager transactionManager;
 
     private AppConfig() {
         dialect = new H2Dialect();
-        originalDataSource = createDataSource();
-        dataSource = new LocalTransactionDataSource(originalDataSource);
+        dataSource = new LocalTransactionDataSource(createDataSource());
         transactionManager = new LocalTransactionManager(
                 dataSource.getLocalTransaction(getJdbcLogger()));
     }
@@ -67,14 +63,6 @@ public class AppConfig implements Config {
     @Override
     public LocalTransactionManager getLocalTransactionManager() {
         return transactionManager;
-    }
-
-    public KeepAliveLocalTransaction getKeepAliveLocalTransaction() {
-        return dataSource.getKeepAliveLocalTransaction(getJdbcLogger());
-    }
-
-    public DataSource getOriginalDataSource() {
-        return originalDataSource;
     }
 
     public static AppConfig singleton() {

@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.seasar.doma.jdbc.IterationCallback;
-import org.seasar.doma.jdbc.IterationContext;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
@@ -190,87 +188,16 @@ public class SelectTest {
     }
 
     @Test
-    public void testIterate() throws Exception {
+    public void testStream() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
-
         tx.required(() -> {
-            Salary sum = dao.selectByAge(30,
-                    new IterationCallback<Employee, Salary>() {
-
-                        private Salary sum = new Salary(0);
-
-                        @Override
-                        public Salary iterate(Employee target,
-                                IterationContext context) {
-                            Salary salary = target.getSalary();
-                            if (salary != null) {
-                                sum = sum.add(salary);
-                            }
-                            return sum;
-                        }
-                    });
+            Salary sum = dao.selectByAge(
+                    30,
+                    s -> s.map(employee -> employee.getSalary())
+                            .filter(salary -> salary != null)
+                            .reduce(new Salary(0), (x, y) -> x.add(y)));
             assertEquals(new Integer(21975), sum.getValue());
-        });
-    }
-
-    @Test
-    public void testIterate_exit() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
-
-        tx.required(() -> {
-            Salary sum = dao.selectByAge(30,
-                    new IterationCallback<Employee, Salary>() {
-
-                        private Salary sum = new Salary(0);
-
-                        @Override
-                        public Salary iterate(Employee target,
-                                IterationContext context) {
-                            Salary salary = target.getSalary();
-                            if (salary != null) {
-                                sum = sum.add(salary);
-                            }
-                            if (sum.getValue() != null
-                                    && sum.getValue() > 10000) {
-                                context.exit();
-                            }
-                            return sum;
-                        }
-                    });
-            assertEquals(new Integer(10725), sum.getValue());
-        });
-    }
-
-    @Test
-    public void testIterate_post() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
-
-        tx.required(() -> {
-            Salary sum = dao.selectByAge(30,
-                    new IterationCallback<Employee, Salary>() {
-
-                        private Salary sum = new Salary(0);
-
-                        @Override
-                        public Salary iterate(Employee target,
-                                IterationContext context) {
-                            Salary salary = target.getSalary();
-                            if (salary != null) {
-                                sum = sum.add(salary);
-                            }
-                            return sum;
-                        }
-
-                        public Salary postIterate(Salary salary,
-                                IterationContext context) {
-                            return salary.add(new Salary(10000));
-                        }
-
-                    });
-            assertEquals(new Integer(31975), sum.getValue());
         });
     }
 

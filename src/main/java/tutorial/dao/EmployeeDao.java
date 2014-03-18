@@ -17,6 +17,8 @@ package tutorial.dao;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import org.seasar.doma.BatchDelete;
 import org.seasar.doma.BatchInsert;
@@ -29,7 +31,6 @@ import org.seasar.doma.Select;
 import org.seasar.doma.SelectStrategyType;
 import org.seasar.doma.Update;
 import org.seasar.doma.jdbc.Config;
-import org.seasar.doma.jdbc.IterationCallback;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.builder.SelectBuilder;
 
@@ -86,8 +87,8 @@ public interface EmployeeDao {
     @Select
     List<Employee> selectAll(SelectOptions options);
 
-    @Select(strategy = SelectStrategyType.ITERATE)
-    <R> R selectByAge(int age, IterationCallback<Employee, R> callback);
+    @Select(strategy = SelectStrategyType.STREAM)
+    <R> R selectByAge(int age, Function<Stream<Employee>, R> mapper);
 
     default int count() {
         Config config = Config.get(this);

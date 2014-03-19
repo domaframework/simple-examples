@@ -1,1 +1,1 @@
-select * from employee where age > /* age */0 order by age
+select /*%expand*/* from employee where age > /* age */0 order by age

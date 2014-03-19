@@ -1,4 +1,4 @@
-select * from employee
+select /*%expand*/* from employee
 where
 /*%if min != null */
   age >= /* min */10

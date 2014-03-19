@@ -1,1 +1,1 @@
-select * from employee where salary > /* salary */0
+select /*%expand*/* from employee where salary > /* salary */0

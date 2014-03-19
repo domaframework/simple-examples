@@ -1,1 +1,1 @@
-select * from employee where id = /* id */0
+select /*%expand*/* from employee where id = /* id */0

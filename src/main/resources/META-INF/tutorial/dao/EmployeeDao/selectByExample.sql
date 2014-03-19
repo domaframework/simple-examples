@@ -1,1 +1,1 @@
-select * from employee where name = /* e.name */'aaa'
+select /*%expand*/* from employee where name = /* e.name */'aaa'

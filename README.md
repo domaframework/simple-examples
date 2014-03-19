@@ -1,7 +1,7 @@
-Doma Tutorial [![Build Status](https://travis-ci.org/domaframework/doma-tutorial.png?branch=master)](https://travis-ci.org/domaframework/doma-tutorial)
+Simple Examples [![Build Status](https://travis-ci.org/domaframework/simple-examples.png?branch=master)](https://travis-ci.org/domaframework/simple-examples)
 ========================================
 
-This is a tutorial for [Doma](https://github.com/domaframework/doma).
+Simple examples for [Doma](https://github.com/domaframework/doma).
 
 License
 -------

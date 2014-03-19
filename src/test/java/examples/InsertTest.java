@@ -1,4 +1,4 @@
-package tutorial;
+package examples;
 
 import java.sql.Timestamp;
 
@@ -6,11 +6,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
-import tutorial.dao.EmployeeDao;
-import tutorial.dao.EmployeeDaoImpl;
-import tutorial.domain.Salary;
-import tutorial.entity.Employee;
-import tutorial.entity.JobType;
+import examples.AppConfig;
+import examples.dao.EmployeeDao;
+import examples.dao.EmployeeDaoImpl;
+import examples.domain.Salary;
+import examples.entity.Employee;
+import examples.entity.JobType;
 
 public class InsertTest {
 

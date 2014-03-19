@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package tutorial.entity;
+package examples.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -27,7 +27,7 @@ import org.seasar.doma.OriginalStates;
 import org.seasar.doma.SequenceGenerator;
 import org.seasar.doma.Version;
 
-import tutorial.domain.Salary;
+import examples.domain.Salary;
 
 @Entity(listener = EmployeeListener.class)
 public class Employee {

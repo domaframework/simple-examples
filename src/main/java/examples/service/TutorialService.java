@@ -13,8 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package tutorial.entity;
+package examples.service;
 
-public enum JobType {
-    SALESMAN, MANAGER, ANALYST, PRESIDENT, CLERK
+import examples.dao.EmployeeDao;
+import examples.dao.EmployeeDaoImpl;
+import examples.entity.Employee;
+
+public class TutorialService {
+
+    public Employee selectById(Integer id) {
+        EmployeeDao dao = new EmployeeDaoImpl();
+        return dao.selectById(id);
+    }
 }

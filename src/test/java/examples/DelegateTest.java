@@ -1,16 +1,16 @@
-package tutorial;
+package examples;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
-import tutorial.dao.EmployeeDao;
-import tutorial.dao.EmployeeDaoImpl;
-import tutorial.entity.Employee;
+import examples.AppConfig;
+import examples.dao.EmployeeDao;
+import examples.dao.EmployeeDaoImpl;
 
-public class BatchDeleteTest {
+public class DelegateTest {
 
     @Rule
     public final DbResource dbResource = new DbResource();
@@ -18,13 +18,13 @@ public class BatchDeleteTest {
     private final EmployeeDao dao = new EmployeeDaoImpl();
 
     @Test
-    public void testBatchDelete() throws Exception {
+    public void testDelegate() throws Exception {
         LocalTransactionManager tx = AppConfig.singleton()
                 .getLocalTransactionManager();
 
         tx.required(() -> {
-            List<Employee> list = dao.selectAll();
-            dao.batchDelete(list);
+            assertEquals(14, dao.count());
         });
     }
+
 }

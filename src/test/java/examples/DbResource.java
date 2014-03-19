@@ -13,13 +13,14 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package tutorial;
+package examples;
 
 import org.junit.rules.ExternalResource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
-import tutorial.dao.EmployeeDao;
-import tutorial.dao.EmployeeDaoImpl;
+import examples.AppConfig;
+import examples.dao.EmployeeDao;
+import examples.dao.EmployeeDaoImpl;
 
 /**
  * @author nakamura-to

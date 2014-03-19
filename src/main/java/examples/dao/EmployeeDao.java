@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package tutorial.dao;
+package examples.dao;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -34,10 +34,10 @@ import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.builder.SelectBuilder;
 
-import tutorial.AppConfig;
-import tutorial.domain.Salary;
-import tutorial.entity.Employee;
-import tutorial.entity.EmployeeDepartment;
+import examples.AppConfig;
+import examples.domain.Salary;
+import examples.entity.Employee;
+import examples.entity.EmployeeDepartment;
 
 @Dao(config = AppConfig.class)
 public interface EmployeeDao {

@@ -1,4 +1,4 @@
-package tutorial;
+package examples;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,11 +12,12 @@ import org.junit.Test;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
-import tutorial.dao.EmployeeDao;
-import tutorial.dao.EmployeeDaoImpl;
-import tutorial.domain.Salary;
-import tutorial.entity.Employee;
-import tutorial.entity.EmployeeDepartment;
+import examples.AppConfig;
+import examples.dao.EmployeeDao;
+import examples.dao.EmployeeDaoImpl;
+import examples.domain.Salary;
+import examples.entity.Employee;
+import examples.entity.EmployeeDepartment;
 
 public class SelectTest {
 

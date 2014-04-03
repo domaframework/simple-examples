@@ -2,9 +2,8 @@ package examples;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
-import examples.AppConfig;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.entity.Employee;
@@ -18,10 +17,9 @@ public class DeleteTest {
 
     @Test
     public void testDelete() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             Employee employee = dao.selectById(1);
             dao.delete(employee);
         });
@@ -29,10 +27,9 @@ public class DeleteTest {
 
     @Test
     public void testDeleteWithSqlFile() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             Employee employee = dao.selectById(1);
             dao.deleteWithSqlFile(employee);
         });

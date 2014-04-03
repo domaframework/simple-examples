@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
-import examples.AppConfig;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 
@@ -19,10 +18,9 @@ public class DelegateTest {
 
     @Test
     public void testDelegate() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             assertEquals(14, dao.count());
         });
     }

@@ -23,6 +23,7 @@ import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
 @SingletonConfig
 public class AppConfig implements Config {
@@ -33,7 +34,7 @@ public class AppConfig implements Config {
 
     private final LocalTransactionDataSource dataSource;
 
-    private final LocalTransactionManager transactionManager;
+    private final TransactionManager transactionManager;
 
     private AppConfig() {
         dialect = new H2Dialect();
@@ -54,7 +55,7 @@ public class AppConfig implements Config {
     }
 
     @Override
-    public LocalTransactionManager getLocalTransactionManager() {
+    public TransactionManager getTransactionManager() {
         return transactionManager;
     }
 

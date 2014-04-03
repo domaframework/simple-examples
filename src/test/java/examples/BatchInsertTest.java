@@ -4,9 +4,8 @@ import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
-import examples.AppConfig;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.domain.Salary;
@@ -21,10 +20,9 @@ public class BatchInsertTest {
 
     @Test
     public void testBatchInsert() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             Employee employee1 = new Employee();
             employee1.setName("test-1");
             employee1.setAge(30);

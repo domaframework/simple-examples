@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
-import examples.AppConfig;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.domain.Salary;
@@ -21,10 +20,9 @@ public class BatchUpdateTest {
 
     @Test
     public void testBatchUpdate() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             List<Employee> list = dao.selectAll();
             for (Employee employee : list) {
                 Salary salary = employee.getSalary();

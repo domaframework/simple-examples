@@ -16,9 +16,8 @@
 package examples;
 
 import org.junit.rules.ExternalResource;
-import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
-import examples.AppConfig;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 
@@ -32,18 +31,16 @@ public class DbResource extends ExternalResource {
 
     @Override
     protected void before() throws Throwable {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
-        tx.required(() -> {
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
+        tm.required(() -> {
             dao.create();
         });
     }
 
     @Override
     protected void after() {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
-        tx.required(() -> {
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
+        tm.required(() -> {
             dao.drop();
         });
     }

@@ -28,7 +28,7 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Script;
 import org.seasar.doma.Select;
-import org.seasar.doma.SelectStrategyType;
+import org.seasar.doma.SelectType;
 import org.seasar.doma.Update;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.SelectOptions;
@@ -87,7 +87,7 @@ public interface EmployeeDao {
     @Select
     List<Employee> selectAll(SelectOptions options);
 
-    @Select(strategy = SelectStrategyType.STREAM)
+    @Select(strategy = SelectType.STREAM)
     <R> R selectByAge(int age, Function<Stream<Employee>, R> mapper);
 
     default int count() {

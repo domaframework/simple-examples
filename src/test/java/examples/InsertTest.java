@@ -4,9 +4,8 @@ import java.sql.Timestamp;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.seasar.doma.jdbc.tx.LocalTransactionManager;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
-import examples.AppConfig;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.domain.Salary;
@@ -22,10 +21,9 @@ public class InsertTest {
 
     @Test
     public void testInsert() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             Employee employee = new Employee();
             employee.setName("test");
             employee.setAge(50);
@@ -37,10 +35,9 @@ public class InsertTest {
 
     @Test
     public void testInsertWithSqlFile() throws Exception {
-        LocalTransactionManager tx = AppConfig.singleton()
-                .getLocalTransactionManager();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-        tx.required(() -> {
+        tm.required(() -> {
             Employee employee = new Employee();
             employee.setId(100);
             employee.setName("test");

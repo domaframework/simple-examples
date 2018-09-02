@@ -25,11 +25,6 @@ test {
     includes = ['**/*Test.class']
 }
 
-wrapper {
-    gradleVersion = '4.10'
-}
-
-
 repositories {
     mavenCentral()
     mavenLocal()

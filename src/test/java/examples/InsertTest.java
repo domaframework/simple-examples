@@ -2,6 +2,7 @@ package examples;
 
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
+import examples.domain.Age;
 import examples.domain.Salary;
 import examples.entity.Employee;
 import examples.entity.JobType;
@@ -24,7 +25,7 @@ public class InsertTest {
         () -> {
           Employee employee = new Employee();
           employee.setName("test");
-          employee.setAge(50);
+          employee.setAge(new Age(50));
           employee.setSalary(new Salary(300));
           employee.setJobType(JobType.PRESIDENT);
           dao.insert(employee);
@@ -40,7 +41,7 @@ public class InsertTest {
           Employee employee = new Employee();
           employee.setId(100);
           employee.setName("test");
-          employee.setAge(50);
+          employee.setAge(new Age(50));
           employee.setSalary(new Salary(300));
           employee.setJobType(JobType.PRESIDENT);
           employee.setInsertTimestamp(new Timestamp(System.currentTimeMillis()));

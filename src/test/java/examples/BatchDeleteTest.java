@@ -1,29 +1,27 @@
 package examples;
 
-import java.util.List;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.seasar.doma.jdbc.tx.TransactionManager;
-
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.entity.Employee;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
+import java.util.List;
+
+@ExtendWith(TestEnvironment.class)
 public class BatchDeleteTest {
 
-    @Rule
-    public final DbResource dbResource = new DbResource();
+  private final EmployeeDao dao = new EmployeeDaoImpl();
 
-    private final EmployeeDao dao = new EmployeeDaoImpl();
+  @Test
+  public void testBatchDelete() {
+    TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
-    @Test
-    public void testBatchDelete() throws Exception {
-        TransactionManager tm = AppConfig.singleton().getTransactionManager();
-
-        tm.required(() -> {
-            List<Employee> list = dao.selectAll();
-            dao.batchDelete(list);
+    tm.required(
+        () -> {
+          List<Employee> list = dao.selectAll();
+          dao.batchDelete(list);
         });
-    }
+  }
 }

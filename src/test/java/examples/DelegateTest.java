@@ -1,12 +1,12 @@
 package examples;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.tx.TransactionManager;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(TestEnvironment.class)
 public class DelegateTest {

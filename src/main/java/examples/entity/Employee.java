@@ -17,6 +17,8 @@ package examples.entity;
 
 import examples.domain.Age;
 import examples.domain.Salary;
+import java.sql.Date;
+import java.sql.Timestamp;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
@@ -25,9 +27,6 @@ import org.seasar.doma.Id;
 import org.seasar.doma.OriginalStates;
 import org.seasar.doma.SequenceGenerator;
 import org.seasar.doma.Version;
-
-import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity(listener = EmployeeListener.class)
 public class Employee {

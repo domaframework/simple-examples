@@ -5,11 +5,10 @@ import examples.dao.EmployeeDaoImpl;
 import examples.domain.Age;
 import examples.domain.Salary;
 import examples.entity.Employee;
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.tx.TransactionManager;
-
-import java.util.Arrays;
 
 @ExtendWith(TestEnvironment.class)
 public class BatchInsertTest {

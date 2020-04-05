@@ -1,21 +1,20 @@
 package examples;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.domain.Salary;
 import examples.entity.Employee;
 import examples.entity.EmployeeDepartment;
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.jdbc.tx.TransactionManager;
-
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(TestEnvironment.class)
 public class SelectTest {

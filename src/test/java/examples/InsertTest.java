@@ -6,11 +6,10 @@ import examples.domain.Age;
 import examples.domain.Salary;
 import examples.entity.Employee;
 import examples.entity.JobType;
+import java.sql.Timestamp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.tx.TransactionManager;
-
-import java.sql.Timestamp;
 
 @ExtendWith(TestEnvironment.class)
 public class InsertTest {

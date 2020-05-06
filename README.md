@@ -11,6 +11,11 @@ $ git clone https://github.com/domaframework/simple-examples.git
 $ cd simple-examples
 ```
 
+Java version
+------------
+
+You need Java 11 or later.
+
 Build
 -----
 

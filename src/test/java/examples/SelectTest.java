@@ -1,44 +1,52 @@
 package examples;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
+import examples.domain.Age;
 import examples.domain.Salary;
 import examples.entity.Employee;
-import examples.entity.EmployeeDepartment;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.seasar.doma.jdbc.SelectOptions;
-import org.seasar.doma.jdbc.tx.TransactionManager;
 
 @ExtendWith(TestEnvironment.class)
 public class SelectTest {
 
-  private final EmployeeDao dao = new EmployeeDaoImpl();
+  private final DbConfig config;
+  private final EmployeeDao dao;
+
+  SelectTest(DbConfig config) {
+    this.config = config;
+    dao = new EmployeeDaoImpl(config);
+  }
 
   @Test
   public void testSimpleSelect() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Employee employee = dao.selectById(1);
+          var employee = dao.selectById(1);
           assertNotNull(employee);
         });
   }
 
   @Test
-  public void testConditinalSelect() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testConditionalSelect() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectByAgeRange(30, 40);
+          var list = dao.selectByAgeRange(30, 40);
+          assertEquals(6, list.size());
           list = dao.selectByAgeRange(30, null);
           assertEquals(12, list.size());
           list = dao.selectByAgeRange(null, 40);
@@ -49,12 +57,12 @@ public class SelectTest {
   }
 
   @Test
-  public void testConditinalSelect2() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testConditionalSelect2() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectByName("SMITH");
+          var list = dao.selectByName("SMITH");
           assertEquals(1, list.size());
           list = dao.selectByName(null);
           assertEquals(0, list.size());
@@ -62,24 +70,12 @@ public class SelectTest {
   }
 
   @Test
-  public void testLoopSelect() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testIsNotEmpty() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Integer> ages = Arrays.asList(30, 40, 50, 60);
-          List<Employee> list = dao.selectByAges(ages);
-          assertEquals(3, list.size());
-        });
-  }
-
-  @Test
-  public void testIsNotEmptyFunction() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
-
-    tm.required(
-        () -> {
-          List<Employee> list = dao.selectByNotEmptyName("SMITH");
+          var list = dao.selectByNotEmptyName("SMITH");
           assertEquals(1, list.size());
           list = dao.selectByNotEmptyName(null);
           assertEquals(14, list.size());
@@ -91,149 +87,162 @@ public class SelectTest {
   }
 
   @Test
-  public void testLikePredicate_prefix() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testLikePredicate_prefix() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectByNameWithPrefixMatching("S");
+          var list = dao.selectByNameWithPrefixMatching("S");
           assertEquals(2, list.size());
         });
   }
 
   @Test
-  public void testLikePredicate_suffix() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testLikePredicate_suffix() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectByNameWithSuffixMatching("S");
+          var list = dao.selectByNameWithSuffixMatching("S");
           assertEquals(3, list.size());
         });
   }
 
   @Test
-  public void testLikePredicate_inside() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testLikePredicate_inside() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectByNameWithInsideMatching("A");
+          var list = dao.selectByNameWithInfixMatching("A");
           assertEquals(7, list.size());
         });
   }
 
   @Test
-  public void testInPredicate() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testInPredicate() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<String> names = Arrays.asList("JONES", "SCOTT", "XXX");
-          List<Employee> list = dao.selectByNames(names);
+          var names = Arrays.asList("JONES", "SCOTT", "XXX");
+          var list = dao.selectByNames(names);
           assertEquals(2, list.size());
         });
   }
 
   @Test
-  public void testSelectByTimestampRange() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testInPredicate_Domain() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Timestamp from = Timestamp.valueOf("2008-01-20 12:34:56");
-          Timestamp to = Timestamp.valueOf("2008-03-20 12:34:56");
-          List<Employee> list = dao.selectByHiredateRange(from, to);
+          var ages = Stream.of(30, 40, 50, 60).map(Age::new).collect(toList());
+          var list = dao.selectByAges(ages);
           assertEquals(3, list.size());
         });
   }
 
   @Test
-  public void testSelectByDomain() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testSelectByTimestampRange() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectBySalary(new Salary(2900));
+          var from = LocalDateTime.parse("2008-01-20T12:34:56");
+          var to = LocalDateTime.parse("2008-03-20T12:34:56");
+
+          var list = dao.selectByHiredateRange(from, to);
+          assertEquals(3, list.size());
+        });
+  }
+
+  @Test
+  public void testSelectByDomain() {
+    var tm = config.getTransactionManager();
+
+    tm.required(
+        () -> {
+          var list = dao.selectBySalary(new Salary(2900));
           assertEquals(4, list.size());
         });
   }
 
   @Test
-  public void testSelectDomain() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testSelectDomain() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Salary salary = dao.selectSummedSalary();
-          assertNotNull(salary);
+          var salary = dao.selectSummedSalary();
+          assertTrue(salary.isPresent());
         });
   }
 
   @Test
-  public void testSelectByEntity() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testSelectByEntity() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Employee e = new Employee();
+          var e = new Employee();
           e.setName("SMITH");
-          List<Employee> list = dao.selectByExample(e);
+          var list = dao.selectByExample(e);
           assertEquals(1, list.size());
         });
   }
 
   @Test
-  public void testStream() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testStream() {
+    var tm = config.getTransactionManager();
     tm.required(
         () -> {
-          Salary sum =
+          var sum =
               dao.selectByAge(
                   30,
                   s ->
-                      s.map(employee -> employee.getSalary())
-                          .filter(salary -> salary != null)
-                          .reduce(new Salary(0), (x, y) -> x.add(y)));
-          assertEquals(new Integer(21975), sum.getValue());
+                      s.map(Employee::getSalary)
+                          .filter(Objects::nonNull)
+                          .reduce(new Salary(0), Salary::add));
+          assertEquals(Integer.valueOf(21975), sum.getValue());
         });
   }
 
   @Test
-  public void testOffsetLimit() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testOffsetLimit() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          SelectOptions options = SelectOptions.get().offset(5).limit(3);
-          List<Employee> list = dao.selectAll(options);
+          var list = dao.select(5, 3);
           assertEquals(3, list.size());
         });
   }
 
   @Test
-  public void testCount() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testCount() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          SelectOptions options = SelectOptions.get().offset(5).limit(3).count();
-          List<Employee> list = dao.selectAll(options);
+          var tuple2 = dao.selectAndCount(5, 3);
+          var list = tuple2.first();
+          var count = tuple2.second();
           assertEquals(3, list.size());
-          assertEquals(14, options.getCount());
+          assertEquals(14, count);
         });
   }
 
   @Test
-  public void testSelectJoinedResult() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testAssociation() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<EmployeeDepartment> list = dao.selectAllEmployeeDepartment();
+          var list = dao.selectAllWithAssociation();
           assertEquals(14, list.size());
-          for (EmployeeDepartment e : list) {
-            assertNotNull(e.getDepartmentName());
+          for (var e : list) {
+            assertNotNull(e.getDepartment().getName());
           }
         });
   }

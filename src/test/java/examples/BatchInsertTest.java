@@ -8,25 +8,30 @@ import examples.entity.Employee;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.seasar.doma.jdbc.tx.TransactionManager;
 
 @ExtendWith(TestEnvironment.class)
 public class BatchInsertTest {
 
-  private final EmployeeDao dao = new EmployeeDaoImpl();
+  private final DbConfig config;
+  private final EmployeeDao dao;
+
+  BatchInsertTest(DbConfig config) {
+    this.config = config;
+    dao = new EmployeeDaoImpl(config);
+  }
 
   @Test
   public void testBatchInsert() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Employee employee1 = new Employee();
+          var employee1 = new Employee();
           employee1.setName("test-1");
           employee1.setAge(new Age(30));
           employee1.setSalary(new Salary(300));
 
-          Employee employee2 = new Employee();
+          var employee2 = new Employee();
           employee2.setName("test-2");
           employee2.setAge(new Age(40));
           employee2.setSalary(new Salary(500));

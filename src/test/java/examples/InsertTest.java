@@ -9,20 +9,25 @@ import examples.entity.JobType;
 import java.sql.Timestamp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.seasar.doma.jdbc.tx.TransactionManager;
 
 @ExtendWith(TestEnvironment.class)
 public class InsertTest {
 
-  private final EmployeeDao dao = new EmployeeDaoImpl();
+  private final DbConfig config;
+  private final EmployeeDao dao;
+
+  InsertTest(DbConfig config) {
+    this.config = config;
+    dao = new EmployeeDaoImpl(config);
+  }
 
   @Test
-  public void testInsert() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testInsert() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Employee employee = new Employee();
+          var employee = new Employee();
           employee.setName("test");
           employee.setAge(new Age(50));
           employee.setSalary(new Salary(300));
@@ -32,12 +37,12 @@ public class InsertTest {
   }
 
   @Test
-  public void testInsertWithSqlFile() throws Exception {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+  public void testInsertByNativeSql() {
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          Employee employee = new Employee();
+          var employee = new Employee();
           employee.setId(100);
           employee.setName("test");
           employee.setAge(new Age(50));
@@ -45,7 +50,7 @@ public class InsertTest {
           employee.setJobType(JobType.PRESIDENT);
           employee.setInsertTimestamp(new Timestamp(System.currentTimeMillis()));
           employee.setVersion(1);
-          dao.insertWithSqlFile(employee);
+          dao.insertByNativeSql(employee);
         });
   }
 }

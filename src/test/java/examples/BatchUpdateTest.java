@@ -3,26 +3,29 @@ package examples;
 import examples.dao.EmployeeDao;
 import examples.dao.EmployeeDaoImpl;
 import examples.domain.Salary;
-import examples.entity.Employee;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.seasar.doma.jdbc.tx.TransactionManager;
 
 @ExtendWith(TestEnvironment.class)
 public class BatchUpdateTest {
 
-  private final EmployeeDao dao = new EmployeeDaoImpl();
+  private final DbConfig config;
+  private final EmployeeDao dao;
+
+  BatchUpdateTest(DbConfig config) {
+    this.config = config;
+    dao = new EmployeeDaoImpl(config);
+  }
 
   @Test
   public void testBatchUpdate() {
-    TransactionManager tm = AppConfig.singleton().getTransactionManager();
+    var tm = config.getTransactionManager();
 
     tm.required(
         () -> {
-          List<Employee> list = dao.selectAll();
-          for (Employee employee : list) {
-            Salary salary = employee.getSalary();
+          var list = dao.selectAll();
+          for (var employee : list) {
+            var salary = employee.getSalary();
             if (salary != null) {
               employee.setSalary(salary.add(new Salary(100)));
             }

@@ -45,11 +45,11 @@ public class SelectTest {
 
     tm.required(
         () -> {
-          var list = dao.selectByAgeRange(30, 40);
+          var list = dao.selectByAgeRange(new Age(30), new Age(40));
           assertEquals(6, list.size());
-          list = dao.selectByAgeRange(30, null);
+          list = dao.selectByAgeRange(new Age(30), null);
           assertEquals(12, list.size());
-          list = dao.selectByAgeRange(null, 40);
+          list = dao.selectByAgeRange(null, new Age(40));
           assertEquals(8, list.size());
           list = dao.selectByAgeRange(null, null);
           assertEquals(14, list.size());
@@ -199,7 +199,7 @@ public class SelectTest {
         () -> {
           var sum =
               dao.selectByAge(
-                  30,
+                  new Age(30),
                   s ->
                       s.map(Employee::getSalary)
                           .filter(Objects::nonNull)
@@ -226,8 +226,8 @@ public class SelectTest {
     tm.required(
         () -> {
           var tuple2 = dao.selectAndCount(5, 3);
-          var list = tuple2.first();
-          var count = tuple2.second();
+          var list = tuple2.getItem1();
+          var count = tuple2.getItem2();
           assertEquals(3, list.size());
           assertEquals(14, count);
         });

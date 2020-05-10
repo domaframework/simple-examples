@@ -17,9 +17,9 @@ import org.seasar.doma.Dao;
 import org.seasar.doma.Script;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.criteria.Entityql;
-import org.seasar.doma.jdbc.criteria.LikeOption;
 import org.seasar.doma.jdbc.criteria.NativeSql;
-import org.seasar.doma.jdbc.criteria.Tuple2;
+import org.seasar.doma.jdbc.criteria.option.LikeOption;
+import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 @Dao
 public interface EmployeeDao {
@@ -34,111 +34,95 @@ public interface EmployeeDao {
 
   default Optional<Employee> selectById(Integer id) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.eq(e.id, id));
-    return stmt.getSingleResult();
+    return entityql().from(e).where(c -> c.eq(e.id, id)).fetchOptional();
   }
 
-  default List<Employee> selectByAgeRange(Integer min, Integer max) {
+  default List<Employee> selectByAgeRange(Age min, Age max) {
     var e = new Employee_();
-    var stmt =
-        entityql()
-            .from(e)
-            .where(
-                c -> {
-                  if (min != null) {
-                    c.ge(e.age, new Age(min));
-                  }
-                  if (max != null) {
-                    c.le(e.age, new Age(max));
-                  }
-                });
-    return stmt.getResultList();
+    return entityql()
+        .from(e)
+        .where(
+            c -> {
+              if (min != null) {
+                c.ge(e.age, min);
+              }
+              if (max != null) {
+                c.le(e.age, max);
+              }
+            })
+        .fetch();
   }
 
   default List<Employee> selectByName(String name) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.eq(e.name, name));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.eq(e.name, name)).fetch();
   }
 
   default List<Employee> selectByNames(List<String> names) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.in(e.name, names));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.in(e.name, names)).fetch();
   }
 
   default List<Employee> selectByAges(List<Age> ages) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.in(e.age, ages));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.in(e.age, ages)).fetch();
   }
 
   default List<Employee> selectByNotEmptyName(String name) {
     var e = new Employee_();
-    var stmt =
-        entityql()
-            .from(e)
-            .where(
-                c -> {
-                  if (name != null && !name.isEmpty()) {
-                    c.eq(e.name, name);
-                  }
-                });
-    return stmt.getResultList();
+    return entityql()
+        .from(e)
+        .where(
+            c -> {
+              if (name != null && !name.isEmpty()) {
+                c.eq(e.name, name);
+              }
+            })
+        .fetch();
   }
 
   default List<Employee> selectByNameWithPrefixMatching(String prefix) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.like(e.name, prefix, LikeOption.PREFIX));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.like(e.name, prefix, LikeOption.PREFIX)).fetch();
   }
 
   default List<Employee> selectByNameWithSuffixMatching(String suffix) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.like(e.name, suffix, LikeOption.SUFFIX));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.like(e.name, suffix, LikeOption.SUFFIX)).fetch();
   }
 
   default List<Employee> selectByNameWithInfixMatching(String inside) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.like(e.name, inside, LikeOption.INFIX));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.like(e.name, inside, LikeOption.INFIX)).fetch();
   }
 
   default List<Employee> selectByHiredateRange(LocalDateTime from, LocalDateTime to) {
     var fromDate = from.toLocalDate();
     var toDate = to.toLocalDate().plusDays(1);
     var e = new Employee_();
-    var stmt =
-        entityql()
-            .from(e)
-            .where(
-                c -> {
-                  c.ge(e.hiredate, fromDate);
-                  c.lt(e.hiredate, toDate);
-                });
-    return stmt.getResultList();
+    return entityql()
+        .from(e)
+        .where(
+            c -> {
+              c.ge(e.hiredate, fromDate);
+              c.lt(e.hiredate, toDate);
+            })
+        .fetch();
   }
 
   default List<Employee> selectBySalary(Salary salary) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.gt(e.salary, salary));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.gt(e.salary, salary)).fetch();
   }
 
   default Optional<Salary> selectSummedSalary() {
     var e = new Employee_();
-    return nativeSql()
-        .from(e)
-        .<Salary>select(sum(e.salary))
-        .map(row -> row.get(sum(e.salary)))
-        .getSingleResult();
+    return nativeSql().from(e).select(sum(e.salary)).fetchOptional();
   }
 
   default List<Employee> selectByExample(Employee employee) {
     var e = new Employee_();
-    var stmt = entityql().from(e).where(c -> c.eq(e.name, employee.getName()));
-    return stmt.getResultList();
+    return entityql().from(e).where(c -> c.eq(e.name, employee.getName())).fetch();
   }
 
   default List<Employee> selectAll() {
@@ -148,104 +132,94 @@ public interface EmployeeDao {
   default Tuple2<List<Employee>, Long> selectAndCount(Integer offset, Integer limit) {
     var list = select(offset, limit);
     var e = new Employee_();
-    var stmt = nativeSql().from(e).<Long>select(count()).map(row -> row.get(count()));
-    var count = stmt.execute().stream().findFirst().orElse(0L);
+    var count = nativeSql().from(e).select(count()).fetchOptional().orElse(0L);
     return new Tuple2<>(list, count);
   }
 
   default List<Employee> select(Integer offset, Integer limit) {
     var e = new Employee_();
-    var stmt = nativeSql().from(e).orderBy(c -> c.asc(e.id)).offset(offset).limit(limit);
-    return stmt.getResultList();
+    return nativeSql().from(e).orderBy(c -> c.asc(e.id)).offset(offset).limit(limit).fetch();
   }
 
-  default <R> R selectByAge(int age, Function<Stream<Employee>, R> mapper) {
+  default <R> R selectByAge(Age age, Function<Stream<Employee>, R> mapper) {
     var e = new Employee_();
-    var stmt = nativeSql().from(e).where(c -> c.gt(e.age, new Age(age))).orderBy(c -> c.asc(e.age));
+    var stmt = nativeSql().from(e).where(c -> c.gt(e.age, age)).orderBy(c -> c.asc(e.age));
     return stmt.mapStream(mapper);
   }
 
   default long selectCount() {
     var e = new Employee_();
-    var stmt = nativeSql().from(e).<Long>select(count()).map(row -> row.get(count()));
-    return stmt.getSingleResult().orElse(0L);
+    return nativeSql().from(e).select(count()).fetchOptional().orElse(0L);
   }
 
   default List<Employee> selectAllWithAssociation() {
     var e = new Employee_();
     var d = new Department_();
-    var stmt =
-        entityql()
-            .from(e)
-            .leftJoin(d, on -> on.eq(e.departmentId, d.id))
-            .orderBy(c -> c.asc(e.id))
-            .associate(e, d, Employee::setDepartment);
-    return stmt.getResultList();
+    return entityql()
+        .from(e)
+        .leftJoin(d, on -> on.eq(e.departmentId, d.id))
+        .orderBy(c -> c.asc(e.id))
+        .associate(e, d, Employee::setDepartment)
+        .fetch();
   }
 
   default void insert(Employee employee) {
     var e = new Employee_();
-    var stmt = entityql().insert(e, employee);
-    stmt.execute();
+    entityql().insert(e, employee).execute();
   }
 
   default int insertByNativeSql(Employee employee) {
     var e = new Employee_();
-    var stmt =
-        nativeSql()
-            .insert(e)
-            .values(
-                c -> {
-                  c.value(e.id, employee.getId());
-                  c.value(e.name, employee.getName());
-                  c.value(e.age, employee.getAge());
-                  c.value(e.departmentId, employee.getDepartmentId());
-                  c.value(e.hiredate, employee.getHiredate());
-                  c.value(e.jobType, employee.getJobType());
-                  c.value(e.salary, employee.getSalary());
-                  c.value(e.insertTimestamp, employee.getInsertTimestamp());
-                  c.value(e.updateTimestamp, employee.getUpdateTimestamp());
-                  c.value(e.version, employee.getVersion());
-                });
-    return stmt.execute();
+    return nativeSql()
+        .insert(e)
+        .values(
+            c -> {
+              c.value(e.id, employee.getId());
+              c.value(e.name, employee.getName());
+              c.value(e.age, employee.getAge());
+              c.value(e.departmentId, employee.getDepartmentId());
+              c.value(e.hiredate, employee.getHiredate());
+              c.value(e.jobType, employee.getJobType());
+              c.value(e.salary, employee.getSalary());
+              c.value(e.insertTimestamp, employee.getInsertTimestamp());
+              c.value(e.updateTimestamp, employee.getUpdateTimestamp());
+              c.value(e.version, employee.getVersion());
+            })
+        .execute();
   }
 
   default void update(Employee employee) {
     var e = new Employee_();
-    var stmt = entityql().update(e, employee);
-    stmt.execute();
+    entityql().update(e, employee).execute();
   }
 
   default int updateByNativeSql(Employee employee) {
     var e = new Employee_();
-    var stmt =
-        nativeSql()
-            .update(e)
-            .set(
-                c -> {
-                  c.value(e.name, employee.getName());
-                  c.value(e.age, employee.getAge());
-                  c.value(e.departmentId, employee.getDepartmentId());
-                  c.value(e.hiredate, employee.getHiredate());
-                  c.value(e.jobType, employee.getJobType());
-                  c.value(e.salary, employee.getSalary());
-                  c.value(e.updateTimestamp, employee.getUpdateTimestamp());
-                  c.value(e.version, employee.getVersion());
-                })
-            .where(c -> c.eq(e.id, employee.getId()));
-    return stmt.execute();
+    return nativeSql()
+        .update(e)
+        .set(
+            c -> {
+              c.value(e.name, employee.getName());
+              c.value(e.age, employee.getAge());
+              c.value(e.departmentId, employee.getDepartmentId());
+              c.value(e.hiredate, employee.getHiredate());
+              c.value(e.jobType, employee.getJobType());
+              c.value(e.salary, employee.getSalary());
+              c.value(e.updateTimestamp, employee.getUpdateTimestamp());
+              c.value(e.version, employee.getVersion());
+            })
+        .where(c -> c.eq(e.id, employee.getId()))
+        .execute();
   }
 
   default void delete(Employee employee) {
     var e = new Employee_();
-    var stmt = entityql().delete(e, employee);
-    stmt.execute();
+    entityql().delete(e, employee).execute();
   }
 
   default int deleteByNativeSql(Employee employee) {
     var e = new Employee_();
-    var stmt = nativeSql().delete(e).where(c -> c.eq(e.id, employee.getId()));
-    return stmt.execute();
+    return nativeSql().delete(e).where(c -> c.eq(e.id, employee.getId())).execute();
   }
 
   default void batchInsert(List<Employee> employees) {
@@ -256,14 +230,12 @@ public interface EmployeeDao {
 
   default void batchUpdate(List<Employee> employees) {
     var e = new Employee_();
-    var stmt = entityql().update(e, employees);
-    stmt.execute();
+    entityql().update(e, employees).execute();
   }
 
   default void batchDelete(List<Employee> employees) {
     var e = new Employee_();
-    var stmt = entityql().delete(e, employees);
-    stmt.execute();
+    entityql().delete(e, employees).execute();
   }
 
   @Script

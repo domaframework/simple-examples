@@ -1,7 +1,7 @@
 package examples.dao;
 
-import static org.seasar.doma.jdbc.criteria.AggregateFunctions.count;
-import static org.seasar.doma.jdbc.criteria.AggregateFunctions.sum;
+import static org.seasar.doma.jdbc.criteria.expression.Expressions.count;
+import static org.seasar.doma.jdbc.criteria.expression.Expressions.sum;
 
 import examples.domain.Age;
 import examples.domain.Salary;
@@ -83,17 +83,17 @@ public interface EmployeeDao {
 
   default List<Employee> selectByNameWithPrefixMatching(String prefix) {
     var e = new Employee_();
-    return entityql().from(e).where(c -> c.like(e.name, prefix, LikeOption.PREFIX)).fetch();
+    return entityql().from(e).where(c -> c.like(e.name, prefix, LikeOption.prefix())).fetch();
   }
 
   default List<Employee> selectByNameWithSuffixMatching(String suffix) {
     var e = new Employee_();
-    return entityql().from(e).where(c -> c.like(e.name, suffix, LikeOption.SUFFIX)).fetch();
+    return entityql().from(e).where(c -> c.like(e.name, suffix, LikeOption.suffix())).fetch();
   }
 
   default List<Employee> selectByNameWithInfixMatching(String inside) {
     var e = new Employee_();
-    return entityql().from(e).where(c -> c.like(e.name, inside, LikeOption.INFIX)).fetch();
+    return entityql().from(e).where(c -> c.like(e.name, inside, LikeOption.infix())).fetch();
   }
 
   default List<Employee> selectByHiredateRange(LocalDateTime from, LocalDateTime to) {

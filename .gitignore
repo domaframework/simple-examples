@@ -10,3 +10,4 @@
 out
 /.apt_generated_tests/
 .vscode
+.sdkmanrc

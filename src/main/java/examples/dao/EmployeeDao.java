@@ -43,12 +43,8 @@ public interface EmployeeDao {
         .from(e)
         .where(
             c -> {
-              if (min != null) {
-                c.ge(e.age, min);
-              }
-              if (max != null) {
-                c.le(e.age, max);
-              }
+              c.ge(e.age, min);
+              c.le(e.age, max);
             })
         .fetch();
   }

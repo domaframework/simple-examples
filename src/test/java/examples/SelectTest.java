@@ -65,7 +65,7 @@ public class SelectTest {
           var list = dao.selectByName("SMITH");
           assertEquals(1, list.size());
           list = dao.selectByName(null);
-          assertEquals(0, list.size());
+          assertEquals(14, list.size());
         });
   }
 

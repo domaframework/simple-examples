@@ -1,4 +1,4 @@
-Simple Examples [![Build Status](https://travis-ci.org/domaframework/simple-examples.png?branch=master)](https://travis-ci.org/domaframework/simple-examples)
+Simple Examples ![Java CI with Gradle](https://github.com/domaframework/simple-examples/workflows/Java%20CI%20with%20Gradle/badge.svg)
 ========================================
 
 Simple examples for [Doma](https://github.com/domaframework/doma).

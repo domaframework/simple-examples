@@ -57,6 +57,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
 }
 
+release {
+    newVersionCommitMessage = '[Gradle Release Plugin] - [skip ci] new version commit: '
+}
+
 eclipse {
     classpath {
         file {

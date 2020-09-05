@@ -1,12 +1,9 @@
 plugins {
     id 'java'
     id 'com.diffplug.eclipse.apt' version '3.24.0'
-    id 'com.diffplug.gradle.spotless' version '3.30.0'
-    id "net.researchgate.release" version '2.8.1'
+    id 'com.diffplug.gradle.spotless' version '3.30.2'
     id 'org.seasar.doma.compile' version '1.1.0'
 }
-
-def domaVersion = project.property('release.releaseVersion')
 
 spotless {
     java {
@@ -55,10 +52,6 @@ dependencies {
     runtimeOnly 'com.h2database:h2:1.4.200'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
-}
-
-release {
-    newVersionCommitMessage = '[Gradle Release Plugin] - [skip ci] new version commit: '
 }
 
 eclipse {

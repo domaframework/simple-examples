@@ -42,8 +42,3 @@ The `eclipse` task generates Eclipse setting files.
 We recommend you write settings on build.gradle and run this task
 whenever you have to change settings about annotation processing.
 Never change Eclipse directly.
-
-License
--------
-
-Apache License, Version 2.0

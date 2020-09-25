@@ -3,6 +3,8 @@ package examples;
 import javax.sql.DataSource;
 import org.seasar.doma.SingletonConfig;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.JdbcLogger;
+import org.seasar.doma.jdbc.Slf4jJdbcLogger;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
@@ -18,14 +20,21 @@ public class DbConfig implements Config {
 
   private final LocalTransactionDataSource dataSource;
 
+  private final JdbcLogger jdbcLogger;
+
   private final TransactionManager transactionManager;
 
   private DbConfig() {
+    jdbcLogger = new Slf4jJdbcLogger();
     dialect = new H2Dialect();
     dataSource =
         new LocalTransactionDataSource("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null);
-    transactionManager =
-        new LocalTransactionManager(dataSource.getLocalTransaction(getJdbcLogger()));
+    transactionManager = new LocalTransactionManager(dataSource.getLocalTransaction(jdbcLogger));
+  }
+
+  @Override
+  public JdbcLogger getJdbcLogger() {
+    return jdbcLogger;
   }
 
   @Override

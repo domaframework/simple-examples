@@ -1,4 +1,4 @@
 rootProject.name = "simple-examples"
-include("criteria-api")
-include("sql-annotation")
-include("sql-file")
+include("dsl-style")
+include("dao-style-file")
+include("dao-style-text")

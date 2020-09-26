@@ -1,5 +1,4 @@
 plugins {
-    base
     id("com.diffplug.eclipse.apt") version "3.24.0" apply false
     id("com.diffplug.spotless") version "5.3.0" apply false
     id("org.seasar.doma.compile") version "1.1.0" apply false
@@ -64,4 +63,3 @@ subprojects {
         }
     }
 }
-

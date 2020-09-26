@@ -1,13 +1,15 @@
-package example.sql_annotation;
+package example.sql_file;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import example.sql_annotation.dao.EmployeeDao;
-import example.sql_annotation.dao.EmployeeDaoImpl;
-import example.sql_annotation.domain.Salary;
-import example.sql_annotation.entity.Employee;
+import example.sql_file.dao.EmployeeDao;
+import example.sql_file.dao.EmployeeDaoImpl;
+import example.sql_file.domain.Salary;
+import example.sql_file.entity.Employee;
+import example.sql_file.entity.EmployeeDepartment;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;
@@ -27,19 +29,19 @@ public class SelectTest {
 
   @Test
   public void testSelectAll() {
-    var employees = dao.selectAll();
+    List<Employee> employees = dao.selectAll();
     assertEquals(14, employees.size());
   }
 
   @Test
   public void testSelectById() {
-    var employee = dao.selectById(1);
+    Employee employee = dao.selectById(1);
     assertNotNull(employee);
   }
 
   @Test
   public void testConditionalSelect() {
-    var list = dao.selectByAgeRange(30, 40);
+    List<Employee> list = dao.selectByAgeRange(30, 40);
     assertEquals(6, list.size());
     list = dao.selectByAgeRange(30, null);
     assertEquals(12, list.size());
@@ -51,7 +53,7 @@ public class SelectTest {
 
   @Test
   public void testConditionalSelect2() {
-    var list = dao.selectByName("SMITH");
+    List<Employee> list = dao.selectByName("SMITH");
     assertEquals(1, list.size());
     list = dao.selectByName(null);
     assertEquals(0, list.size());
@@ -59,14 +61,14 @@ public class SelectTest {
 
   @Test
   public void testLoopSelect() {
-    var ages = List.of(30, 40, 50, 60);
-    var list = dao.selectByAges(ages);
+    List<Integer> ages = Arrays.asList(30, 40, 50, 60);
+    List<Employee> list = dao.selectByAges(ages);
     assertEquals(3, list.size());
   }
 
   @Test
   public void testIsNotEmptyFunction() {
-    var list = dao.selectByNotEmptyName("SMITH");
+    List<Employee> list = dao.selectByNotEmptyName("SMITH");
     assertEquals(1, list.size());
     list = dao.selectByNotEmptyName(null);
     assertEquals(14, list.size());
@@ -78,60 +80,60 @@ public class SelectTest {
 
   @Test
   public void testLikePredicate_prefix() {
-    var list = dao.selectByNameWithPrefixMatching("S");
+    List<Employee> list = dao.selectByNameWithPrefixMatching("S");
     assertEquals(2, list.size());
   }
 
   @Test
   public void testLikePredicate_suffix() {
-    var list = dao.selectByNameWithSuffixMatching("S");
+    List<Employee> list = dao.selectByNameWithSuffixMatching("S");
     assertEquals(3, list.size());
   }
 
   @Test
   public void testLikePredicate_inside() {
-    var list = dao.selectByNameWithInfixMatching("A");
+    List<Employee> list = dao.selectByNameWithInfixMatching("A");
     assertEquals(7, list.size());
   }
 
   @Test
   public void testInPredicate() {
-    var names = List.of("JONES", "SCOTT", "XXX");
-    var list = dao.selectByNames(names);
+    List<String> names = Arrays.asList("JONES", "SCOTT", "XXX");
+    List<Employee> list = dao.selectByNames(names);
     assertEquals(2, list.size());
   }
 
   @Test
   public void testSelectByTimestampRange() {
-    var from = Timestamp.valueOf("2008-01-20 12:34:56");
-    var to = Timestamp.valueOf("2008-03-20 12:34:56");
-    var list = dao.selectByHiredateRange(from, to);
+    Timestamp from = Timestamp.valueOf("2008-01-20 12:34:56");
+    Timestamp to = Timestamp.valueOf("2008-03-20 12:34:56");
+    List<Employee> list = dao.selectByHiredateRange(from, to);
     assertEquals(3, list.size());
   }
 
   @Test
   public void testSelectByDomain() {
-    var list = dao.selectBySalary(new Salary(2900));
+    List<Employee> list = dao.selectBySalary(new Salary(2900));
     assertEquals(4, list.size());
   }
 
   @Test
   public void testSelectDomain() {
-    var salary = dao.selectSummedSalary();
+    Salary salary = dao.selectSummedSalary();
     assertNotNull(salary);
   }
 
   @Test
   public void testSelectByEntity() {
-    var e = new Employee();
+    Employee e = new Employee();
     e.setName("SMITH");
-    var list = dao.selectByExample(e);
+    List<Employee> list = dao.selectByExample(e);
     assertEquals(1, list.size());
   }
 
   @Test
   public void testStream() {
-    var sum =
+    Salary sum =
         dao.selectByAge(
             30,
             s ->
@@ -143,24 +145,24 @@ public class SelectTest {
 
   @Test
   public void testOffsetLimit() {
-    var options = SelectOptions.get().offset(5).limit(3);
-    var list = dao.selectAll(options);
+    SelectOptions options = SelectOptions.get().offset(5).limit(3);
+    List<Employee> list = dao.selectAll(options);
     assertEquals(3, list.size());
   }
 
   @Test
   public void testCount() {
-    var options = SelectOptions.get().offset(5).limit(3).count();
-    var list = dao.selectAll(options);
+    SelectOptions options = SelectOptions.get().offset(5).limit(3).count();
+    List<Employee> list = dao.selectAll(options);
     assertEquals(3, list.size());
     assertEquals(14, options.getCount());
   }
 
   @Test
   public void testSelectJoinedResult() {
-    var list = dao.selectAllEmployeeDepartment();
+    List<EmployeeDepartment> list = dao.selectAllEmployeeDepartment();
     assertEquals(14, list.size());
-    for (var e : list) {
+    for (EmployeeDepartment e : list) {
       assertNotNull(e.getDepartmentName());
     }
   }

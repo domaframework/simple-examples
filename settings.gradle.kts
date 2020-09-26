@@ -1,6 +1,6 @@
 rootProject.name = "simple-examples"
-include("dsl-style")
+include("dao-style-basic")
 include("dao-style-file")
 include("dao-style-text")
-include("dao-style-basic")
+include("dsl-style-java")
 include("dsl-style-kotlin")

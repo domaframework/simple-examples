@@ -8,13 +8,14 @@ import example.dsl_style.repository.EmployeeRepository;
 import java.sql.Timestamp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.seasar.doma.jdbc.Config;
 
 @ExtendWith(TestEnvironment.class)
 public class InsertTest {
 
   private final EmployeeRepository repository;
 
-  InsertTest(DbConfig config) {
+  InsertTest(Config config) {
     repository = new EmployeeRepository(config);
   }
 

@@ -2,8 +2,8 @@ package example.dao_style_basic.entity;
 
 import example.dao_style_basic.domain.Age;
 import example.dao_style_basic.domain.Salary;
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
@@ -41,9 +41,9 @@ public class Employee {
   @Column(name = "VERSION")
   Integer version;
 
-  Timestamp insertTimestamp;
+  LocalDateTime insertTimestamp;
 
-  Timestamp updateTimestamp;
+  LocalDateTime updateTimestamp;
 
   @Transient Department department;
 
@@ -105,19 +105,19 @@ public class Employee {
     this.departmentId = departmentId;
   }
 
-  public Timestamp getInsertTimestamp() {
+  public LocalDateTime getInsertTimestamp() {
     return insertTimestamp;
   }
 
-  public void setInsertTimestamp(Timestamp insertTimestamp) {
+  public void setInsertTimestamp(LocalDateTime insertTimestamp) {
     this.insertTimestamp = insertTimestamp;
   }
 
-  public Timestamp getUpdateTimestamp() {
+  public LocalDateTime getUpdateTimestamp() {
     return updateTimestamp;
   }
 
-  public void setUpdateTimestamp(Timestamp updateTimestamp) {
+  public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
     this.updateTimestamp = updateTimestamp;
   }
 

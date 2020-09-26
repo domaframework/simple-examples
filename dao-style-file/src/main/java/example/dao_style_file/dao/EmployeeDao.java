@@ -1,9 +1,10 @@
 package example.dao_style_file.dao;
 
+import example.dao_style_file.domain.Age;
 import example.dao_style_file.domain.Salary;
 import example.dao_style_file.entity.Employee;
 import example.dao_style_file.entity.EmployeeDepartment;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -22,10 +23,10 @@ public interface EmployeeDao {
   Employee selectById(Integer id);
 
   @Select
-  List<Employee> selectByAgeRange(Integer min, Integer max);
+  List<Employee> selectByAgeRange(Age min, Age max);
 
   @Select
-  List<Employee> selectByAges(List<Integer> ages);
+  List<Employee> selectByAges(List<Age> ages);
 
   @Select
   List<Employee> selectByName(String name);
@@ -46,7 +47,7 @@ public interface EmployeeDao {
   List<Employee> selectByNameWithInfixMatching(String inside);
 
   @Select
-  List<Employee> selectByHiredateRange(Timestamp from, Timestamp to);
+  List<Employee> selectByHiredateRange(LocalDateTime from, LocalDateTime to);
 
   @Select
   List<Employee> selectBySalary(Salary salary);

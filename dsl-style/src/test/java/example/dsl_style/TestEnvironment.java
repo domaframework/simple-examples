@@ -61,7 +61,7 @@ public class TestEnvironment
 
   public boolean supportsParameter(
       ParameterContext parameterContext, ExtensionContext extensionContext) {
-    return parameterContext.getParameter().getType() == DbConfig.class;
+    return parameterContext.getParameter().getType().isAssignableFrom(DbConfig.class);
   }
 
   public Object resolveParameter(

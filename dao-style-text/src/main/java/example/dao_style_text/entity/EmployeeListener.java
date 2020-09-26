@@ -1,6 +1,6 @@
 package example.dao_style_text.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
 import org.seasar.doma.jdbc.entity.PostInsertContext;
@@ -16,14 +16,14 @@ public class EmployeeListener<E extends Employee> implements EntityListener<E> {
 
   @Override
   public void preInsert(E employee, PreInsertContext<E> context) {
-    var timestamp = new Timestamp(System.currentTimeMillis());
+    var timestamp = LocalDateTime.now();
     employee.setInsertTimestamp(timestamp);
   }
 
   @Override
   public void preUpdate(E employee, PreUpdateContext<E> context) {
     if (context.isEntityChanged()) {
-      var timestamp = new Timestamp(System.currentTimeMillis());
+      var timestamp = LocalDateTime.now();
       employee.setUpdateTimestamp(timestamp);
     }
   }

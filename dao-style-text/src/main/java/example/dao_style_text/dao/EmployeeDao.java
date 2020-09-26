@@ -1,5 +1,6 @@
 package example.dao_style_text.dao;
 
+import example.dao_style_text.domain.Age;
 import example.dao_style_text.domain.Salary;
 import example.dao_style_text.entity.Employee;
 import example.dao_style_text.entity.EmployeeDepartment;
@@ -49,7 +50,7 @@ public interface EmployeeDao {
         age
       """)
   @Select
-  List<Employee> selectByAgeRange(Integer min, Integer max);
+  List<Employee> selectByAgeRange(Age min, Age max);
 
   @Sql(
       """
@@ -66,7 +67,7 @@ public interface EmployeeDao {
       /*%end */
       """)
   @Select
-  List<Employee> selectByAges(List<Integer> ages);
+  List<Employee> selectByAges(List<Age> ages);
 
   @Sql(
       """

@@ -1,17 +1,20 @@
 package example.dao_style_file;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import example.dao_style_file.dao.EmployeeDao;
 import example.dao_style_file.dao.EmployeeDaoImpl;
+import example.dao_style_file.domain.Age;
 import example.dao_style_file.domain.Salary;
 import example.dao_style_file.entity.Employee;
 import example.dao_style_file.entity.EmployeeDepartment;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
@@ -41,11 +44,11 @@ public class SelectTest {
 
   @Test
   public void testConditionalSelect() {
-    List<Employee> list = dao.selectByAgeRange(30, 40);
+    List<Employee> list = dao.selectByAgeRange(new Age(30), new Age(40));
     assertEquals(6, list.size());
-    list = dao.selectByAgeRange(30, null);
+    list = dao.selectByAgeRange(new Age(30), null);
     assertEquals(12, list.size());
-    list = dao.selectByAgeRange(null, 40);
+    list = dao.selectByAgeRange(null, new Age(40));
     assertEquals(8, list.size());
     list = dao.selectByAgeRange(null, null);
     assertEquals(14, list.size());
@@ -61,7 +64,7 @@ public class SelectTest {
 
   @Test
   public void testLoopSelect() {
-    List<Integer> ages = Arrays.asList(30, 40, 50, 60);
+    List<Age> ages = Stream.of(30, 40, 50, 60).map(Age::new).collect(toList());
     List<Employee> list = dao.selectByAges(ages);
     assertEquals(3, list.size());
   }
@@ -105,8 +108,8 @@ public class SelectTest {
 
   @Test
   public void testSelectByTimestampRange() {
-    Timestamp from = Timestamp.valueOf("2008-01-20 12:34:56");
-    Timestamp to = Timestamp.valueOf("2008-03-20 12:34:56");
+    LocalDateTime from = LocalDateTime.of(2008, 1, 20, 12, 34, 56);
+    LocalDateTime to = LocalDateTime.of(2008, 3, 20, 12, 34, 56);
     List<Employee> list = dao.selectByHiredateRange(from, to);
     assertEquals(3, list.size());
   }

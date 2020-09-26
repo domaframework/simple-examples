@@ -15,13 +15,14 @@ import java.util.Objects;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.seasar.doma.jdbc.Config;
 
 @ExtendWith(TestEnvironment.class)
 public class SelectTest {
 
   private final EmployeeRepository repository;
 
-  SelectTest(DbConfig config) {
+  SelectTest(Config config) {
     repository = new EmployeeRepository(config);
   }
 

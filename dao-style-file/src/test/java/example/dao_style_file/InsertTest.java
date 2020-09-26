@@ -8,7 +8,7 @@ import example.dao_style_file.domain.Age;
 import example.dao_style_file.domain.Salary;
 import example.dao_style_file.entity.Employee;
 import example.dao_style_file.entity.JobType;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ public class InsertTest {
     employee.setAge(new Age(50));
     employee.setSalary(new Salary(300));
     employee.setJobType(JobType.PRESIDENT);
-    employee.setInsertTimestamp(new Timestamp(System.currentTimeMillis()));
+    employee.setInsertTimestamp(LocalDateTime.now());
     employee.setVersion(1);
     int rows = dao.insert(employee);
     assertEquals(1, rows);

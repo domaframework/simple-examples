@@ -4,13 +4,14 @@ import example.dsl_style.domain.Salary;
 import example.dsl_style.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.seasar.doma.jdbc.Config;
 
 @ExtendWith(TestEnvironment.class)
 public class BatchUpdateTest {
 
   private final EmployeeRepository repository;
 
-  BatchUpdateTest(DbConfig config) {
+  BatchUpdateTest(Config config) {
     repository = new EmployeeRepository(config);
   }
 

@@ -1,15 +1,18 @@
 package example.dao_style_text;
 
+import static java.util.stream.Collectors.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import example.dao_style_text.dao.EmployeeDao;
 import example.dao_style_text.dao.EmployeeDaoImpl;
+import example.dao_style_text.domain.Age;
 import example.dao_style_text.domain.Salary;
 import example.dao_style_text.entity.Employee;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
@@ -39,11 +42,11 @@ public class SelectTest {
 
   @Test
   public void testConditionalSelect() {
-    var list = dao.selectByAgeRange(30, 40);
+    var list = dao.selectByAgeRange(new Age(30), new Age(40));
     assertEquals(6, list.size());
-    list = dao.selectByAgeRange(30, null);
+    list = dao.selectByAgeRange(new Age(30), null);
     assertEquals(12, list.size());
-    list = dao.selectByAgeRange(null, 40);
+    list = dao.selectByAgeRange(null, new Age(40));
     assertEquals(8, list.size());
     list = dao.selectByAgeRange(null, null);
     assertEquals(14, list.size());
@@ -59,7 +62,7 @@ public class SelectTest {
 
   @Test
   public void testLoopSelect() {
-    var ages = List.of(30, 40, 50, 60);
+    var ages = Stream.of(30, 40, 50, 60).map(Age::new).collect(toList());
     var list = dao.selectByAges(ages);
     assertEquals(3, list.size());
   }

@@ -6,13 +6,14 @@ import example.dsl_style.entity.JobType;
 import example.dsl_style.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.seasar.doma.jdbc.Config;
 
 @ExtendWith(TestEnvironment.class)
 public class UpdateTest {
 
   private final EmployeeRepository repository;
 
-  UpdateTest(DbConfig config) {
+  UpdateTest(Config config) {
     repository = new EmployeeRepository(config);
   }
 

@@ -60,7 +60,7 @@ subprojects {
 
     configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         java {
-            googleJavaFormat("1.7")
+            googleJavaFormat("1.9")
         }
     }
 }

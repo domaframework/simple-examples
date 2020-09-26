@@ -14,7 +14,7 @@ $ cd simple-examples
 Java version
 ------------
 
-You need Java 11 or later.
+You need Java 15 or later.
 
 Build
 -----

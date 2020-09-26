@@ -5,7 +5,7 @@ import example.dsl_style.domain.Salary;
 import example.dsl_style.entity.Employee;
 import example.dsl_style.entity.JobType;
 import example.dsl_style.repository.EmployeeRepository;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
@@ -37,7 +37,7 @@ public class InsertTest {
     employee.setAge(new Age(50));
     employee.setSalary(new Salary(300));
     employee.setJobType(JobType.PRESIDENT);
-    employee.setInsertTimestamp(new Timestamp(System.currentTimeMillis()));
+    employee.setInsertTimestamp(LocalDateTime.now());
     employee.setVersion(1);
     repository.insertByNativeSql(employee);
   }

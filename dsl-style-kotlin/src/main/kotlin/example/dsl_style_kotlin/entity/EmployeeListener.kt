@@ -7,18 +7,18 @@ import org.seasar.doma.jdbc.entity.PostUpdateContext
 import org.seasar.doma.jdbc.entity.PreDeleteContext
 import org.seasar.doma.jdbc.entity.PreInsertContext
 import org.seasar.doma.jdbc.entity.PreUpdateContext
-import java.sql.Timestamp
+import java.time.LocalDateTime
 
 class EmployeeListener : EntityListener<Employee> {
     override fun preDelete(employee: Employee, context: PreDeleteContext<Employee>) {}
     override fun preInsert(employee: Employee, context: PreInsertContext<Employee>) {
-        val timestamp = Timestamp(System.currentTimeMillis())
+        val timestamp = LocalDateTime.now()
         employee.insertTimestamp = timestamp
     }
 
     override fun preUpdate(employee: Employee, context: PreUpdateContext<Employee>) {
         if (context.isEntityChanged) {
-            val timestamp = Timestamp(System.currentTimeMillis())
+            val timestamp = LocalDateTime.now()
             employee.updateTimestamp = timestamp
         }
     }

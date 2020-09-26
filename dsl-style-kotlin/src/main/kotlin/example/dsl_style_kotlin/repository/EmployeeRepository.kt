@@ -8,9 +8,8 @@ import example.dsl_style_kotlin.entity.Employee_
 import org.seasar.doma.jdbc.Config
 import org.seasar.doma.jdbc.criteria.KEntityql
 import org.seasar.doma.jdbc.criteria.KNativeSql
-import org.seasar.doma.jdbc.criteria.expression.Expressions
+import org.seasar.doma.jdbc.criteria.expression.KExpressions
 import org.seasar.doma.jdbc.criteria.option.LikeOption
-import org.seasar.doma.jdbc.criteria.tuple.Tuple2
 import java.time.LocalDateTime
 
 class EmployeeRepository(config: Config) {
@@ -96,23 +95,23 @@ class EmployeeRepository(config: Config) {
 
     fun selectSummedSalary(): Salary? {
         val e = Employee_()
-        return nativeSql.from(e).select(Expressions.sum(e.salary)).fetchOneOrNull()
+        return nativeSql.from(e).select(KExpressions.sum(e.salary)).fetchOneOrNull()
     }
 
     fun selectByExample(employee: Employee): List<Employee> {
         val e = Employee_()
-        return entityql.from(e).where { eq<String>(e.name, employee.name) }.fetch()
+        return entityql.from(e).where { eq(e.name, employee.name) }.fetch()
     }
 
     fun selectAll(): List<Employee> {
         return select(null, null)
     }
 
-    fun selectAndCount(offset: Int?, limit: Int?): Tuple2<List<Employee>, Long> {
+    fun selectAndCount(offset: Int?, limit: Int?): Pair<List<Employee>, Long> {
         val list = select(offset, limit)
         val e = Employee_()
-        val count = nativeSql.from(e).select(Expressions.count()).fetchOneOrNull() ?: 0L
-        return Tuple2(list, count)
+        val count = nativeSql.from(e).select(KExpressions.count()).fetchOneOrNull() ?: 0L
+        return list to count
     }
 
     fun select(offset: Int?, limit: Int?): List<Employee> {
@@ -128,7 +127,7 @@ class EmployeeRepository(config: Config) {
 
     fun selectCount(): Long {
         val e = Employee_()
-        return nativeSql.from(e).select(Expressions.count()).fetchOneOrNull() ?: 0L
+        return nativeSql.from(e).select(KExpressions.count()).fetchOneOrNull() ?: 0L
     }
 
     fun selectAllWithAssociation(): List<Employee> {

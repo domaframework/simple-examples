@@ -12,8 +12,8 @@ import org.seasar.doma.OriginalStates
 import org.seasar.doma.SequenceGenerator
 import org.seasar.doma.Transient
 import org.seasar.doma.Version
-import java.sql.Timestamp
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity(listener = EmployeeListener::class, metamodel = Metamodel())
 class Employee {
@@ -35,8 +35,8 @@ class Employee {
     @Version
     @Column(name = "VERSION")
     var version: Int? = null
-    var insertTimestamp: Timestamp? = null
-    var updateTimestamp: Timestamp? = null
+    var insertTimestamp: LocalDateTime? = null
+    var updateTimestamp: LocalDateTime? = null
 
     @Transient
     var department: Department? = null

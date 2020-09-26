@@ -8,7 +8,7 @@ import example.dsl_style_kotlin.repository.EmployeeRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.seasar.doma.jdbc.Config
-import java.sql.Timestamp
+import java.time.LocalDateTime
 
 @ExtendWith(TestEnvironment::class)
 class InsertTest internal constructor(config: Config) {
@@ -33,7 +33,7 @@ class InsertTest internal constructor(config: Config) {
         employee.age = Age(50)
         employee.salary = Salary(300)
         employee.jobType = JobType.PRESIDENT
-        employee.insertTimestamp = Timestamp(System.currentTimeMillis())
+        employee.insertTimestamp = LocalDateTime.now()
         employee.version = 1
         repository.insertByNativeSql(employee)
     }

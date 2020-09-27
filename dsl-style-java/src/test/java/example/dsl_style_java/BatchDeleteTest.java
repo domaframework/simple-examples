@@ -1,6 +1,8 @@
 package example.dsl_style_java;
 
+import example.dsl_style_java.entity.Employee;
 import example.dsl_style_java.repository.EmployeeRepository;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
@@ -16,7 +18,7 @@ public class BatchDeleteTest {
 
   @Test
   public void testBatchDelete() {
-    var list = repository.selectAll();
+    List<Employee> list = repository.selectAll();
     repository.batchDelete(list);
   }
 }

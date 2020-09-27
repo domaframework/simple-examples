@@ -5,6 +5,7 @@ import example.dsl_style_java.domain.Salary;
 import example.dsl_style_java.entity.Department_;
 import example.dsl_style_java.entity.Employee;
 import example.dsl_style_java.entity.Employee_;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +17,7 @@ import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
 import org.seasar.doma.jdbc.criteria.expression.Expressions;
 import org.seasar.doma.jdbc.criteria.option.LikeOption;
+import org.seasar.doma.jdbc.criteria.statement.StreamMappable;
 import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 public class EmployeeRepository {
@@ -31,12 +33,12 @@ public class EmployeeRepository {
   }
 
   public Employee selectById(Integer id) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.eq(e.id, id)).fetchOne();
   }
 
   public List<Employee> selectByAgeRange(Age min, Age max) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql
         .from(e)
         .where(
@@ -48,22 +50,22 @@ public class EmployeeRepository {
   }
 
   public List<Employee> selectByName(String name) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.eq(e.name, name)).fetch();
   }
 
   public List<Employee> selectByNames(List<String> names) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.in(e.name, names)).fetch();
   }
 
   public List<Employee> selectByAges(List<Age> ages) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.in(e.age, ages)).fetch();
   }
 
   public List<Employee> selectByNotEmptyName(String name) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql
         .from(e)
         .where(
@@ -76,24 +78,24 @@ public class EmployeeRepository {
   }
 
   public List<Employee> selectByNameWithPrefixMatching(String prefix) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.like(e.name, prefix, LikeOption.prefix())).fetch();
   }
 
   public List<Employee> selectByNameWithSuffixMatching(String suffix) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.like(e.name, suffix, LikeOption.suffix())).fetch();
   }
 
   public List<Employee> selectByNameWithInfixMatching(String inside) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.like(e.name, inside, LikeOption.infix())).fetch();
   }
 
   public List<Employee> selectByHiredateRange(LocalDateTime from, LocalDateTime to) {
-    var fromDate = from.toLocalDate();
-    var toDate = to.toLocalDate().plusDays(1);
-    var e = new Employee_();
+    LocalDate fromDate = from.toLocalDate();
+    LocalDate toDate = to.toLocalDate().plusDays(1);
+    Employee_ e = new Employee_();
     return entityql
         .from(e)
         .where(
@@ -105,17 +107,17 @@ public class EmployeeRepository {
   }
 
   public List<Employee> selectBySalary(Salary salary) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.gt(e.salary, salary)).fetch();
   }
 
   public Optional<Salary> selectSummedSalary() {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return nativeSql.from(e).select(Expressions.sum(e.salary)).fetchOptional();
   }
 
   public List<Employee> selectByExample(Employee employee) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return entityql.from(e).where(c -> c.eq(e.name, employee.getName())).fetch();
   }
 
@@ -124,31 +126,32 @@ public class EmployeeRepository {
   }
 
   public Tuple2<List<Employee>, Long> selectAndCount(Integer offset, Integer limit) {
-    var list = select(offset, limit);
-    var e = new Employee_();
-    var count = nativeSql.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
+    List<Employee> list = select(offset, limit);
+    Employee_ e = new Employee_();
+    long count = nativeSql.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
     return new Tuple2<>(list, count);
   }
 
   public List<Employee> select(Integer offset, Integer limit) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return nativeSql.from(e).orderBy(c -> c.asc(e.id)).offset(offset).limit(limit).fetch();
   }
 
   public <R> R selectByAge(Age age, Function<Stream<Employee>, R> mapper) {
-    var e = new Employee_();
-    var stmt = nativeSql.from(e).where(c -> c.gt(e.age, age)).orderBy(c -> c.asc(e.age));
+    Employee_ e = new Employee_();
+    StreamMappable<Employee> stmt =
+        nativeSql.from(e).where(c -> c.gt(e.age, age)).orderBy(c -> c.asc(e.age));
     return stmt.mapStream(mapper);
   }
 
   public long selectCount() {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     return nativeSql.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
   }
 
   public List<Employee> selectAllWithAssociation() {
-    var e = new Employee_();
-    var d = new Department_();
+    Employee_ e = new Employee_();
+    Department_ d = new Department_();
     return entityql
         .from(e)
         .leftJoin(d, on -> on.eq(e.departmentId, d.id))
@@ -158,13 +161,13 @@ public class EmployeeRepository {
   }
 
   public void insert(Employee employee) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     entityql.insert(e, employee).execute();
   }
 
-  public int insertByNativeSql(Employee employee) {
-    var e = new Employee_();
-    return nativeSql
+  public void insertByNativeSql(Employee employee) {
+    Employee_ e = new Employee_();
+    nativeSql
         .insert(e)
         .values(
             c -> {
@@ -183,13 +186,13 @@ public class EmployeeRepository {
   }
 
   public void update(Employee employee) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     entityql.update(e, employee).execute();
   }
 
-  public int updateByNativeSql(Employee employee) {
-    var e = new Employee_();
-    return nativeSql
+  public void updateByNativeSql(Employee employee) {
+    Employee_ e = new Employee_();
+    nativeSql
         .update(e)
         .set(
             c -> {
@@ -207,28 +210,27 @@ public class EmployeeRepository {
   }
 
   public void delete(Employee employee) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     entityql.delete(e, employee).execute();
   }
 
-  public int deleteByNativeSql(Employee employee) {
-    var e = new Employee_();
-    return nativeSql.delete(e).where(c -> c.eq(e.id, employee.getId())).execute();
+  public void deleteByNativeSql(Employee employee) {
+    Employee_ e = new Employee_();
+    nativeSql.delete(e).where(c -> c.eq(e.id, employee.getId())).execute();
   }
 
   public void batchInsert(List<Employee> employees) {
-    var e = new Employee_();
-    var stmt = entityql.insert(e, employees);
-    stmt.execute();
+    Employee_ e = new Employee_();
+    entityql.insert(e, employees).execute();
   }
 
   public void batchUpdate(List<Employee> employees) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     entityql.update(e, employees).execute();
   }
 
   public void batchDelete(List<Employee> employees) {
-    var e = new Employee_();
+    Employee_ e = new Employee_();
     entityql.delete(e, employees).execute();
   }
 }

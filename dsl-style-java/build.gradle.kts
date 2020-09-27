@@ -18,7 +18,7 @@ dependencies {
     implementation("org.seasar.doma:doma-slf4j:${domaVersion}")
 }
 
-val javaLanguageVersion: JavaLanguageVersion = JavaLanguageVersion.of(11)
+val javaLanguageVersion: JavaLanguageVersion = JavaLanguageVersion.of(8)
 
 java {
     toolchain {

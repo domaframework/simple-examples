@@ -16,14 +16,14 @@ public class EmployeeListener<E extends Employee> implements EntityListener<E> {
 
   @Override
   public void preInsert(E employee, PreInsertContext<E> context) {
-    var timestamp = LocalDateTime.now();
+    LocalDateTime timestamp = LocalDateTime.now();
     employee.setInsertTimestamp(timestamp);
   }
 
   @Override
   public void preUpdate(E employee, PreUpdateContext<E> context) {
     if (context.isEntityChanged()) {
-      var timestamp = LocalDateTime.now();
+      LocalDateTime timestamp = LocalDateTime.now();
       employee.setUpdateTimestamp(timestamp);
     }
   }

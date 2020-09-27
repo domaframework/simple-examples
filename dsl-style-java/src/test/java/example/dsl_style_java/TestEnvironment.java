@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.Slf4jJdbcLogger;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.LocalTransaction;
@@ -29,10 +30,10 @@ public class TestEnvironment
   private final ScriptDao dao;
 
   public TestEnvironment() {
-    var dialect = new H2Dialect();
-    var dataSource =
+    H2Dialect dialect = new H2Dialect();
+    LocalTransactionDataSource dataSource =
         new LocalTransactionDataSource("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null);
-    var jdbcLogger = new Slf4jJdbcLogger();
+    JdbcLogger jdbcLogger = new Slf4jJdbcLogger();
     localTransaction = dataSource.getLocalTransaction(jdbcLogger);
     transactionManager = new LocalTransactionManager(localTransaction);
     config = new DbConfig(dialect, dataSource, jdbcLogger, transactionManager);

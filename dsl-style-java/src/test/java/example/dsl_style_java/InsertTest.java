@@ -21,7 +21,7 @@ public class InsertTest {
 
   @Test
   public void testInsert() {
-    var employee = new Employee();
+    Employee employee = new Employee();
     employee.setName("test");
     employee.setAge(new Age(50));
     employee.setSalary(new Salary(300));
@@ -31,7 +31,7 @@ public class InsertTest {
 
   @Test
   public void testInsertByNativeSql() {
-    var employee = new Employee();
+    Employee employee = new Employee();
     employee.setId(100);
     employee.setName("test");
     employee.setAge(new Age(50));

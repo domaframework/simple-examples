@@ -27,8 +27,8 @@ public class Salary {
 
   @Override
   public int hashCode() {
-    final var prime = 31;
-    var result = 1;
+    final int prime = 31;
+    int result = 1;
     result = prime * result + ((value == null) ? 0 : value.hashCode());
     return result;
   }
@@ -44,7 +44,7 @@ public class Salary {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    var other = (Salary) obj;
+    Salary other = (Salary) obj;
     if (value == null) {
       return other.value == null;
     } else return value.equals(other.value);

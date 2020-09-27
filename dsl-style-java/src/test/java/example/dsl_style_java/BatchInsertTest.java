@@ -20,12 +20,12 @@ public class BatchInsertTest {
 
   @Test
   public void testBatchInsert() {
-    var employee1 = new Employee();
+    Employee employee1 = new Employee();
     employee1.setName("test-1");
     employee1.setAge(new Age(30));
     employee1.setSalary(new Salary(300));
 
-    var employee2 = new Employee();
+    Employee employee2 = new Employee();
     employee2.setName("test-2");
     employee2.setAge(new Age(40));
     employee2.setSalary(new Salary(500));

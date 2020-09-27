@@ -11,11 +11,14 @@ import example.dsl_style_java.entity.Employee;
 import example.dsl_style_java.repository.EmployeeRepository;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 @ExtendWith(TestEnvironment.class)
 public class SelectTest {
@@ -28,13 +31,13 @@ public class SelectTest {
 
   @Test
   public void testSimpleSelect() {
-    var employee = repository.selectById(1);
+    Employee employee = repository.selectById(1);
     assertNotNull(employee);
   }
 
   @Test
   public void testConditionalSelect() {
-    var list = repository.selectByAgeRange(new Age(30), new Age(40));
+    List<Employee> list = repository.selectByAgeRange(new Age(30), new Age(40));
     assertEquals(6, list.size());
     list = repository.selectByAgeRange(new Age(30), null);
     assertEquals(12, list.size());
@@ -46,7 +49,7 @@ public class SelectTest {
 
   @Test
   public void testConditionalSelect2() {
-    var list = repository.selectByName("SMITH");
+    List<Employee> list = repository.selectByName("SMITH");
     assertEquals(1, list.size());
     list = repository.selectByName(null);
     assertEquals(14, list.size());
@@ -54,7 +57,7 @@ public class SelectTest {
 
   @Test
   public void testIsNotEmpty() {
-    var list = repository.selectByNotEmptyName("SMITH");
+    List<Employee> list = repository.selectByNotEmptyName("SMITH");
     assertEquals(1, list.size());
     list = repository.selectByNotEmptyName(null);
     assertEquals(14, list.size());
@@ -66,68 +69,68 @@ public class SelectTest {
 
   @Test
   public void testLikePredicate_prefix() {
-    var list = repository.selectByNameWithPrefixMatching("S");
+    List<Employee> list = repository.selectByNameWithPrefixMatching("S");
     assertEquals(2, list.size());
   }
 
   @Test
   public void testLikePredicate_suffix() {
-    var list = repository.selectByNameWithSuffixMatching("S");
+    List<Employee> list = repository.selectByNameWithSuffixMatching("S");
     assertEquals(3, list.size());
   }
 
   @Test
   public void testLikePredicate_inside() {
-    var list = repository.selectByNameWithInfixMatching("A");
+    List<Employee> list = repository.selectByNameWithInfixMatching("A");
     assertEquals(7, list.size());
   }
 
   @Test
   public void testInPredicate() {
-    var names = Arrays.asList("JONES", "SCOTT", "XXX");
-    var list = repository.selectByNames(names);
+    List<String> names = Arrays.asList("JONES", "SCOTT", "XXX");
+    List<Employee> list = repository.selectByNames(names);
     assertEquals(2, list.size());
   }
 
   @Test
   public void testInPredicate_Domain() {
-    var ages = Stream.of(30, 40, 50, 60).map(Age::new).collect(toList());
-    var list = repository.selectByAges(ages);
+    List<Age> ages = Stream.of(30, 40, 50, 60).map(Age::new).collect(toList());
+    List<Employee> list = repository.selectByAges(ages);
     assertEquals(3, list.size());
   }
 
   @Test
   public void testSelectByTimestampRange() {
-    var from = LocalDateTime.parse("2008-01-20T12:34:56");
-    var to = LocalDateTime.parse("2008-03-20T12:34:56");
+    LocalDateTime from = LocalDateTime.parse("2008-01-20T12:34:56");
+    LocalDateTime to = LocalDateTime.parse("2008-03-20T12:34:56");
 
-    var list = repository.selectByHiredateRange(from, to);
+    List<Employee> list = repository.selectByHiredateRange(from, to);
     assertEquals(3, list.size());
   }
 
   @Test
   public void testSelectByDomain() {
-    var list = repository.selectBySalary(new Salary(2900));
+    List<Employee> list = repository.selectBySalary(new Salary(2900));
     assertEquals(4, list.size());
   }
 
   @Test
   public void testSelectDomain() {
-    var salary = repository.selectSummedSalary();
+    Optional<Salary> salary = repository.selectSummedSalary();
     assertTrue(salary.isPresent());
   }
 
   @Test
   public void testSelectByEntity() {
-    var e = new Employee();
+    Employee e = new Employee();
     e.setName("SMITH");
-    var list = repository.selectByExample(e);
+    List<Employee> list = repository.selectByExample(e);
     assertEquals(1, list.size());
   }
 
   @Test
   public void testStream() {
-    var sum =
+    Salary sum =
         repository.selectByAge(
             new Age(30),
             s ->
@@ -139,24 +142,24 @@ public class SelectTest {
 
   @Test
   public void testOffsetLimit() {
-    var list = repository.select(5, 3);
+    List<Employee> list = repository.select(5, 3);
     assertEquals(3, list.size());
   }
 
   @Test
   public void testCount() {
-    var tuple2 = repository.selectAndCount(5, 3);
-    var list = tuple2.getItem1();
-    var count = tuple2.getItem2();
+    Tuple2<List<Employee>, Long> tuple2 = repository.selectAndCount(5, 3);
+    List<Employee> list = tuple2.getItem1();
+    long count = tuple2.getItem2();
     assertEquals(3, list.size());
     assertEquals(14, count);
   }
 
   @Test
   public void testAssociation() {
-    var list = repository.selectAllWithAssociation();
+    List<Employee> list = repository.selectAllWithAssociation();
     assertEquals(14, list.size());
-    for (var e : list) {
+    for (Employee e : list) {
       assertNotNull(e.getDepartment().getName());
     }
   }

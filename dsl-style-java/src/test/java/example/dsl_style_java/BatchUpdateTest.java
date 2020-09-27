@@ -1,7 +1,9 @@
 package example.dsl_style_java;
 
 import example.dsl_style_java.domain.Salary;
+import example.dsl_style_java.entity.Employee;
 import example.dsl_style_java.repository.EmployeeRepository;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
@@ -17,9 +19,9 @@ public class BatchUpdateTest {
 
   @Test
   public void testBatchUpdate() {
-    var list = repository.selectAll();
-    for (var employee : list) {
-      var salary = employee.getSalary();
+    List<Employee> list = repository.selectAll();
+    for (Employee employee : list) {
+      Salary salary = employee.getSalary();
       if (salary != null) {
         employee.setSalary(salary.add(new Salary(100)));
       }

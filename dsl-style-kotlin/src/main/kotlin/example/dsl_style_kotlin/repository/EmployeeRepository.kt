@@ -130,6 +130,45 @@ class EmployeeRepository(config: Config) {
         return nativeSql.from(e).select(KExpressions.count()).fetchOneOrNull() ?: 0L
     }
 
+    fun selectByDepartmentName_in(departmentName: String): List<Employee> {
+        val e = Employee_()
+        val d = Department_()
+        return entityql
+            .from(e)
+            .where {
+                `in`(e.departmentId, from(d).where { eq(d.name, departmentName) }.select(d.id))
+            }
+            .fetch()
+    }
+
+    fun selectByDepartmentName_exists(departmentName: String): List<Employee> {
+        val e = Employee_()
+        val d = Department_()
+        return entityql
+            .from(e)
+            .where {
+                exists(
+                    from(d).where {
+                        eq(e.departmentId, d.id)
+                        eq(d.name, departmentName)
+                    }
+                )
+            }
+            .fetch()
+    }
+
+    fun selectByDepartmentName_join(departmentName: String): List<Employee> {
+        val e = Employee_()
+        val d = Department_()
+        return entityql
+            .from(e)
+            .innerJoin(d) { eq(e.departmentId, d.id) }
+            .where {
+                eq(d.name, departmentName)
+            }
+            .fetch()
+    }
+
     fun selectAllWithAssociation(): List<Employee> {
         val e = Employee_()
         val d = Department_()

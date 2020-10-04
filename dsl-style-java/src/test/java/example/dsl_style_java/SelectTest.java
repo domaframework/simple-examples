@@ -156,6 +156,24 @@ public class SelectTest {
   }
 
   @Test
+  public void testSelectByDepartmentName_in() {
+    List<Employee> list = repository.selectByDepartmentName_in("SALES");
+    assertEquals(4, list.size());
+  }
+
+  @Test
+  public void testSelectByDepartmentName_exists() {
+    List<Employee> list = repository.selectByDepartmentName_exists("SALES");
+    assertEquals(4, list.size());
+  }
+
+  @Test
+  public void testSelectByDepartmentName_join() {
+    List<Employee> list = repository.selectByDepartmentName_join("SALES");
+    assertEquals(4, list.size());
+  }
+
+  @Test
   public void testAssociation() {
     List<Employee> list = repository.selectAllWithAssociation();
     assertEquals(14, list.size());

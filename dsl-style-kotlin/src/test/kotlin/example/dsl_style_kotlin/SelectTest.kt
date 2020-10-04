@@ -136,6 +136,24 @@ class SelectTest internal constructor(config: Config) {
     }
 
     @Test
+    fun testSelectByDepartmentName_in() {
+        val list = repository.selectByDepartmentName_in("SALES")
+        assertEquals(4, list.size)
+    }
+
+    @Test
+    fun testSelectByDepartmentName_exists() {
+        val list = repository.selectByDepartmentName_exists("SALES")
+        assertEquals(4, list.size)
+    }
+
+    @Test
+    fun testSelectByDepartmentName_join() {
+        val list = repository.selectByDepartmentName_join("SALES")
+        assertEquals(4, list.size)
+    }
+
+    @Test
     fun testAssociation() {
         val list = repository.selectAllWithAssociation()
         assertEquals(14, list.size)

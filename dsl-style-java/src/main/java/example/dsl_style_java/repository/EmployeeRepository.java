@@ -160,6 +160,46 @@ public class EmployeeRepository {
         .fetch();
   }
 
+  public List<Employee> selectByDepartmentName_in(String departmentName) {
+    Employee_ e = new Employee_();
+    Department_ d = new Department_();
+    return entityql
+        .from(e)
+        .where(
+            c ->
+                c.in(
+                    e.departmentId,
+                    c.from(d).where(c2 -> c2.eq(d.name, departmentName)).select(d.id)))
+        .fetch();
+  }
+
+  public List<Employee> selectByDepartmentName_exists(String departmentName) {
+    Employee_ e = new Employee_();
+    Department_ d = new Department_();
+    return entityql
+        .from(e)
+        .where(
+            c ->
+                c.exists(
+                    c.from(d)
+                        .where(
+                            c2 -> {
+                              c2.eq(e.departmentId, d.id);
+                              c2.eq(d.name, departmentName);
+                            })))
+        .fetch();
+  }
+
+  public List<Employee> selectByDepartmentName_join(String departmentName) {
+    Employee_ e = new Employee_();
+    Department_ d = new Department_();
+    return entityql
+        .from(e)
+        .innerJoin(d, on -> on.eq(e.departmentId, d.id))
+        .where(c -> c.eq(d.name, departmentName))
+        .fetch();
+  }
+
   public void insert(Employee employee) {
     Employee_ e = new Employee_();
     entityql.insert(e, employee).execute();

@@ -156,7 +156,13 @@ public class EmployeeRepository {
         .from(e)
         .leftJoin(d, on -> on.eq(e.departmentId, d.id))
         .orderBy(c -> c.asc(e.id))
-        .associate(e, d, Employee::setDepartment)
+        .associate(
+            e,
+            d,
+            (employee, department) -> {
+              employee.setDepartment(department);
+              department.getEmployees().add(employee);
+            })
         .fetch();
   }
 

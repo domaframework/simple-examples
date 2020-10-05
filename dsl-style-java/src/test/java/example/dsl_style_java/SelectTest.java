@@ -179,6 +179,7 @@ public class SelectTest {
     assertEquals(14, list.size());
     for (Employee e : list) {
       assertNotNull(e.getDepartment().getName());
+      assertTrue(e.getDepartment().getEmployees().contains(e));
     }
   }
 }

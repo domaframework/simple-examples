@@ -176,7 +176,10 @@ class EmployeeRepository(config: Config) {
             .from(e)
             .leftJoin(d) { eq(e.departmentId, d.id) }
             .orderBy { asc(e.id) }
-            .associate(e, d) { employee, department -> employee.department = department }
+            .associate(e, d) { employee, department ->
+                employee.department = department
+                department.employees.add(employee)
+            }
             .fetch()
     }
 

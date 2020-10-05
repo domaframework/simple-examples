@@ -1,8 +1,11 @@
 package example.dsl_style_java.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Metamodel;
+import org.seasar.doma.Transient;
 import org.seasar.doma.Version;
 
 @Entity(metamodel = @Metamodel)
@@ -12,6 +15,8 @@ public class Department {
   String name;
 
   @Version Integer version;
+
+  @Transient List<Employee> employees = new ArrayList<>();
 
   public Integer getId() {
     return id;
@@ -35,5 +40,9 @@ public class Department {
 
   public void setVersion(Integer version) {
     this.version = version;
+  }
+
+  public List<Employee> getEmployees() {
+    return employees;
   }
 }

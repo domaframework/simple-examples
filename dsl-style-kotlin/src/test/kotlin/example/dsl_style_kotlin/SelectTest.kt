@@ -6,6 +6,7 @@ import example.dsl_style_kotlin.entity.Employee
 import example.dsl_style_kotlin.repository.EmployeeRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.seasar.doma.jdbc.Config
@@ -159,6 +160,7 @@ class SelectTest internal constructor(config: Config) {
         assertEquals(14, list.size)
         for (e in list) {
             assertNotNull(e.department?.name)
+            assertTrue(e.department!!.employees.contains(e))
         }
     }
 }

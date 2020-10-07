@@ -5,21 +5,21 @@ import example.dsl_style_java.domain.Salary;
 import example.dsl_style_java.entity.Department_;
 import example.dsl_style_java.entity.Employee;
 import example.dsl_style_java.entity.Employee_;
+import example.dsl_style_java.entity.NameAndSalaryDto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
 import org.seasar.doma.jdbc.criteria.expression.Expressions;
-import org.seasar.doma.jdbc.criteria.metamodel.PropertyMetamodel;
 import org.seasar.doma.jdbc.criteria.option.LikeOption;
 import org.seasar.doma.jdbc.criteria.statement.StreamMappable;
-import org.seasar.doma.jdbc.criteria.tuple.Row;
 import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 public class EmployeeRepository {
@@ -208,19 +208,21 @@ public class EmployeeRepository {
         .fetch();
   }
 
+  public List<Employee> selectNameAndSalaryAsEntityList() {
+    Employee_ e = new Employee_();
+    return entityql.from(e).selectTo(e, e.name, e.salary).fetch();
+  }
+
   public List<Tuple2<String, Salary>> selectNameAndSalaryAsTuple2List() {
     Employee_ e = new Employee_();
     return nativeSql.from(e).select(e.name, e.salary).fetch();
   }
 
-  public List<Row> selectNameAndSalaryAsRowList() {
+  public List<NameAndSalaryDto> selectNameAndSalaryAsNameAndSalaryDtoList() {
     Employee_ e = new Employee_();
-    return nativeSql.from(e).select(e.name, new PropertyMetamodel[] {e.salary}).fetch();
-  }
-
-  public List<Employee> selectNameAndSalaryAsEntityList() {
-    Employee_ e = new Employee_();
-    return nativeSql.from(e).selectTo(e, e.name, e.salary).fetch();
+    return nativeSql.from(e).select(e.name, e.salary).stream()
+        .map(tuple -> new NameAndSalaryDto(tuple.getItem1(), tuple.getItem2()))
+        .collect(Collectors.toList());
   }
 
   public void insert(Employee employee) {

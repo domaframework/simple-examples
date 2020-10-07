@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import example.dsl_style_java.domain.Age;
 import example.dsl_style_java.domain.Salary;
 import example.dsl_style_java.entity.Employee;
+import example.dsl_style_java.entity.NameAndSalaryDto;
 import example.dsl_style_java.repository.EmployeeRepository;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -18,8 +19,6 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
-import org.seasar.doma.jdbc.criteria.metamodel.PropertyMetamodel;
-import org.seasar.doma.jdbc.criteria.tuple.Row;
 import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 @ExtendWith(TestEnvironment.class)
@@ -196,13 +195,12 @@ public class SelectTest {
   }
 
   @Test
-  public void testSelectNameAndSalaryAsRowList() {
-    List<Row> list = repository.selectNameAndSalaryAsRowList();
+  public void testSelectNameAndSalaryAsNameAndSalaryDtoList() {
+    List<NameAndSalaryDto> list = repository.selectNameAndSalaryAsNameAndSalaryDtoList();
     assertEquals(14, list.size());
-    for (Row row : list) {
-      for (PropertyMetamodel<?> key : row.keySet()) {
-        assertNotNull(row.get(key));
-      }
+    for (NameAndSalaryDto dto : list) {
+      assertNotNull(dto.getName());
+      assertNotNull(dto.getSalary());
     }
   }
 

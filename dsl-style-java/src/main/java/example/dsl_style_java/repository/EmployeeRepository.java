@@ -16,8 +16,10 @@ import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
 import org.seasar.doma.jdbc.criteria.expression.Expressions;
+import org.seasar.doma.jdbc.criteria.metamodel.PropertyMetamodel;
 import org.seasar.doma.jdbc.criteria.option.LikeOption;
 import org.seasar.doma.jdbc.criteria.statement.StreamMappable;
+import org.seasar.doma.jdbc.criteria.tuple.Row;
 import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 public class EmployeeRepository {
@@ -204,6 +206,21 @@ public class EmployeeRepository {
         .innerJoin(d, on -> on.eq(e.departmentId, d.id))
         .where(c -> c.eq(d.name, departmentName))
         .fetch();
+  }
+
+  public List<Tuple2<String, Salary>> selectNameAndSalaryAsTuple2List() {
+    Employee_ e = new Employee_();
+    return nativeSql.from(e).select(e.name, e.salary).fetch();
+  }
+
+  public List<Row> selectNameAndSalaryAsRowList() {
+    Employee_ e = new Employee_();
+    return nativeSql.from(e).select(e.name, new PropertyMetamodel[] {e.salary}).fetch();
+  }
+
+  public List<Employee> selectNameAndSalaryAsEntityList() {
+    Employee_ e = new Employee_();
+    return nativeSql.from(e).selectTo(e, e.name, e.salary).fetch();
   }
 
   public void insert(Employee employee) {

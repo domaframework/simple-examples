@@ -18,6 +18,8 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.criteria.metamodel.PropertyMetamodel;
+import org.seasar.doma.jdbc.criteria.tuple.Row;
 import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 @ExtendWith(TestEnvironment.class)
@@ -180,6 +182,38 @@ public class SelectTest {
     for (Employee e : list) {
       assertNotNull(e.getDepartment().getName());
       assertTrue(e.getDepartment().getEmployees().contains(e));
+    }
+  }
+
+  @Test
+  public void testSelectNameAndSalaryAsTuple2List() {
+    List<Tuple2<String, Salary>> list = repository.selectNameAndSalaryAsTuple2List();
+    assertEquals(14, list.size());
+    for (Tuple2<String, Salary> tuple2 : list) {
+      assertNotNull(tuple2.getItem1());
+      assertNotNull(tuple2.getItem2());
+    }
+  }
+
+  @Test
+  public void testSelectNameAndSalaryAsRowList() {
+    List<Row> list = repository.selectNameAndSalaryAsRowList();
+    assertEquals(14, list.size());
+    for (Row row : list) {
+      for (PropertyMetamodel<?> key : row.keySet()) {
+        assertNotNull(row.get(key));
+      }
+    }
+  }
+
+  @Test
+  public void testSelectNameAndSalaryAsEntityList() {
+    List<Employee> list = repository.selectNameAndSalaryAsEntityList();
+    assertEquals(14, list.size());
+    for (Employee employee : list) {
+      assertNotNull(employee.getId());
+      assertNotNull(employee.getName());
+      assertNotNull(employee.getSalary());
     }
   }
 }

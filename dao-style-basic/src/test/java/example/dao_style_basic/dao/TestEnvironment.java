@@ -12,10 +12,8 @@ import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.Slf4jJdbcLogger;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.H2Dialect;
-import org.seasar.doma.jdbc.tx.LocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
-import org.seasar.doma.jdbc.tx.TransactionManager;
 
 public class TestEnvironment
     implements BeforeAllCallback,
@@ -24,8 +22,7 @@ public class TestEnvironment
         AfterTestExecutionCallback,
         ParameterResolver {
 
-  private final LocalTransaction localTransaction;
-  private final TransactionManager transactionManager;
+  private final LocalTransactionManager transactionManager;
   private final DbConfig config;
   private final ScriptDao dao;
 
@@ -34,8 +31,7 @@ public class TestEnvironment
     LocalTransactionDataSource dataSource =
         new LocalTransactionDataSource("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null);
     JdbcLogger jdbcLogger = new Slf4jJdbcLogger();
-    localTransaction = dataSource.getLocalTransaction(jdbcLogger);
-    transactionManager = new LocalTransactionManager(localTransaction);
+    transactionManager = new LocalTransactionManager(dataSource, jdbcLogger);
     config = new DbConfig(dialect, dataSource, jdbcLogger, transactionManager);
     dao = new ScriptDaoImpl(config);
   }
@@ -52,12 +48,12 @@ public class TestEnvironment
 
   @Override
   public void beforeTestExecution(ExtensionContext context) {
-    localTransaction.begin();
+    transactionManager.getTransaction().begin();
   }
 
   @Override
   public void afterTestExecution(ExtensionContext context) {
-    localTransaction.rollback();
+    transactionManager.getTransaction().rollback();
   }
 
   public boolean supportsParameter(

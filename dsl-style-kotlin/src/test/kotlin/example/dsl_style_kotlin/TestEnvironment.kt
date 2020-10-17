@@ -17,8 +17,7 @@ class TestEnvironment : BeforeAllCallback, AfterAllCallback, BeforeTestExecution
     private val dialect = H2Dialect()
     private val dataSource = LocalTransactionDataSource("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null)
     private val jdbcLogger = Slf4jJdbcLogger()
-    private val localTransaction = dataSource.getLocalTransaction(jdbcLogger)
-    private val transactionManager = LocalTransactionManager(localTransaction)
+    private val transactionManager = LocalTransactionManager(dataSource, jdbcLogger)
     private val config = DbConfig(dialect, dataSource, jdbcLogger, transactionManager)
     private val dao = example.dsl_style_kotlin.dao.ScriptDaoImpl(config)
 
@@ -31,11 +30,11 @@ class TestEnvironment : BeforeAllCallback, AfterAllCallback, BeforeTestExecution
     }
 
     override fun beforeTestExecution(context: ExtensionContext) {
-        localTransaction.begin()
+        transactionManager.transaction.begin()
     }
 
     override fun afterTestExecution(context: ExtensionContext) {
-        localTransaction.rollback()
+        transactionManager.transaction.rollback()
     }
 
     override fun supportsParameter(

@@ -15,7 +15,6 @@ import org.seasar.doma.jdbc.dialect.H2Dialect;
 import org.seasar.doma.jdbc.tx.LocalTransaction;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
-import org.seasar.doma.jdbc.tx.TransactionManager;
 
 public class TestEnvironment
     implements BeforeAllCallback,
@@ -25,7 +24,7 @@ public class TestEnvironment
         ParameterResolver {
 
   private final LocalTransaction localTransaction;
-  private final TransactionManager transactionManager;
+  private final LocalTransactionManager transactionManager;
   private final DbConfig config;
   private final ScriptDao dao;
 

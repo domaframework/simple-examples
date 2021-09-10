@@ -1,6 +1,6 @@
 plugins {
     id("com.diffplug.eclipse.apt") version "3.32.1" apply false
-    id("com.diffplug.spotless") version "5.14.3" apply false
+    id("com.diffplug.spotless") version "5.15.0" apply false
     id("org.seasar.doma.compile") version "1.1.0" apply false
     kotlin("jvm") version "1.5.30" apply false
     kotlin("kapt") version "1.5.30" apply false

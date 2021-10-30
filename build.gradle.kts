@@ -2,8 +2,8 @@ plugins {
     id("com.diffplug.eclipse.apt") version "3.33.1" apply false
     id("com.diffplug.spotless") version "5.17.1" apply false
     id("org.seasar.doma.compile") version "1.1.0" apply false
-    kotlin("jvm") version "1.5.31" apply false
-    kotlin("kapt") version "1.5.31" apply false
+    kotlin("jvm") version "1.6.0-RC" apply false
+    kotlin("kapt") version "1.6.0-RC" apply false
 }
 
 subprojects {
@@ -61,7 +61,7 @@ subprojects {
 
     configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         java {
-            googleJavaFormat("1.9")
+            googleJavaFormat("1.12.0")
         }
     }
 }

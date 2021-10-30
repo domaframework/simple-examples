@@ -9,7 +9,7 @@ This repository includes the following examples:
 * [dao-style-file](dao-style-file) - Uses files to store SQL templates. Written in Java 8.
 * [dao-style-text](dao-style-text) - Uses Text Blocks to store SQL templates. Written in Java 15.
 * [dsl-style-java](dsl-style-java) - Uses the Criteria API. Written in Java 8.
-* [dsl-style-kotlin](dsl-style-kotlin) - Uses the Kotlin Criteria API. Written in Kotlin 1.5.
+* [dsl-style-kotlin](dsl-style-kotlin) - Uses the Kotlin Criteria API. Written in Kotlin 1.6.0-RC.
 * [jpms-java](jpms-java) - Uses the Java Platform Module System (JPMS). Written in Java 17.
 
 Clone this repository
@@ -23,7 +23,7 @@ $ cd simple-examples
 Java version
 ------------
 
-You need Java 15 or later.
+You need Java 17.
 
 Build
 -----

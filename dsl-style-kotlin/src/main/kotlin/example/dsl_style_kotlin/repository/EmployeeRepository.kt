@@ -6,10 +6,10 @@ import example.dsl_style_kotlin.entity.Department_
 import example.dsl_style_kotlin.entity.Employee
 import example.dsl_style_kotlin.entity.Employee_
 import org.seasar.doma.jdbc.Config
-import org.seasar.doma.jdbc.criteria.KEntityql
-import org.seasar.doma.jdbc.criteria.KNativeSql
-import org.seasar.doma.jdbc.criteria.expression.KExpressions
 import org.seasar.doma.jdbc.criteria.option.LikeOption
+import org.seasar.doma.kotlin.jdbc.criteria.KEntityql
+import org.seasar.doma.kotlin.jdbc.criteria.KNativeSql
+import org.seasar.doma.kotlin.jdbc.criteria.expression.KExpressions
 import java.time.LocalDateTime
 
 class EmployeeRepository(config: Config) {

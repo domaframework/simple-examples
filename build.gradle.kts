@@ -35,8 +35,8 @@ subprojects {
         "implementation"("org.seasar.doma:doma-slf4j:${domaVersion}")
         "runtimeOnly"("ch.qos.logback:logback-classic:1.2.7")
         "runtimeOnly"("com.h2database:h2:1.4.200")
-        "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.8.1")
-        "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+        "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.8.2")
+        "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     }
     
     configure<org.gradle.plugins.ide.eclipse.model.EclipseModel> {

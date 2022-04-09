@@ -34,7 +34,7 @@ subprojects {
         "implementation"("org.seasar.doma:doma-core:${domaVersion}")
         "implementation"("org.seasar.doma:doma-slf4j:${domaVersion}")
         "runtimeOnly"("ch.qos.logback:logback-classic:1.2.11")
-        "runtimeOnly"("com.h2database:h2:2.1.210")
+        "runtimeOnly"("com.h2database:h2:2.1.212")
         "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.8.2")
         "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     }

@@ -1,7 +1,7 @@
 plugins {
     id("com.diffplug.eclipse.apt") version "3.37.1" apply false
     id("com.diffplug.spotless") version "6.7.2" apply false
-    id("org.seasar.doma.compile") version "1.1.0" apply false
+    id("org.domaframework.doma.compile") version "2.0.0" apply false
     kotlin("jvm") version "1.6.21" apply false
     kotlin("kapt") version "1.6.21" apply false
 }
@@ -10,7 +10,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "com.diffplug.eclipse.apt")
     apply(plugin = "com.diffplug.spotless")
-    apply(plugin = "org.seasar.doma.compile")
+    apply(plugin = "org.domaframework.doma.compile")
 
     tasks {
         withType<JavaCompile> {

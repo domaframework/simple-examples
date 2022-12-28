@@ -2,8 +2,8 @@ plugins {
     id("com.diffplug.eclipse.apt") version "3.40.0" apply false
     id("com.diffplug.spotless") version "6.12.0" apply false
     id("org.domaframework.doma.compile") version "2.0.0" apply false
-    kotlin("jvm") version "1.7.22" apply false
-    kotlin("kapt") version "1.7.22" apply false
+    kotlin("jvm") version "1.8.0" apply false
+    kotlin("kapt") version "1.8.0" apply false
 }
 
 subprojects {

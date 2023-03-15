@@ -33,7 +33,7 @@ subprojects {
         "annotationProcessor"("org.seasar.doma:doma-processor:${domaVersion}")
         "implementation"("org.seasar.doma:doma-core:${domaVersion}")
         "implementation"("org.seasar.doma:doma-slf4j:${domaVersion}")
-        "runtimeOnly"("ch.qos.logback:logback-classic:1.2.11")
+        "runtimeOnly"("ch.qos.logback:logback-classic:1.4.6")
         "runtimeOnly"("com.h2database:h2:2.1.214")
         "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.9.2")
         "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.9.2")

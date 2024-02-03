@@ -1,5 +1,5 @@
 plugins {
-    id("com.diffplug.eclipse.apt") version "3.43.0" apply false
+    id("com.diffplug.eclipse.apt") version "3.44.0" apply false
     id("com.diffplug.spotless") version "6.13.0" apply false
     id("org.domaframework.doma.compile") version "2.0.0" apply false
     kotlin("jvm") version "1.9.22" apply false

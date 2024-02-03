@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin.entity
+package example.dsl.style.kotlin.entity
 
 enum class JobType {
     SALESMAN, MANAGER, ANALYST, PRESIDENT, CLERK

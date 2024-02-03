@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin.domain
+package example.dsl.style.kotlin.domain
 
 import org.seasar.doma.ExternalDomain
 import org.seasar.doma.jdbc.domain.DomainConverter

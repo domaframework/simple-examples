@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin.entity
+package example.dsl.style.kotlin.entity
 
 import org.seasar.doma.jdbc.entity.EntityListener
 import org.seasar.doma.jdbc.entity.PostDeleteContext

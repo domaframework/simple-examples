@@ -1,7 +1,7 @@
-package example.dsl_style_kotlin
+package example.dsl.style.kotlin
 
-import example.dsl_style_kotlin.domain.Salary
-import example.dsl_style_kotlin.repository.EmployeeRepository
+import example.dsl.style.kotlin.domain.Salary
+import example.dsl.style.kotlin.repository.EmployeeRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.seasar.doma.jdbc.Config

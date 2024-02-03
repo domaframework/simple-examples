@@ -1,6 +1,6 @@
-package example.dsl_style_kotlin
+package example.dsl.style.kotlin
 
-import example.dsl_style_kotlin.repository.EmployeeRepository
+import example.dsl.style.kotlin.repository.EmployeeRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

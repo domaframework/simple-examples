@@ -19,7 +19,7 @@ tasks {
 
 kapt {
     arguments { 
-        arg("doma.domain.converters", "example.dsl_style_kotlin.domain.DomainConverterProvider")
+        arg("doma.domain.converters", "example.dsl.style.kotlin.domain.DomainConverterProvider")
     }
 }
 
@@ -38,7 +38,7 @@ java {
 
 spotless {
     kotlin {
-        ktlint("0.38.1")
+        ktlint("0.50.0")
         trimTrailingWhitespace()
         endWithNewline()
     }

@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin.domain
+package example.dsl.style.kotlin.domain
 
 class Age(val value: Int) {
 

@@ -1,7 +1,7 @@
-package example.dsl_style_kotlin.entity
+package example.dsl.style.kotlin.entity
 
-import example.dsl_style_kotlin.domain.Age
-import example.dsl_style_kotlin.domain.Salary
+import example.dsl.style.kotlin.domain.Age
+import example.dsl.style.kotlin.domain.Salary
 import org.seasar.doma.Column
 import org.seasar.doma.Entity
 import org.seasar.doma.GeneratedValue

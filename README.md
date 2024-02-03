@@ -7,9 +7,8 @@ This repository includes the following examples:
 
 * [dao-style-basic](dao-style-basic) - Shows basic DAO style. Written in Java 8.
 * [dao-style-file](dao-style-file) - Uses files to store SQL templates. Written in Java 8.
-* [dao-style-text](dao-style-text) - Uses Text Blocks to store SQL templates. Written in Java 15.
+* [dao-style-text](dao-style-text) - Uses Text Blocks to store SQL templates. Written in Java 17.
 * [dsl-style-java](dsl-style-java) - Uses the Criteria API. Written in Java 8.
-* [dsl-style-kotlin](dsl-style-kotlin) - Uses the Kotlin Criteria API. Written in Kotlin 1.6.0-RC.
 * [jpms-java](jpms-java) - Uses the Java Platform Module System (JPMS). Written in Java 17.
 
 Clone this repository
@@ -41,13 +40,18 @@ Import the project as a Gradle project.
 
 ### Eclipse
 
-Before importing the project into Eclipse, run the following command:
+To import this project into Eclipse, adhere to the instructions outlined below.
 
-```bash
+**1. Run the Gradle command:**
+
+```sh
 $ ./gradlew cleanEclipse eclipse
 ```
 
-The `eclipse` task generates Eclipse setting files.  
-We recommend you write settings on build.gradle and run this task
-whenever you have to change settings about annotation processing.
-Never change Eclipse directly.
+**2. Navigate through the Eclipse menu and select:**
+
+```
+File > Import > General > Existing Projects into Workspace
+```
+
+It is important not to choose `File > Import > Gradle > Existing Gradle Project`.

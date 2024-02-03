@@ -2,12 +2,15 @@ plugins {
     java
 }
 
+val javaVersion = 17
+
 tasks {
     compileJava {
         val aptOptions = extensions.getByType<com.diffplug.gradle.eclipse.apt.AptPlugin.AptOptions>()
         aptOptions.processorArgs = mapOf(
                 "doma.domain.converters" to "example.dao_style_text.domain.DomainConverterProvider"
         )
+        options.release = javaVersion
     }
 }
 
@@ -18,16 +21,8 @@ dependencies {
     implementation("org.seasar.doma:doma-slf4j:${domaVersion}")
 }
 
-val javaLanguageVersion: JavaLanguageVersion = JavaLanguageVersion.of(15)
-
 java {
     toolchain {
-        languageVersion.set(javaLanguageVersion)
-    }
-}
-
-eclipse {
-    jdt {
-        javaRuntimeName = "JavaSE-$javaLanguageVersion"
+        languageVersion.set(JavaLanguageVersion.of(javaVersion))
     }
 }

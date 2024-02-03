@@ -38,7 +38,7 @@ java {
 
 spotless {
     kotlin {
-        ktlint("0.50.0")
+        ktlint("0.48.0")
         trimTrailingWhitespace()
         endWithNewline()
     }

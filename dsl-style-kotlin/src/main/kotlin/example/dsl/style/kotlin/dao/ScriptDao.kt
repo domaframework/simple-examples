@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin.dao
+package example.dsl.style.kotlin.dao
 
 import org.seasar.doma.Dao
 import org.seasar.doma.Script
@@ -28,7 +28,7 @@ interface ScriptDao {
         insert into employee values(12,'FORD',55,3000,'ANALYST','2008-12-20 12:34:56',3,1,CURRENT_TIMESTAMP,null);
         insert into employee values(13,'MILLER',51,1300,'MANAGER','2009-01-20 12:34:56',1,1,CURRENT_TIMESTAMP,null);
         insert into employee values(14,'SMITH',410,800,'PRESIDENT','2009-02-20 12:34:56',2,1,CURRENT_TIMESTAMP,null);
-    """
+    """,
     )
     @Script
     fun create()
@@ -38,7 +38,7 @@ interface ScriptDao {
         drop sequence employee_seq;
         drop table employee;
         drop table department;
-    """
+    """,
     )
     @Script
     fun drop()

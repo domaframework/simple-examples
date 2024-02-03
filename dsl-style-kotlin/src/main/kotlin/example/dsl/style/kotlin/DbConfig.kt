@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin
+package example.dsl.style.kotlin
 
 import org.seasar.doma.jdbc.Config
 import org.seasar.doma.jdbc.JdbcLogger
@@ -10,7 +10,7 @@ class DbConfig(
     private val dialect: Dialect,
     private val dataSource: DataSource,
     private val jdbcLogger: JdbcLogger,
-    private val transactionManager: TransactionManager
+    private val transactionManager: TransactionManager,
 ) : Config {
     override fun getJdbcLogger(): JdbcLogger {
         return jdbcLogger

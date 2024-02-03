@@ -1,10 +1,10 @@
-package example.dsl_style_kotlin.repository
+package example.dsl.style.kotlin.repository
 
-import example.dsl_style_kotlin.domain.Age
-import example.dsl_style_kotlin.domain.Salary
-import example.dsl_style_kotlin.entity.Department_
-import example.dsl_style_kotlin.entity.Employee
-import example.dsl_style_kotlin.entity.Employee_
+import example.dsl.style.kotlin.domain.Age
+import example.dsl.style.kotlin.domain.Salary
+import example.dsl.style.kotlin.entity.Department_
+import example.dsl.style.kotlin.entity.Employee
+import example.dsl.style.kotlin.entity.Employee_
 import org.seasar.doma.jdbc.Config
 import org.seasar.doma.jdbc.criteria.option.LikeOption
 import org.seasar.doma.kotlin.jdbc.criteria.KEntityql
@@ -151,7 +151,7 @@ class EmployeeRepository(config: Config) {
                     from(d).where {
                         eq(e.departmentId, d.id)
                         eq(d.name, departmentName)
-                    }
+                    },
                 )
             }
             .fetch()

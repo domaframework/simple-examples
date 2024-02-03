@@ -1,4 +1,4 @@
-package example.dsl_style_kotlin
+package example.dsl.style.kotlin
 
 import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback
@@ -19,7 +19,7 @@ class TestEnvironment : BeforeAllCallback, AfterAllCallback, BeforeTestExecution
     private val jdbcLogger = Slf4jJdbcLogger()
     private val transactionManager = LocalTransactionManager(dataSource, jdbcLogger)
     private val config = DbConfig(dialect, dataSource, jdbcLogger, transactionManager)
-    private val dao = example.dsl_style_kotlin.dao.ScriptDaoImpl(config)
+    private val dao = example.dsl.style.kotlin.dao.ScriptDaoImpl(config)
 
     override fun beforeAll(context: ExtensionContext) {
         transactionManager.required { dao.create() }
@@ -39,14 +39,14 @@ class TestEnvironment : BeforeAllCallback, AfterAllCallback, BeforeTestExecution
 
     override fun supportsParameter(
         parameterContext: ParameterContext,
-        extensionContext: ExtensionContext
+        extensionContext: ExtensionContext,
     ): Boolean {
         return parameterContext.parameter.type.isAssignableFrom(DbConfig::class.java)
     }
 
     override fun resolveParameter(
         parameterContext: ParameterContext,
-        extensionContext: ExtensionContext
+        extensionContext: ExtensionContext,
     ): Any {
         return config
     }

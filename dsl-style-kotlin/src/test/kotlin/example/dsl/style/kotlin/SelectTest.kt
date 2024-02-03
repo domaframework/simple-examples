@@ -1,9 +1,9 @@
-package example.dsl_style_kotlin
+package example.dsl.style.kotlin
 
-import example.dsl_style_kotlin.domain.Age
-import example.dsl_style_kotlin.domain.Salary
-import example.dsl_style_kotlin.entity.Employee
-import example.dsl_style_kotlin.repository.EmployeeRepository
+import example.dsl.style.kotlin.domain.Age
+import example.dsl.style.kotlin.domain.Salary
+import example.dsl.style.kotlin.entity.Employee
+import example.dsl.style.kotlin.repository.EmployeeRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue

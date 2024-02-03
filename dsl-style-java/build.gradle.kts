@@ -18,16 +18,10 @@ dependencies {
     implementation("org.seasar.doma:doma-slf4j:${domaVersion}")
 }
 
-val javaLanguageVersion: JavaLanguageVersion = JavaLanguageVersion.of(8)
-
 java {
     toolchain {
-        languageVersion.set(javaLanguageVersion)
+        languageVersion.set(JavaLanguageVersion.of(8))
     }
-}
-
-eclipse {
-    jdt {
-        javaRuntimeName = "JavaSE-$javaLanguageVersion"
-    }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

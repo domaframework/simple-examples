@@ -40,18 +40,4 @@ Import the project as a Gradle project.
 
 ### Eclipse
 
-To import this project into Eclipse, adhere to the instructions outlined below.
-
-**1. Run the Gradle command:**
-
-```sh
-$ ./gradlew cleanEclipse eclipse
-```
-
-**2. Navigate through the Eclipse menu and select:**
-
-```
-File > Import > General > Existing Projects into Workspace
-```
-
-It is important not to choose `File > Import > Gradle > Existing Gradle Project`.
+Import the project as a Gradle project.

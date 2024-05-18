@@ -1,9 +1,7 @@
 plugins {
-    id("com.diffplug.eclipse.apt") version "3.44.0" apply false
-    id("com.diffplug.spotless") version "6.25.0" apply false
-    id("org.domaframework.doma.compile") version "2.0.0" apply false
-    kotlin("jvm") version "1.9.23" apply false
-    kotlin("kapt") version "1.9.23" apply false
+    id("com.diffplug.eclipse.apt") version "3.44.0"
+    id("com.diffplug.spotless") version "6.25.0"
+    id("org.domaframework.doma.compile") version "2.0.0"
 }
 
 subprojects {
@@ -19,18 +17,6 @@ subprojects {
 
         withType<Test> {
             useJUnitPlatform()
-        }
-
-        named("eclipse") {
-            doFirst {
-                val prefs = file(".settings/org.eclipse.buildship.core.prefs")
-                if(!prefs.exists()){
-                    prefs.appendText("""
-                            connection.project.dir=
-                            eclipse.preferences.version=1
-                        """.trimIndent())
-                }
-            }
         }
     }
 
@@ -50,22 +36,18 @@ subprojects {
         "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.10.2")
         "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.10.2")
     }
-    
-    configure<org.gradle.plugins.ide.eclipse.model.EclipseModel> {
+
+    eclipse {
         classpath {
             file {
                 whenMerged {
                     val classpath = this as org.gradle.plugins.ide.eclipse.model.Classpath
-                    classpath.entries.removeAll {
-                        when (it) {
-                            is org.gradle.plugins.ide.eclipse.model.Output -> it.path == ".apt_generated"
-                            else -> false
-                        }
+                    val folder = org.gradle.plugins.ide.eclipse.model.SourceFolder(".apt_generated", "bin/main")
+                    classpath.entries.add(folder)
+                    val dir = file(folder.path)
+                    if (!dir.exists()) {
+                        dir.mkdir()
                     }
-                }
-                withXml {
-                    val node = asNode()
-                    node.appendNode("classpathentry", mapOf("kind" to "src", "output" to "bin/main", "path" to ".apt_generated"))
                 }
             }
         }
@@ -73,9 +55,11 @@ subprojects {
             buildCommand("org.eclipse.buildship.core.gradleprojectbuilder")
             natures("org.eclipse.buildship.core.gradleprojectnature")
         }
+        // Reset all Eclipse settings when "Refresh Gradle Project" is executed
+        synchronizationTasks("cleanEclipse", "eclipse")
     }
 
-    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    spotless {
         java {
             googleJavaFormat("1.12.0")
         }

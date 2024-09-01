@@ -5,11 +5,11 @@ Simple examples for [Doma](https://github.com/domaframework/doma).
 
 This repository includes the following examples:
 
-* [dao-style-basic](dao-style-basic) - Shows basic DAO style. Written in Java 8.
-* [dao-style-file](dao-style-file) - Uses files to store SQL templates. Written in Java 8.
-* [dao-style-text](dao-style-text) - Uses Text Blocks to store SQL templates. Written in Java 17.
-* [dsl-style-java](dsl-style-java) - Uses the Criteria API. Written in Java 8.
-* [jpms-java](jpms-java) - Uses the Java Platform Module System (JPMS). Written in Java 17.
+* [dao-style-basic](dao-style-basic) - Shows basic DAO style.
+* [dao-style-file](dao-style-file) - Uses files to store SQL templates.
+* [dao-style-text](dao-style-text) - Uses Text Blocks to store SQL templates.
+* [dsl-style-java](dsl-style-java) - Uses the Criteria API.
+* [jpms-java](jpms-java) - Uses the Java Platform Module System (JPMS).
 
 Clone this repository
 ---------------------
@@ -40,4 +40,4 @@ Import the project as a Gradle project.
 
 ### Eclipse
 
-Import the project as a Gradle project.
+Import the project as a Eclipse project.

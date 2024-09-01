@@ -17,11 +17,3 @@ dependencies {
     implementation("org.seasar.doma:doma-core:${domaVersion}")
     implementation("org.seasar.doma:doma-slf4j:${domaVersion}")
 }
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
-    }
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}

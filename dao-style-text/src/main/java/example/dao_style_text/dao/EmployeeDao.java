@@ -172,7 +172,8 @@ public interface EmployeeDao {
   @Select
   List<Employee> selectBySalary(Salary salary);
 
-  @Sql("""
+  @Sql(
+      """
       select
         sum(salary)
       from

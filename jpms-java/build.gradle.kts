@@ -3,15 +3,12 @@ plugins {
     application
 }
 
-val javaVersion = 17
-
 tasks {
     compileJava {
         val aptOptions = extensions.getByType<com.diffplug.gradle.eclipse.apt.AptPlugin.AptOptions>()
         aptOptions.processorArgs = mapOf(
             "doma.domain.converters" to "example.jpms_java.domain.DomainConverterProvider"
         )
-        options.release = javaVersion
     }
 }
 
@@ -24,10 +21,4 @@ dependencies {
 
 application {
     mainClass.set("example.jpms_java.Main")
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(javaVersion))
-    }
 }

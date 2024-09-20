@@ -1,6 +1,6 @@
 plugins {
     java
-    id("com.diffplug.eclipse.apt") version "4.0.1"
+    id("com.diffplug.eclipse.apt") version "4.1.0"
     id("com.diffplug.spotless") version "6.25.0"
     id("org.domaframework.doma.compile") version "2.0.0"
 }

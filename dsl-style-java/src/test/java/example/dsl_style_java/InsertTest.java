@@ -30,7 +30,7 @@ public class InsertTest {
   }
 
   @Test
-  public void testInsertByNativeSql() {
+  public void testInsertWithSpecifiedValues() {
     Employee employee = new Employee();
     employee.setId(100);
     employee.setName("test");
@@ -39,6 +39,6 @@ public class InsertTest {
     employee.setJobType(JobType.PRESIDENT);
     employee.setInsertTimestamp(LocalDateTime.now());
     employee.setVersion(1);
-    repository.insertByNativeSql(employee);
+    repository.insertWithSpecifiedValues(employee);
   }
 }

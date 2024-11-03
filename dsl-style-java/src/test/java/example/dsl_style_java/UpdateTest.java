@@ -28,11 +28,11 @@ public class UpdateTest {
   }
 
   @Test
-  public void testUpdateByNativeSql() {
+  public void testUpdateByWhereExpression() {
     Employee employee = repository.selectById(1);
     assertNotNull(employee);
     employee.setName("hoge");
     employee.setJobType(JobType.PRESIDENT);
-    repository.updateByNativeSql(employee);
+    repository.updateByWhereExpression(employee);
   }
 }

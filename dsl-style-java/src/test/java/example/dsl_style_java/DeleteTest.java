@@ -25,9 +25,9 @@ public class DeleteTest {
   }
 
   @Test
-  public void testDeleteByNativeSql() {
+  public void testDeleteByWhereExpression() {
     Employee employee = repository.selectById(1);
     assertNotNull(employee);
-    repository.deleteByNativeSql(employee);
+    repository.deleteByWhereExpression(employee);
   }
 }

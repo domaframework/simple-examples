@@ -15,8 +15,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.seasar.doma.jdbc.Config;
-import org.seasar.doma.jdbc.criteria.Entityql;
-import org.seasar.doma.jdbc.criteria.NativeSql;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 import org.seasar.doma.jdbc.criteria.expression.Expressions;
 import org.seasar.doma.jdbc.criteria.option.LikeOption;
 import org.seasar.doma.jdbc.criteria.statement.StreamMappable;
@@ -24,24 +23,21 @@ import org.seasar.doma.jdbc.criteria.tuple.Tuple2;
 
 public class EmployeeRepository {
 
-  private final Entityql entityql;
-
-  private final NativeSql nativeSql;
+  private final QueryDsl queryDsl;
 
   public EmployeeRepository(Config config) {
     Objects.requireNonNull(config);
-    entityql = new Entityql(config);
-    nativeSql = new NativeSql(config);
+    queryDsl = new QueryDsl(config);
   }
 
   public Employee selectById(Integer id) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.eq(e.id, id)).fetchOne();
+    return queryDsl.from(e).where(c -> c.eq(e.id, id)).fetchOne();
   }
 
   public List<Employee> selectByAgeRange(Age min, Age max) {
     Employee_ e = new Employee_();
-    return entityql
+    return queryDsl
         .from(e)
         .where(
             c -> {
@@ -53,22 +49,22 @@ public class EmployeeRepository {
 
   public List<Employee> selectByName(String name) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.eq(e.name, name)).fetch();
+    return queryDsl.from(e).where(c -> c.eq(e.name, name)).fetch();
   }
 
   public List<Employee> selectByNames(List<String> names) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.in(e.name, names)).fetch();
+    return queryDsl.from(e).where(c -> c.in(e.name, names)).fetch();
   }
 
   public List<Employee> selectByAges(List<Age> ages) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.in(e.age, ages)).fetch();
+    return queryDsl.from(e).where(c -> c.in(e.age, ages)).fetch();
   }
 
   public List<Employee> selectByNotEmptyName(String name) {
     Employee_ e = new Employee_();
-    return entityql
+    return queryDsl
         .from(e)
         .where(
             c -> {
@@ -81,24 +77,24 @@ public class EmployeeRepository {
 
   public List<Employee> selectByNameWithPrefixMatching(String prefix) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.like(e.name, prefix, LikeOption.prefix())).fetch();
+    return queryDsl.from(e).where(c -> c.like(e.name, prefix, LikeOption.prefix())).fetch();
   }
 
   public List<Employee> selectByNameWithSuffixMatching(String suffix) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.like(e.name, suffix, LikeOption.suffix())).fetch();
+    return queryDsl.from(e).where(c -> c.like(e.name, suffix, LikeOption.suffix())).fetch();
   }
 
   public List<Employee> selectByNameWithInfixMatching(String inside) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.like(e.name, inside, LikeOption.infix())).fetch();
+    return queryDsl.from(e).where(c -> c.like(e.name, inside, LikeOption.infix())).fetch();
   }
 
   public List<Employee> selectByHiredateRange(LocalDateTime from, LocalDateTime to) {
     LocalDate fromDate = from.toLocalDate();
     LocalDate toDate = to.toLocalDate().plusDays(1);
     Employee_ e = new Employee_();
-    return entityql
+    return queryDsl
         .from(e)
         .where(
             c -> {
@@ -110,17 +106,17 @@ public class EmployeeRepository {
 
   public List<Employee> selectBySalary(Salary salary) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.gt(e.salary, salary)).fetch();
+    return queryDsl.from(e).where(c -> c.gt(e.salary, salary)).fetch();
   }
 
   public Optional<Salary> selectSummedSalary() {
     Employee_ e = new Employee_();
-    return nativeSql.from(e).select(Expressions.sum(e.salary)).fetchOptional();
+    return queryDsl.from(e).select(Expressions.sum(e.salary)).fetchOptional();
   }
 
   public List<Employee> selectByExample(Employee employee) {
     Employee_ e = new Employee_();
-    return entityql.from(e).where(c -> c.eq(e.name, employee.getName())).fetch();
+    return queryDsl.from(e).where(c -> c.eq(e.name, employee.getName())).fetch();
   }
 
   public List<Employee> selectAll() {
@@ -130,31 +126,31 @@ public class EmployeeRepository {
   public Tuple2<List<Employee>, Long> selectAndCount(Integer offset, Integer limit) {
     List<Employee> list = select(offset, limit);
     Employee_ e = new Employee_();
-    long count = nativeSql.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
+    long count = queryDsl.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
     return new Tuple2<>(list, count);
   }
 
   public List<Employee> select(Integer offset, Integer limit) {
     Employee_ e = new Employee_();
-    return nativeSql.from(e).orderBy(c -> c.asc(e.id)).offset(offset).limit(limit).fetch();
+    return queryDsl.from(e).orderBy(c -> c.asc(e.id)).offset(offset).limit(limit).fetch();
   }
 
   public <R> R selectByAge(Age age, Function<Stream<Employee>, R> mapper) {
     Employee_ e = new Employee_();
     StreamMappable<Employee> stmt =
-        nativeSql.from(e).where(c -> c.gt(e.age, age)).orderBy(c -> c.asc(e.age));
+        queryDsl.from(e).where(c -> c.gt(e.age, age)).orderBy(c -> c.asc(e.age));
     return stmt.mapStream(mapper);
   }
 
   public long selectCount() {
     Employee_ e = new Employee_();
-    return nativeSql.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
+    return queryDsl.from(e).select(Expressions.count()).fetchOptional().orElse(0L);
   }
 
   public List<Employee> selectAllWithAssociation() {
     Employee_ e = new Employee_();
     Department_ d = new Department_();
-    return entityql
+    return queryDsl
         .from(e)
         .leftJoin(d, on -> on.eq(e.departmentId, d.id))
         .orderBy(c -> c.asc(e.id))
@@ -171,7 +167,7 @@ public class EmployeeRepository {
   public List<Employee> selectByDepartmentName_in(String departmentName) {
     Employee_ e = new Employee_();
     Department_ d = new Department_();
-    return entityql
+    return queryDsl
         .from(e)
         .where(
             c ->
@@ -184,7 +180,7 @@ public class EmployeeRepository {
   public List<Employee> selectByDepartmentName_exists(String departmentName) {
     Employee_ e = new Employee_();
     Department_ d = new Department_();
-    return entityql
+    return queryDsl
         .from(e)
         .where(
             c ->
@@ -201,7 +197,7 @@ public class EmployeeRepository {
   public List<Employee> selectByDepartmentName_join(String departmentName) {
     Employee_ e = new Employee_();
     Department_ d = new Department_();
-    return entityql
+    return queryDsl
         .from(e)
         .innerJoin(d, on -> on.eq(e.departmentId, d.id))
         .where(c -> c.eq(d.name, departmentName))
@@ -210,29 +206,29 @@ public class EmployeeRepository {
 
   public List<Employee> selectNameAndSalaryAsEntityList() {
     Employee_ e = new Employee_();
-    return entityql.from(e).selectTo(e, e.name, e.salary).fetch();
+    return queryDsl.from(e).selectTo(e, e.name, e.salary).fetch();
   }
 
   public List<Tuple2<String, Salary>> selectNameAndSalaryAsTuple2List() {
     Employee_ e = new Employee_();
-    return nativeSql.from(e).select(e.name, e.salary).fetch();
+    return queryDsl.from(e).select(e.name, e.salary).fetch();
   }
 
   public List<NameAndSalaryDto> selectNameAndSalaryAsNameAndSalaryDtoList() {
     Employee_ e = new Employee_();
-    return nativeSql.from(e).select(e.name, e.salary).stream()
+    return queryDsl.from(e).select(e.name, e.salary).stream()
         .map(tuple -> new NameAndSalaryDto(tuple.getItem1(), tuple.getItem2()))
         .collect(Collectors.toList());
   }
 
   public void insert(Employee employee) {
     Employee_ e = new Employee_();
-    entityql.insert(e, employee).execute();
+    queryDsl.insert(e).single(employee).execute();
   }
 
-  public void insertByNativeSql(Employee employee) {
+  public void insertWithSpecifiedValues(Employee employee) {
     Employee_ e = new Employee_();
-    nativeSql
+    queryDsl
         .insert(e)
         .values(
             c -> {
@@ -252,12 +248,12 @@ public class EmployeeRepository {
 
   public void update(Employee employee) {
     Employee_ e = new Employee_();
-    entityql.update(e, employee).execute();
+    queryDsl.update(e).single(employee).execute();
   }
 
-  public void updateByNativeSql(Employee employee) {
+  public void updateByWhereExpression(Employee employee) {
     Employee_ e = new Employee_();
-    nativeSql
+    queryDsl
         .update(e)
         .set(
             c -> {
@@ -276,26 +272,26 @@ public class EmployeeRepository {
 
   public void delete(Employee employee) {
     Employee_ e = new Employee_();
-    entityql.delete(e, employee).execute();
+    queryDsl.delete(e).single(employee).execute();
   }
 
-  public void deleteByNativeSql(Employee employee) {
+  public void deleteByWhereExpression(Employee employee) {
     Employee_ e = new Employee_();
-    nativeSql.delete(e).where(c -> c.eq(e.id, employee.getId())).execute();
+    queryDsl.delete(e).where(c -> c.eq(e.id, employee.getId())).execute();
   }
 
   public void batchInsert(List<Employee> employees) {
     Employee_ e = new Employee_();
-    entityql.insert(e, employees).execute();
+    queryDsl.insert(e).batch(employees).execute();
   }
 
   public void batchUpdate(List<Employee> employees) {
     Employee_ e = new Employee_();
-    entityql.update(e, employees).execute();
+    queryDsl.update(e).batch(employees).execute();
   }
 
   public void batchDelete(List<Employee> employees) {
     Employee_ e = new Employee_();
-    entityql.delete(e, employees).execute();
+    queryDsl.delete(e).batch(employees).execute();
   }
 }

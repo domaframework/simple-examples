@@ -1,6 +1,5 @@
 select
-    e.*,
-    d.name department_name
+    /*%expand */*
 from
     employee e
 left outer join

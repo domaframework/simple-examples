@@ -2,12 +2,15 @@ package example.dao_style_file.dao;
 
 import example.dao_style_file.domain.Age;
 import example.dao_style_file.domain.Salary;
+import example.dao_style_file.entity.Department;
 import example.dao_style_file.entity.Employee;
-import example.dao_style_file.entity.EmployeeDepartment;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import org.seasar.doma.AggregateStrategy;
+import org.seasar.doma.AssociationLinker;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
@@ -67,8 +70,8 @@ public interface EmployeeDao {
   @Select(strategy = SelectType.STREAM)
   <R> R selectByAge(int age, Function<Stream<Employee>, R> mapper);
 
-  @Select
-  List<EmployeeDepartment> selectAllEmployeeDepartment();
+  @Select(aggregateStrategy = EmployeeAggregateStrategy.class)
+  List<Employee> selectAllEmployeeDepartment();
 
   @Insert(sqlFile = true)
   int insert(Employee employee);
@@ -78,4 +81,14 @@ public interface EmployeeDao {
 
   @Delete(sqlFile = true)
   int delete(Employee employee);
+}
+
+@AggregateStrategy(root = Employee.class, tableAlias = "e")
+interface EmployeeAggregateStrategy {
+  @AssociationLinker(propertyPath = "department", tableAlias = "d")
+  BiFunction<Employee, Department, Employee> department =
+      (e, d) -> {
+        e.setDepartment(d);
+        return e;
+      };
 }

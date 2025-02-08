@@ -8,6 +8,7 @@ import example.dao_style_text.dao.EmployeeDao;
 import example.dao_style_text.dao.EmployeeDaoImpl;
 import example.dao_style_text.domain.Age;
 import example.dao_style_text.domain.Salary;
+import example.dao_style_text.entity.Department;
 import example.dao_style_text.entity.Employee;
 import java.sql.Timestamp;
 import java.util.List;
@@ -164,7 +165,9 @@ public class SelectTest {
     var list = dao.selectAllEmployeeDepartment();
     assertEquals(14, list.size());
     for (var e : list) {
-      assertNotNull(e.getDepartmentName());
+      Department department = e.getDepartment();
+      assertNotNull(department);
+      assertNotNull(department.getName());
     }
   }
 }

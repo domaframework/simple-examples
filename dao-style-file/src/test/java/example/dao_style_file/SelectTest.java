@@ -8,8 +8,8 @@ import example.dao_style_file.dao.EmployeeDao;
 import example.dao_style_file.dao.EmployeeDaoImpl;
 import example.dao_style_file.domain.Age;
 import example.dao_style_file.domain.Salary;
+import example.dao_style_file.entity.Department;
 import example.dao_style_file.entity.Employee;
-import example.dao_style_file.entity.EmployeeDepartment;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -163,10 +163,12 @@ public class SelectTest {
 
   @Test
   public void testSelectJoinedResult() {
-    List<EmployeeDepartment> list = dao.selectAllEmployeeDepartment();
+    List<Employee> list = dao.selectAllEmployeeDepartment();
     assertEquals(14, list.size());
-    for (EmployeeDepartment e : list) {
-      assertNotNull(e.getDepartmentName());
+    for (Employee e : list) {
+      Department department = e.getDepartment();
+      assertNotNull(department);
+      assertNotNull(department.getName());
     }
   }
 }

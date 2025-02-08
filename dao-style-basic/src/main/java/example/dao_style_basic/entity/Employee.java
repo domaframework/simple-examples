@@ -4,18 +4,17 @@ import example.dao_style_basic.domain.Age;
 import example.dao_style_basic.domain.Salary;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import org.seasar.doma.Association;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
 import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
-import org.seasar.doma.Metamodel;
 import org.seasar.doma.OriginalStates;
 import org.seasar.doma.SequenceGenerator;
-import org.seasar.doma.Transient;
 import org.seasar.doma.Version;
 
-@Entity(listener = EmployeeListener.class, metamodel = @Metamodel)
+@Entity(listener = EmployeeListener.class)
 public class Employee {
 
   @Id
@@ -45,7 +44,7 @@ public class Employee {
 
   LocalDateTime updateTimestamp;
 
-  @Transient Department department;
+  @Association Department department;
 
   @OriginalStates Employee originalStates;
 

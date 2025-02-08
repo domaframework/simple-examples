@@ -2,10 +2,9 @@ package example.dao_style_text.entity;
 
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
-import org.seasar.doma.Metamodel;
 import org.seasar.doma.Version;
 
-@Entity(metamodel = @Metamodel)
+@Entity
 public class Department {
   @Id Integer id;
 

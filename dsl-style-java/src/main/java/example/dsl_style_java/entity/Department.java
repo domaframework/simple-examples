@@ -2,10 +2,10 @@ package example.dsl_style_java.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.seasar.doma.Association;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Metamodel;
-import org.seasar.doma.Transient;
 import org.seasar.doma.Version;
 
 @Entity(metamodel = @Metamodel)
@@ -16,7 +16,7 @@ public class Department {
 
   @Version Integer version;
 
-  @Transient List<Employee> employees = new ArrayList<>();
+  @Association List<Employee> employees = new ArrayList<>();
 
   public Integer getId() {
     return id;

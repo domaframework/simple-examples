@@ -15,6 +15,7 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.re
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.25.2" }
+ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.5.0" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version = "7.0.2" }

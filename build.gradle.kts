@@ -9,6 +9,40 @@ plugins {
 // See https://github.com/gradle/gradle/issues/16708
 val catalog = libs
 
+allprojects {
+    apply(plugin = "base")
+    apply(plugin = catalog.plugins.spotless.get().pluginId)
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    }
+
+    spotless {
+        lineEndings = com.diffplug.spotless.LineEnding.UNIX
+        java {
+            googleJavaFormat(catalog.google.java.format.get().version)
+        }
+        kotlinGradle {
+            ktlint(catalog.ktlint.get().version)
+        }
+        format("misc") {
+            target("**/*.gitignore", "**/*.md")
+            targetExclude("**/bin/**", "**/build/**")
+            leadingTabsToSpaces()
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+    }
+
+    tasks {
+        build {
+            dependsOn(spotlessApply)
+        }
+    }
+}
+
 subprojects {
     apply(plugin = "java")
     apply(plugin = catalog.plugins.eclipse.apt.get().pluginId)
@@ -31,12 +65,6 @@ subprojects {
         }
     }
 
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
-    }
-
     dependencies {
         annotationProcessor(catalog.doma.processor)
         implementation(catalog.doma.core)
@@ -52,7 +80,9 @@ subprojects {
             file {
                 whenMerged {
                     val classpath = this as org.gradle.plugins.ide.eclipse.model.Classpath
-                    val folder = org.gradle.plugins.ide.eclipse.model.SourceFolder(".apt_generated", "bin/main")
+                    val folder =
+                        org.gradle.plugins.ide.eclipse.model
+                            .SourceFolder(".apt_generated", "bin/main")
                     classpath.entries.add(folder)
                     val dir = file(folder.path)
                     if (!dir.exists()) {
@@ -67,11 +97,5 @@ subprojects {
         }
         // Reset all Eclipse settings when "Refresh Gradle Project" is executed
         synchronizationTasks("cleanEclipse", "eclipse")
-    }
-
-    spotless {
-        java {
-            googleJavaFormat(catalog.google.java.format.get().version)
-        }
     }
 }

@@ -1,15 +1,19 @@
 plugins {
     java
-    id("com.diffplug.eclipse.apt") version "4.2.0"
-    id("com.diffplug.spotless") version "7.0.2"
-    id("org.domaframework.doma.compile") version "3.0.1"
+    alias(libs.plugins.eclipse.apt)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.doma.compile)
 }
+
+// Retain a reference to rootProject.libs to make the version catalog accessible within allprojects and subprojects.
+// See https://github.com/gradle/gradle/issues/16708
+val catalog = libs
 
 subprojects {
     apply(plugin = "java")
-    apply(plugin = "com.diffplug.eclipse.apt")
-    apply(plugin = "com.diffplug.spotless")
-    apply(plugin = "org.domaframework.doma.compile")
+    apply(plugin = catalog.plugins.eclipse.apt.get().pluginId)
+    apply(plugin = catalog.plugins.spotless.get().pluginId)
+    apply(plugin = catalog.plugins.doma.compile.get().pluginId)
 
     java {
         toolchain {
@@ -34,14 +38,13 @@ subprojects {
     }
 
     dependencies {
-        val domaVersion: String by project
-        annotationProcessor("org.seasar.doma:doma-processor:${domaVersion}")
-        implementation("org.seasar.doma:doma-core:${domaVersion}")
-        implementation("org.seasar.doma:doma-slf4j:${domaVersion}")
-        runtimeOnly("ch.qos.logback:logback-classic:1.5.16")
-        runtimeOnly("com.h2database:h2:2.3.232")
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+        annotationProcessor(catalog.doma.processor)
+        implementation(catalog.doma.core)
+        implementation(catalog.doma.slf4j)
+        runtimeOnly(catalog.logback.classic)
+        runtimeOnly(catalog.jdbc.h2)
+        testImplementation(catalog.junit.jupiter.api)
+        testRuntimeOnly(catalog.junit.jupiter.engine)
     }
 
     eclipse {
@@ -68,7 +71,7 @@ subprojects {
 
     spotless {
         java {
-            googleJavaFormat("1.23.0")
+            googleJavaFormat(catalog.google.java.format.get().version)
         }
     }
 }

@@ -1,0 +1,23 @@
+[versions]
+doma = "3.4.0"
+junit = "5.11.4"
+
+[libraries]
+doma-core = { module = "org.seasar.doma:doma-core", version.ref = "doma"}
+doma-processor = { module = "org.seasar.doma:doma-processor", version.ref = "doma"}
+doma-slf4j = { module = "org.seasar.doma:doma-slf4j", version.ref = "doma"}
+
+jdbc-h2 = { module = "com.h2database:h2", version = "2.3.232" }
+
+logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.16" }
+
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.25.2" }
+ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.5.0" }
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version = "7.0.2" }
+doma-compile = { id = "org.domaframework.doma.compile", version = "3.0.1" }
+eclipse-apt = { id = "com.diffplug.eclipse.apt", version = "4.2.0" }

@@ -1,8 +1,9 @@
 package example.dsl_style_java;
 
-import example.dsl_style_java.domain.Age;
-import example.dsl_style_java.domain.Salary;
-import example.dsl_style_java.entity.Employee;
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import example.dsl_style_java.repository.EmployeeRepository;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;

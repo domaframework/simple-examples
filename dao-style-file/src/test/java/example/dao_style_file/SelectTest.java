@@ -4,12 +4,13 @@ import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Department;
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import example.dao_style_file.dao.EmployeeDao;
 import example.dao_style_file.dao.EmployeeDaoImpl;
-import example.dao_style_file.domain.Age;
-import example.dao_style_file.domain.Salary;
-import example.dao_style_file.entity.Department;
-import example.dao_style_file.entity.Employee;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -143,7 +144,7 @@ public class SelectTest {
                 s.map(Employee::getSalary)
                     .filter(Objects::nonNull)
                     .reduce(new Salary(0), Salary::add));
-    assertEquals(Integer.valueOf(21975), sum.getValue());
+    assertEquals(Integer.valueOf(21975), sum.value());
   }
 
   @Test

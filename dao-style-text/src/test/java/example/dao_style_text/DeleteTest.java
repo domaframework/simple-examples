@@ -2,6 +2,7 @@ package example.dao_style_text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import example.common.test.TestEnvironment;
 import example.dao_style_text.dao.EmployeeDao;
 import example.dao_style_text.dao.EmployeeDaoImpl;
 import java.util.Objects;

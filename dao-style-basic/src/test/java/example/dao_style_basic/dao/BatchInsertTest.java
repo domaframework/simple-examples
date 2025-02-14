@@ -3,9 +3,10 @@ package example.dao_style_basic.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import example.dao_style_basic.domain.Age;
-import example.dao_style_basic.domain.Salary;
-import example.dao_style_basic.entity.Employee;
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import java.util.Arrays;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;

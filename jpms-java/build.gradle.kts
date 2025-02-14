@@ -16,3 +16,7 @@ tasks {
 application {
     mainClass.set("example.jpms_java.Main")
 }
+
+dependencies {
+    implementation(project(":common"))
+}

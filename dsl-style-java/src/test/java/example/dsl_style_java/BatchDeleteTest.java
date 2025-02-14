@@ -1,6 +1,7 @@
 package example.dsl_style_java;
 
-import example.dsl_style_java.entity.Employee;
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import example.dsl_style_java.repository.EmployeeRepository;
 import java.util.List;
 import org.junit.jupiter.api.Test;

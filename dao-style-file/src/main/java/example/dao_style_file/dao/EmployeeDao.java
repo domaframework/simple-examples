@@ -1,9 +1,9 @@
 package example.dao_style_file.dao;
 
-import example.dao_style_file.domain.Age;
-import example.dao_style_file.domain.Salary;
-import example.dao_style_file.entity.Department;
-import example.dao_style_file.entity.Employee;
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Department;
+import example.common.entity.Employee;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.BiFunction;

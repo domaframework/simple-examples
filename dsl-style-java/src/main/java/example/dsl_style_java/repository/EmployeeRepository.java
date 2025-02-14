@@ -1,10 +1,10 @@
 package example.dsl_style_java.repository;
 
-import example.dsl_style_java.domain.Age;
-import example.dsl_style_java.domain.Salary;
-import example.dsl_style_java.entity.Department_;
-import example.dsl_style_java.entity.Employee;
-import example.dsl_style_java.entity.Employee_;
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Department_;
+import example.common.entity.Employee;
+import example.common.entity.Employee_;
 import example.dsl_style_java.entity.NameAndSalaryDto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

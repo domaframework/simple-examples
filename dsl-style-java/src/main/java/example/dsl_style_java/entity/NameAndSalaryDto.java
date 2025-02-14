@@ -1,6 +1,6 @@
 package example.dsl_style_java.entity;
 
-import example.dsl_style_java.domain.Salary;
+import example.common.domain.Salary;
 
 public class NameAndSalaryDto {
 

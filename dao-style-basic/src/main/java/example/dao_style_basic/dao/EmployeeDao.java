@@ -1,6 +1,6 @@
 package example.dao_style_basic.dao;
 
-import example.dao_style_basic.entity.Employee;
+import example.common.entity.Employee;
 import java.util.List;
 import org.seasar.doma.BatchDelete;
 import org.seasar.doma.BatchInsert;

@@ -2,9 +2,10 @@ package example.dao_style_file;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import example.dao_style_file.dao.EmployeeDao;
 import example.dao_style_file.dao.EmployeeDaoImpl;
-import example.dao_style_file.entity.Employee;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

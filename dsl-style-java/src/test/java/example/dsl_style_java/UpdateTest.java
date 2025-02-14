@@ -2,8 +2,9 @@ package example.dsl_style_java;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import example.dsl_style_java.entity.Employee;
-import example.dsl_style_java.entity.JobType;
+import example.common.entity.Employee;
+import example.common.entity.JobType;
+import example.common.test.TestEnvironment;
 import example.dsl_style_java.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

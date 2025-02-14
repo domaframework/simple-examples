@@ -3,7 +3,8 @@ package example.dao_style_basic.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import example.dao_style_basic.entity.Employee;
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import java.util.Arrays;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;

@@ -7,7 +7,12 @@ tasks {
         val aptOptions = extensions.getByType<com.diffplug.gradle.eclipse.apt.AptPlugin.AptOptions>()
         aptOptions.processorArgs =
             mapOf(
-                "doma.domain.converters" to "example.dao_style_text.domain.DomainConverterProvider",
+                "doma.domain.converters" to "example.common.domain.DomainConverterProvider",
             )
     }
+}
+
+dependencies {
+    implementation(project(":common"))
+    testImplementation(project(":common-test"))
 }

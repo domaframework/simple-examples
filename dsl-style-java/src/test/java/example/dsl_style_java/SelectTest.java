@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import example.dsl_style_java.domain.Age;
-import example.dsl_style_java.domain.Salary;
-import example.dsl_style_java.entity.Employee;
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Employee;
+import example.common.test.TestEnvironment;
 import example.dsl_style_java.entity.NameAndSalaryDto;
 import example.dsl_style_java.repository.EmployeeRepository;
 import java.time.LocalDateTime;
@@ -138,7 +139,7 @@ public class SelectTest {
                 s.map(Employee::getSalary)
                     .filter(Objects::nonNull)
                     .reduce(new Salary(0), Salary::add));
-    assertEquals(Integer.valueOf(21975), sum.getValue());
+    assertEquals(Integer.valueOf(21975), sum.value());
   }
 
   @Test

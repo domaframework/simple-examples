@@ -2,12 +2,13 @@ package example.dao_style_text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import example.common.domain.Age;
+import example.common.domain.Salary;
+import example.common.entity.Employee;
+import example.common.entity.JobType;
+import example.common.test.TestEnvironment;
 import example.dao_style_text.dao.EmployeeDao;
 import example.dao_style_text.dao.EmployeeDaoImpl;
-import example.dao_style_text.domain.Age;
-import example.dao_style_text.domain.Salary;
-import example.dao_style_text.entity.Employee;
-import example.dao_style_text.entity.JobType;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;

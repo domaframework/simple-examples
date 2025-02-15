@@ -1,6 +1,7 @@
 rootProject.name = "simple-examples"
-include("dao-style-basic")
-include("dao-style-file")
-include("dao-style-text")
-include("dsl-style-java")
-include("jpms-java")
+include("example-sql-file")
+include("example-sql-annotation")
+include("example-criteria")
+include("example-jpms")
+include("common")
+include("common-test")

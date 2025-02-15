@@ -5,7 +5,7 @@ import java.util.List;
 import org.seasar.doma.*;
 import org.seasar.doma.jdbc.entity.NamingType;
 
-@Entity(naming = NamingType.SNAKE_LOWER_CASE)
+@Entity(metamodel = @Metamodel, naming = NamingType.SNAKE_LOWER_CASE)
 public class Role {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

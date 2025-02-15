@@ -1,4 +1,4 @@
-package example.sql.annotation;
+package example.sql.file;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import example.common.entity.OrderItem;
 import example.common.entity.Product;
 import example.common.test.TestEnvironment;
+import example.sql.file.dao.OrderDao;
+import example.sql.file.dao.OrderDaoImpl;
+import example.sql.file.dao.ReviewDao;
+import example.sql.file.dao.ReviewDaoImpl;
 import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -14,7 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.seasar.doma.jdbc.Config;
 
 @ExtendWith(TestEnvironment.class)
-public class SelectAggregateTest {
+public class AggregateStrategyTest {
 
   @Test
   public void selectOrderAggregate(Config config) {

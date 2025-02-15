@@ -1,3 +1,14 @@
 drop sequence employee_seq;
 drop table employee;
 drop table department;
+
+drop table if exists review;
+drop table if exists payment;
+drop table if exists order_item;
+drop table if exists `order`;
+drop table if exists product_category;
+drop table if exists category;
+drop table if exists product;
+drop table if exists user_role;
+drop table if exists role;
+drop table if exists `user`;

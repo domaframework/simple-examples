@@ -5,11 +5,10 @@ Simple examples for [Doma](https://github.com/domaframework/doma).
 
 This repository includes the following examples:
 
-* [dao-style-basic](dao-style-basic) - Shows basic DAO style.
-* [dao-style-file](dao-style-file) - Uses files to store SQL templates.
-* [dao-style-text](dao-style-text) - Uses Text Blocks to store SQL templates.
-* [dsl-style-java](dsl-style-java) - Uses the Criteria API.
-* [jpms-java](jpms-java) - Uses the Java Platform Module System (JPMS).
+* [example-sql-file](example-sql-file) - Uses SQL files to store SQL templates.
+* [example-sql-annotation](example-sql-annotation) - Uses SQL annotations to store SQL templates.
+* [example-criteria](example-criteria) - Uses the Criteria API.
+* [example-jpms](example-jpms) - Uses the Java Platform Module System (JPMS).
 
 Clone this repository
 ---------------------

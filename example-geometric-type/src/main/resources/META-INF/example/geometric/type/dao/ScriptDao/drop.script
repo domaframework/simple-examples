@@ -1,0 +1,2 @@
+DROP TABLE landmark;
+DROP TABLE circle_zone;

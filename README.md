@@ -9,6 +9,7 @@ This repository includes the following examples:
 * [example-sql-annotation](example-sql-annotation) - Uses SQL annotations to store SQL templates.
 * [example-criteria](example-criteria) - Uses the Criteria API.
 * [example-jpms](example-jpms) - Uses the Java Platform Module System (JPMS).
+* [example-geometric-type](example-geometric-type) - Uses Geometric types of PostgreSQL.
 
 ER diagram
 ---------------------

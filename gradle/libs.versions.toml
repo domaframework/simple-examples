@@ -3,16 +3,20 @@ doma = "3.4.0"
 junit = "5.11.4"
 
 [libraries]
-doma-core = { module = "org.seasar.doma:doma-core", version.ref = "doma"}
-doma-processor = { module = "org.seasar.doma:doma-processor", version.ref = "doma"}
-doma-slf4j = { module = "org.seasar.doma:doma-slf4j", version.ref = "doma"}
+doma-core = { module = "org.seasar.doma:doma-core", version.ref = "doma" }
+doma-processor = { module = "org.seasar.doma:doma-processor", version.ref = "doma" }
+doma-slf4j = { module = "org.seasar.doma:doma-slf4j", version.ref = "doma" }
 
 jdbc-h2 = { module = "com.h2database:h2", version = "2.3.232" }
+jdbc-postgresql = { module = "org.postgresql:postgresql", version = "42.7.5" }
 
 logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.16" }
 
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version = "1.20.5" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.25.2" }
 ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.5.0" }

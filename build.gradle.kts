@@ -71,8 +71,10 @@ subprojects {
         implementation(catalog.doma.slf4j)
         runtimeOnly(catalog.logback.classic)
         runtimeOnly(catalog.jdbc.h2)
+        testImplementation(platform(catalog.junit.bom))
         testImplementation(catalog.junit.jupiter.api)
         testRuntimeOnly(catalog.junit.jupiter.engine)
+        testRuntimeOnly(catalog.junit.platform.launcher)
     }
 
     eclipse {

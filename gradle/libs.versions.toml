@@ -12,8 +12,10 @@ jdbc-postgresql = { module = "org.postgresql:postgresql", version = "42.7.5" }
 
 logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.16" }
 
-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version = "1.20.5" }
 testcontainers-postgresql = { module = "org.testcontainers:postgresql" }

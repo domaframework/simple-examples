@@ -1,6 +1,6 @@
 [versions]
 doma = "3.4.0"
-junit = "5.11.4"
+junit = "5.12.0"
 
 [libraries]
 doma-core = { module = "org.seasar.doma:doma-core", version.ref = "doma" }

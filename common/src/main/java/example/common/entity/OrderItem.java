@@ -6,12 +6,11 @@ import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
 import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
-import org.seasar.doma.Metamodel;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
 
-@Entity(metamodel = @Metamodel)
-@Table(name = "order_item")
+@Entity
+@Table
 public class OrderItem {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

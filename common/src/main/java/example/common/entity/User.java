@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.seasar.doma.*;
 
-@Entity(metamodel = @Metamodel)
+@Entity
 @Table(quote = true)
 public class User {
   @Id

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.seasar.doma.*;
 
-@Entity(metamodel = @Metamodel)
+@Entity
 public class Role {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

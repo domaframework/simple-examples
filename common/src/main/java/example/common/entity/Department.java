@@ -5,10 +5,9 @@ import java.util.List;
 import org.seasar.doma.Association;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
-import org.seasar.doma.Metamodel;
 import org.seasar.doma.Version;
 
-@Entity(metamodel = @Metamodel)
+@Entity
 public class Department {
   @Id Integer id;
 

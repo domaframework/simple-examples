@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.seasar.doma.*;
-import org.seasar.doma.jdbc.entity.NamingType;
 
-@Entity(metamodel = @Metamodel, naming = NamingType.SNAKE_LOWER_CASE)
+@Entity(metamodel = @Metamodel)
 @Table(quote = true)
 public class User {
   @Id

@@ -7,22 +7,24 @@ import example.jpms.repository.EmployeeRepository;
 public class Main {
 
   public static void main(String[] args) {
-    var dbContext = DbContextFactory.create();
-    var scriptDao = new ScriptDaoImpl(dbContext.config);
+    var config = SimpleConfigFactory.create();
+    var scriptDao = new ScriptDaoImpl(config);
 
-    dbContext.transactionManager.required(
-        () -> {
-          scriptDao.create();
+    config
+        .getTransactionManager()
+        .required(
+            () -> {
+              scriptDao.create();
 
-          var repository = new EmployeeRepository(dbContext.config);
-          var employee1 = repository.selectById(1);
-          if (employee1 == null) throw new IllegalStateException();
-          System.out.println(employee1);
+              var repository = new EmployeeRepository(config);
+              var employee1 = repository.selectById(1);
+              if (employee1 == null) throw new IllegalStateException();
+              System.out.println(employee1);
 
-          var dao = new EmployeeDaoImpl(dbContext.config);
-          var employee2 = dao.selectById(1);
-          if (employee2 == null) throw new IllegalStateException();
-          System.out.println(employee2);
-        });
+              var dao = new EmployeeDaoImpl(config);
+              var employee2 = dao.selectById(1);
+              if (employee2 == null) throw new IllegalStateException();
+              System.out.println(employee2);
+            });
   }
 }

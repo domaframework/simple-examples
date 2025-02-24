@@ -1,6 +1,5 @@
 package example.common.test;
 
-import example.common.DbConfig;
 import example.common.dao.ScriptDao;
 import example.common.dao.ScriptDaoImpl;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -10,10 +9,8 @@ import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import org.seasar.doma.jdbc.JdbcLogger;
-import org.seasar.doma.jdbc.dialect.Dialect;
-import org.seasar.doma.jdbc.dialect.H2Dialect;
-import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
+import org.seasar.doma.jdbc.Naming;
+import org.seasar.doma.jdbc.SimpleConfig;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 import org.seasar.doma.slf4j.Slf4jJdbcLogger;
 
@@ -25,16 +22,16 @@ public class TestEnvironment
         ParameterResolver {
 
   private final LocalTransactionManager transactionManager;
-  private final DbConfig config;
+  private final SimpleConfig config;
   private final ScriptDao dao;
 
   public TestEnvironment() {
-    Dialect dialect = new H2Dialect();
-    LocalTransactionDataSource dataSource =
-        new LocalTransactionDataSource("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null);
-    JdbcLogger jdbcLogger = new Slf4jJdbcLogger();
-    transactionManager = new LocalTransactionManager(dataSource, jdbcLogger);
-    config = new DbConfig(dialect, dataSource, jdbcLogger, transactionManager);
+    config =
+        SimpleConfig.builder("jdbc:h2:mem:tutorial;DB_CLOSE_DELAY=-1", "sa", null)
+            .jdbcLogger(new Slf4jJdbcLogger())
+            .naming(Naming.SNAKE_LOWER_CASE)
+            .build();
+    transactionManager = config.getLocalTransactionManager();
     dao = new ScriptDaoImpl(config);
   }
 
@@ -60,7 +57,7 @@ public class TestEnvironment
 
   public boolean supportsParameter(
       ParameterContext parameterContext, ExtensionContext extensionContext) {
-    return parameterContext.getParameter().getType().isAssignableFrom(DbConfig.class);
+    return parameterContext.getParameter().getType().isAssignableFrom(SimpleConfig.class);
   }
 
   public Object resolveParameter(

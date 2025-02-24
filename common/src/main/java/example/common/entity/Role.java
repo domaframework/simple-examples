@@ -3,9 +3,8 @@ package example.common.entity;
 import java.util.ArrayList;
 import java.util.List;
 import org.seasar.doma.*;
-import org.seasar.doma.jdbc.entity.NamingType;
 
-@Entity(metamodel = @Metamodel, naming = NamingType.SNAKE_LOWER_CASE)
+@Entity(metamodel = @Metamodel)
 public class Role {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

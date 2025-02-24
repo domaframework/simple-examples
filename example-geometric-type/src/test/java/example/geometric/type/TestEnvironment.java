@@ -9,10 +9,8 @@ import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import org.seasar.doma.jdbc.JdbcLogger;
-import org.seasar.doma.jdbc.dialect.Dialect;
-import org.seasar.doma.jdbc.dialect.PostgresDialect;
-import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
+import org.seasar.doma.jdbc.Naming;
+import org.seasar.doma.jdbc.SimpleConfig;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 import org.seasar.doma.slf4j.Slf4jJdbcLogger;
 
@@ -24,17 +22,16 @@ public class TestEnvironment
         ParameterResolver {
 
   private final LocalTransactionManager transactionManager;
-  private final DbConfig config;
+  private final SimpleConfig config;
   private final ScriptDao dao;
 
   public TestEnvironment() {
-    Dialect dialect = new PostgresDialect();
-    LocalTransactionDataSource dataSource =
-        new LocalTransactionDataSource(
-            "jdbc:tc:postgresql:12.20:///test?TC_DAEMON=true", "test", "test");
-    JdbcLogger jdbcLogger = new Slf4jJdbcLogger();
-    transactionManager = new LocalTransactionManager(dataSource, jdbcLogger);
-    config = new DbConfig(dialect, dataSource, jdbcLogger, transactionManager);
+    config =
+        SimpleConfig.builder("jdbc:tc:postgresql:12.20:///test?TC_DAEMON=true", "test", "test")
+            .jdbcLogger(new Slf4jJdbcLogger())
+            .naming(Naming.SNAKE_LOWER_CASE)
+            .build();
+    transactionManager = config.getLocalTransactionManager();
     dao = new ScriptDaoImpl(config);
   }
 
@@ -60,7 +57,7 @@ public class TestEnvironment
 
   public boolean supportsParameter(
       ParameterContext parameterContext, ExtensionContext extensionContext) {
-    return parameterContext.getParameter().getType().isAssignableFrom(DbConfig.class);
+    return parameterContext.getParameter().getType().isAssignableFrom(SimpleConfig.class);
   }
 
   public Object resolveParameter(

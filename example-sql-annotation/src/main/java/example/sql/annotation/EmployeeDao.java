@@ -261,8 +261,8 @@ public interface EmployeeDao {
         HIREDATE,
         JOB_TYPE,
         SALARY,
-        INSERTTIMESTAMP,
-        UPDATETIMESTAMP,
+        INSERT_TIMESTAMP,
+        UPDATE_TIMESTAMP,
         VERSION
       ) values (
         /* employee.id */1,
@@ -291,7 +291,7 @@ public interface EmployeeDao {
         HIREDATE = /* employee.hiredate */date'2010-01-01',
         JOB_TYPE = /* employee.jobType */'SALESMAN',
         SALARY = /* employee.salary */300,
-        UPDATETIMESTAMP = /* employee.updateTimestamp */timestamp'2010-01-01 12:34:56',
+        UPDATE_TIMESTAMP = /* employee.updateTimestamp */timestamp'2010-01-01 12:34:56',
         VERSION = /* employee.version */1
       where
         ID = /* employee.id */1

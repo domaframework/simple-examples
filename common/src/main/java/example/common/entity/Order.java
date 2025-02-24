@@ -11,9 +11,8 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Metamodel;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-import org.seasar.doma.jdbc.entity.NamingType;
 
-@Entity(metamodel = @Metamodel, naming = NamingType.SNAKE_LOWER_CASE)
+@Entity(metamodel = @Metamodel)
 @Table(quote = true)
 public class Order {
   @Id

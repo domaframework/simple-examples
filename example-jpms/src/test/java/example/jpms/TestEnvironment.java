@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.seasar.doma.jdbc.SimpleConfig;
+import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 
 public class TestEnvironment
     implements BeforeAllCallback,
@@ -17,32 +19,34 @@ public class TestEnvironment
         AfterTestExecutionCallback,
         ParameterResolver {
 
-  private final DbContext dbContext;
+  private final SimpleConfig config;
+  private final LocalTransactionManager transactionManager;
   private final ScriptDao dao;
 
   public TestEnvironment() {
-    dbContext = DbContextFactory.create();
-    dao = new ScriptDaoImpl(dbContext.config);
+    config = SimpleConfigFactory.create();
+    transactionManager = config.getLocalTransactionManager();
+    dao = new ScriptDaoImpl(config);
   }
 
   @Override
   public void beforeAll(ExtensionContext context) {
-    dbContext.transactionManager.required(dao::create);
+    config.getTransactionManager().required(dao::create);
   }
 
   @Override
   public void afterAll(ExtensionContext context) {
-    dbContext.transactionManager.required(dao::drop);
+    transactionManager.required(dao::drop);
   }
 
   @Override
   public void beforeTestExecution(ExtensionContext context) {
-    dbContext.localTransaction.begin();
+    transactionManager.getTransaction().begin();
   }
 
   @Override
   public void afterTestExecution(ExtensionContext context) {
-    dbContext.localTransaction.rollback();
+    transactionManager.getTransaction().rollback();
   }
 
   public boolean supportsParameter(
@@ -52,6 +56,6 @@ public class TestEnvironment
 
   public Object resolveParameter(
       ParameterContext parameterContext, ExtensionContext extensionContext) {
-    return dbContext.config;
+    return config;
   }
 }

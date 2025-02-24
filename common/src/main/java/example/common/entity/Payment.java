@@ -9,9 +9,8 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Metamodel;
 import org.seasar.doma.Version;
-import org.seasar.doma.jdbc.entity.NamingType;
 
-@Entity(metamodel = @Metamodel, naming = NamingType.SNAKE_LOWER_CASE)
+@Entity(metamodel = @Metamodel)
 public class Payment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

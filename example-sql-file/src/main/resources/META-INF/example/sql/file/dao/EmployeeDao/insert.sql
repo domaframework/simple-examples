@@ -6,8 +6,8 @@ insert into Employee (
     HIREDATE,
     JOB_TYPE,
     SALARY,
-    INSERTTIMESTAMP,
-    UPDATETIMESTAMP,
+    INSERT_TIMESTAMP,
+    UPDATE_TIMESTAMP,
     VERSION
 ) values (
     /* employee.id */1,

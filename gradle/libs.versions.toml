@@ -17,7 +17,7 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
-testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version = "1.20.5" }
+testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version = "1.20.6" }
 testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.25.2" }

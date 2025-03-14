@@ -1,5 +1,5 @@
 [versions]
-doma = "3.5.1"
+doma = "3.6.0"
 junit = "5.12.1"
 
 [libraries]

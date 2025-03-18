@@ -10,7 +10,7 @@ doma-slf4j = { module = "org.seasar.doma:doma-slf4j", version.ref = "doma" }
 jdbc-h2 = { module = "com.h2database:h2", version = "2.3.232" }
 jdbc-postgresql = { module = "org.postgresql:postgresql", version = "42.7.5" }
 
-logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.17" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.18" }
 
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }

@@ -1,7 +1,7 @@
 rootProject.name = "simple-examples"
 
 include("common")
-include("common-test")
+include("common-testing")
 
 include("example-sql-file")
 include("example-sql-annotation")

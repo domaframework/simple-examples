@@ -47,7 +47,6 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = catalog.plugins.eclipse.apt.get().pluginId)
     apply(plugin = catalog.plugins.spotless.get().pluginId)
-    apply(plugin = catalog.plugins.doma.compile.get().pluginId)
 
     java {
         toolchain {
@@ -58,6 +57,8 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
+            // TODO Remove this workaround
+            options.compilerArgs.add("-Adoma.resources.dir=" + sourceSets["main"].resources.srcDirs.first().absolutePath)
         }
 
         withType<Test> {

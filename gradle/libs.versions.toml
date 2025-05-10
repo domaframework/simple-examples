@@ -25,5 +25,5 @@ ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.5.0" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version = "7.0.3" }
-doma-compile = { id = "org.domaframework.doma.compile", version = "3.0.1" }
+doma-compile = { id = "org.domaframework.doma.compile", version = "4.0.0" }
 eclipse-apt = { id = "com.diffplug.eclipse.apt", version = "4.3.0" }

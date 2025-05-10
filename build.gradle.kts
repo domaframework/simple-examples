@@ -2,7 +2,7 @@ plugins {
     java
     alias(libs.plugins.eclipse.apt)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.doma.compile)
+    alias(libs.plugins.doma.compile) apply false
 }
 
 // Retain a reference to rootProject.libs to make the version catalog accessible within allprojects and subprojects.
@@ -47,6 +47,10 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = catalog.plugins.eclipse.apt.get().pluginId)
     apply(plugin = catalog.plugins.spotless.get().pluginId)
+    // TODO: This is a workaround. JPMS-compatible modules can’t be built with the Doma Compile Plugin.
+    if (project.name != "example-jpms") {
+        apply(plugin = catalog.plugins.doma.compile.get().pluginId)
+    }
 
     java {
         toolchain {
@@ -57,8 +61,10 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            // TODO Remove this workaround
-            options.compilerArgs.add("-Adoma.resources.dir=" + sourceSets["main"].resources.srcDirs.first().absolutePath)
+            // TODO: This is a workaround. JPMS-compatible modules can’t be built with the Doma Compile Plugin.
+            if (project.name == "example-jpms") {
+                options.compilerArgs.add("-Adoma.resources.dir=" + sourceSets["main"].resources.srcDirs.first().absolutePath)
+            }
         }
 
         withType<Test> {

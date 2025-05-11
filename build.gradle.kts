@@ -4,7 +4,7 @@ plugins {
     java
     alias(libs.plugins.eclipse.apt)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.doma.compile) apply false
+    alias(libs.plugins.doma.compile)
 }
 
 // Retain a reference to rootProject.libs to make the version catalog accessible within allprojects and subprojects.

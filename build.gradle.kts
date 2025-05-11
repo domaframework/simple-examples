@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.invoke
+
 plugins {
     java
     alias(libs.plugins.eclipse.apt)
@@ -47,10 +49,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = catalog.plugins.eclipse.apt.get().pluginId)
     apply(plugin = catalog.plugins.spotless.get().pluginId)
-    // TODO: This is a workaround. JPMS-compatible modules can’t be built with the Doma Compile Plugin.
-    if (project.name != "example-jpms") {
-        apply(plugin = catalog.plugins.doma.compile.get().pluginId)
-    }
+    apply(plugin = catalog.plugins.doma.compile.get().pluginId)
 
     java {
         toolchain {
@@ -61,10 +60,6 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            // TODO: This is a workaround. JPMS-compatible modules can’t be built with the Doma Compile Plugin.
-            if (project.name == "example-jpms") {
-                options.compilerArgs.add("-Adoma.resources.dir=" + sourceSets["main"].resources.srcDirs.first().absolutePath)
-            }
         }
 
         withType<Test> {

@@ -4,11 +4,14 @@ import example.common.domain.Age;
 import example.common.domain.Salary;
 import example.common.entity.Department;
 import example.common.entity.Employee;
+
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
+
 import org.seasar.doma.AggregateStrategy;
 import org.seasar.doma.AssociationLinker;
 import org.seasar.doma.Dao;
@@ -86,9 +89,5 @@ public interface EmployeeDao {
 @AggregateStrategy(root = Employee.class, tableAlias = "e")
 interface EmployeeAggregateStrategy {
   @AssociationLinker(propertyPath = "department", tableAlias = "d")
-  BiFunction<Employee, Department, Employee> department =
-      (e, d) -> {
-        e.setDepartment(d);
-        return e;
-      };
+  BiConsumer<Employee, Department> department = Employee::setDepartment;
 }

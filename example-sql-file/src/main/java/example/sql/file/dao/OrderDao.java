@@ -6,7 +6,10 @@ import example.common.entity.OrderItem;
 import example.common.entity.Payment;
 import example.common.entity.Product;
 import example.common.entity.User;
+
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+
 import org.seasar.doma.AggregateStrategy;
 import org.seasar.doma.AssociationLinker;
 import org.seasar.doma.Dao;
@@ -22,40 +25,35 @@ public interface OrderDao {
 @AggregateStrategy(root = Order.class, tableAlias = "o")
 interface OrderAggregateStrategy {
   @AssociationLinker(propertyPath = "payment", tableAlias = "pa")
-  BiFunction<Order, Payment, Order> payment =
-      (order, payment) -> {
-        order.payment = payment;
-        payment.order = order;
-        return order;
-      };
+  BiConsumer<Order, Payment> payment =
+          (order, payment) -> {
+            order.payment = payment;
+            payment.order = order;
+          };
 
   @AssociationLinker(propertyPath = "user", tableAlias = "u")
-  BiFunction<Order, User, Order> user =
-      (order, user) -> {
-        order.user = user;
-        return order;
-      };
+  BiConsumer<Order, User> user =
+          (order, user) -> {
+            order.user = user;
+          };
 
   @AssociationLinker(propertyPath = "orderItemList", tableAlias = "oi")
-  BiFunction<Order, OrderItem, Order> orderItemList =
-      (order, orderItem) -> {
-        order.orderItemList.add(orderItem);
-        orderItem.order = order;
-        return order;
-      };
+  BiConsumer<Order, OrderItem> orderItemList =
+          (order, orderItem) -> {
+            order.orderItemList.add(orderItem);
+            orderItem.order = order;
+          };
 
   @AssociationLinker(propertyPath = "orderItemList.product", tableAlias = "pr")
-  BiFunction<OrderItem, Product, OrderItem> orderItemList$product =
-      (orderItem, product) -> {
-        orderItem.product = product;
-        return orderItem;
-      };
+  BiConsumer<OrderItem, Product> orderItemList$product =
+          (orderItem, product) -> {
+            orderItem.product = product;
+          };
 
   @AssociationLinker(propertyPath = "orderItemList.product.categoryList", tableAlias = "c")
-  BiFunction<Product, Category, Product> orderItemList$product$category =
-      (product, category) -> {
-        product.categoryList.add(category);
-        category.productList.add(product);
-        return product;
-      };
+  BiConsumer<Product, Category> orderItemList$product$category =
+          (product, category) -> {
+            product.categoryList.add(category);
+            category.productList.add(product);
+          };
 }

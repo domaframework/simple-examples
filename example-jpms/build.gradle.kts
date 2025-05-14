@@ -14,6 +14,6 @@ dependencies {
 tasks {
     compileJava {
         // TODO: This is a workaround. JPMS-compatible modules can’t be built with the Doma Compile Plugin.
-        options.sourcepath = files(sourceSets["main"].java.srcDirs + sourceSets["main"].resources.srcDirs)
+        options.sourcepath = files(options.sourcepath, sourceSets["main"].java.srcDirs)
     }
 }

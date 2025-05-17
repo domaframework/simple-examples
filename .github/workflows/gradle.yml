@@ -21,7 +21,7 @@ jobs:
         java-version: 17
 
     - name: Set up Gradle
-      uses: gradle/actions/setup-gradle@v4.3.1
+      uses: gradle/actions/setup-gradle@v4.4.0
 
     - name: Assemble and Check
       run: ./gradlew assemble check

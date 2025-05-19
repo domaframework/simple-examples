@@ -21,7 +21,7 @@ testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version
 testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.27.0" }
-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.5.0" }
+ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.6.0" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version = "7.0.3" }

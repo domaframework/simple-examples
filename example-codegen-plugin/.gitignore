@@ -1,0 +1,17 @@
+.classpath
+.factorypath
+.project
+.settings
+/.apt_generated
+/bin
+/build
+.gradle
+.idea
+out
+/.apt_generated_tests/
+.vscode
+.sdkmanrc
+
+src/main/java/example/generated/
+src/main/resources/META-INF/example/generated/
+src/test/java/example/generated/

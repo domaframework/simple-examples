@@ -25,6 +25,7 @@ allprojects {
         lineEndings = com.diffplug.spotless.LineEnding.UNIX
         java {
             googleJavaFormat(catalog.google.java.format.get().version)
+            targetExclude("**/generated/**")
         }
         kotlinGradle {
             ktlint(catalog.ktlint.get().version)

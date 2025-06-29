@@ -87,8 +87,8 @@ tasks {
         dependsOn(cleanGeneratedSources)
     }
 
-    // Configure test task to generate all source files before running tests
-    test {
+    // Configure assemble task to generate all source files before running tests
+    assemble {
         dependsOn("domaCodeGenMysqlAll", "domaCodeGenPostgresqlAll")
     }
 }

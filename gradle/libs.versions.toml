@@ -26,7 +26,7 @@ google-java-format = { module = "com.google.googlejavaformat:google-java-format"
 ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.7.0" }
 
 [plugins]
-spotless = { id = "com.diffplug.spotless", version = "7.1.0" }
+spotless = { id = "com.diffplug.spotless", version = "7.2.0" }
 doma-codegen = { id = "org.domaframework.doma.codegen", version = "3.2.1" }
 doma-compile = { id = "org.domaframework.doma.compile", version = "4.0.2" }
 eclipse-apt = { id = "com.diffplug.eclipse.apt", version = "4.3.0" }

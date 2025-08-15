@@ -4,13 +4,11 @@ import example.common.domain.Age;
 import example.common.domain.Salary;
 import example.common.entity.Department;
 import example.common.entity.Employee;
-
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
-
 import org.seasar.doma.AggregateStrategy;
 import org.seasar.doma.AssociationLinker;
 import org.seasar.doma.Dao;

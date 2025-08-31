@@ -1,10 +1,5 @@
-select
-    /*%expand */*
-from
-    employee e
-left outer join
-    department d
-    on
-    e.department_id = d.id
-order by
-    e.id
+SELECT /*%expand */*
+  FROM employee e
+       LEFT OUTER JOIN department d
+                    ON e.department_id = d.id
+ ORDER BY e.id

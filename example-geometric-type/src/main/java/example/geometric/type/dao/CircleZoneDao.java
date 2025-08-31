@@ -9,7 +9,12 @@ import org.seasar.doma.Sql;
 @Dao
 public interface CircleZoneDao {
 
-  @Sql("select /*%expand */* from circle_zone where id = /* id */0")
+  @Sql(
+      """
+          SELECT /*%expand */*
+            FROM circle_zone
+           WHERE id = /* id */0
+          """)
   @Select
   CircleZone selectById(Integer id);
 

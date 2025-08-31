@@ -1,175 +1,242 @@
-create sequence employee_seq start with 100 increment by 1;
-
-create table department (
-    id integer not null primary key,
-    name varchar(255) not null,
-    version integer not null
-);
-
-create table employee (
-    id integer not null primary key,
-    name varchar(255) not null,
-    age integer not null,
-    salary integer,
-    job_type varchar(20),
-    hiredate timestamp,
-    department_id integer,
-    version integer not null,
-    insert_timestamp timestamp,
-    update_timestamp timestamp
-);
-
-create table "user" (
-    id int auto_increment primary key,
-    name varchar(100) not null,
-    email varchar(255) unique not null,
-    created_at timestamp default current_timestamp,
-    version int default 0 not null
-);
-
-create table role (
-    id int auto_increment primary key,
-    name varchar(50) unique not null,
-    version int default 0 not null
-);
-
-create table user_role (
-    id int auto_increment primary key,
-    user_id int not null,
-    role_id int not null,
-    version int default 0 not null,
-    foreign key (user_id) references "user"(id),
-    foreign key (role_id) references role(id)
-);
-
-create table product (
-    id int auto_increment primary key,
-    name varchar(255) not null,
-    price decimal(10,2) not null,
-    stock_quantity int not null,
-    created_at timestamp default current_timestamp,
-    version int default 0 not null
-);
-
-create table category (
-    id int auto_increment primary key,
-    name varchar(100) unique not null,
-    version int default 0 not null
-);
-
-create table product_category (
-    id int auto_increment primary key,
-    product_id int not null,
-    category_id int not null,
-    version int default 0 not null,
-    foreign key (product_id) references product(id),
-    foreign key (category_id) references category(id)
-);
-
-create table "order" (
-    id int auto_increment primary key,
-    user_id int not null,
-    order_date timestamp default current_timestamp,
-    status varchar(50) not null,
-    version int default 0 not null,
-    foreign key (user_id) references "user"(id)
-);
-
-create table order_item (
-    id int auto_increment primary key,
-    order_id int not null,
-    product_id int not null,
-    quantity int not null,
-    price decimal(10,2) not null,
-    version int default 0 not null,
-    foreign key (order_id) references "order"(id),
-    foreign key (product_id) references product(id)
-);
-
-create table payment (
-    id int auto_increment primary key,
-    order_id int unique not null,
-    amount decimal(10,2) not null,
-    payment_date timestamp default current_timestamp,
-    version int default 0 not null,
-    foreign key (order_id) references "order"(id)
-);
-
-create table review (
-    id int auto_increment primary key,
-    user_id int not null,
-    product_id int not null,
-    rating int check (rating between 1 and 5),
-    comment text,
-    created_at timestamp default current_timestamp,
-    version int default 0 not null,
-    foreign key (user_id) references "user"(id),
-    foreign key (product_id) references product(id)
-);
-
-insert into department (id, name, version) values
-    (1, 'ACCOUNTING', 1),
-    (2, 'RESEARCH', 1),
-    (3, 'SALES', 1);
-
-insert into employee (id, name, age, salary, job_type, hiredate, department_id, version, insert_timestamp, update_timestamp) values
-    (1, 'ALLEN', 30, 1600, 'SALESMAN', '2008-01-20 12:34:56', 1, 1, current_timestamp, null),
-    (2, 'WARD', 32, 1250, 'ANALYST', '2008-02-20 12:34:56', 2, 1, current_timestamp, null),
-    (3, 'JONES', 38, 2975, 'MANAGER', '2008-03-20 12:34:56', 3, 1, current_timestamp, null),
-    (4, 'MARTIN', 40, 1250, 'SALESMAN', '2008-04-20 12:34:56', 1, 1, current_timestamp, null),
-    (5, 'BLAKE', 50, 2850, 'SALESMAN', '2008-05-20 12:34:56', 2, 1, current_timestamp, null),
-    (6, 'CLARK', 23, 2450, 'MANAGER', '2008-06-20 12:34:56', 3, 1, current_timestamp, null),
-    (7, 'SCOTT', 28, 3000, 'SALESMAN', '2008-07-20 12:34:56', 1, 1, current_timestamp, null),
-    (8, 'KING', 38, 5000, 'CLERK', '2008-08-20 12:34:56', 2, 1, current_timestamp, null),
-    (9, 'TURNER', 33, 1500, 'ANALYST', '2008-09-20 12:34:56', 3, 1, current_timestamp, null),
-    (10, 'ADAMS', 62, 1100, 'SALESMAN', '2008-10-20 12:34:56', 1, 1, current_timestamp, null),
-    (11, 'JAMES', 44, 950, 'CLERK', '2008-11-20 12:34:56', 2, 1, current_timestamp, null),
-    (12, 'FORD', 55, 3000, 'ANALYST', '2008-12-20 12:34:56', 3, 1, current_timestamp, null),
-    (13, 'MILLER', 51, 1300, 'MANAGER', '2009-01-20 12:34:56', 1, 1, current_timestamp, null),
-    (14, 'SMITH', 410, 800, 'PRESIDENT', '2009-02-20 12:34:56', 2, 1, current_timestamp, null);
-
-insert into "user" (name, email, version) values
-    ('Alice', 'alice@example.com', 0),
-    ('Bob', 'bob@example.com', 0),
-    ('Charlie', 'charlie@example.com', 0);
-
-insert into role (name, version) values
-    ('Admin', 0),
-    ('User', 0);
-
-insert into user_role (user_id, role_id, version) values
-    (1, 1, 0),  -- Alice is Admin
-    (2, 2, 0),  -- Bob is User
-    (3, 2, 0);  -- Charlie is User
-
-insert into product (name, price, stock_quantity, version) values
-    ('Laptop', 1200.99, 10, 0),
-    ('Smartphone', 699.49, 20, 0),
-    ('Tablet', 399.99, 15, 0);
-
-insert into category (name, version) values
-    ('Electronics', 0),
-    ('Gadgets', 0);
-
-insert into product_category (product_id, category_id, version) values
-    (1, 1, 0),  -- Laptop -> Electronics
-    (2, 1, 0),  -- Smartphone -> Electronics
-    (2, 2, 0),  -- Smartphone -> Gadgets
-    (3, 2, 0);  -- Tablet -> Gadgets
-
-insert into "order" (user_id, status, version) values
-    (1, 'Pending', 0),
-    (2, 'Shipped', 0);
-
-insert into order_item (order_id, product_id, quantity, price, version) values
-    (1, 1, 1, 1200.99, 0),  -- Alice orders 1 Laptop
-    (2, 2, 2, 699.49, 0);   -- Bob orders 2 Smartphones
-
-insert into payment (order_id, amount, version) values
-    (1, 1200.99, 0),
-    (2, 1398.98, 0);
-
-insert into review (user_id, product_id, rating, comment, version) values
-    (1, 1, 5, 'Great laptop!', 0),
-    (2, 2, 4, 'Good phone, but battery life could be better.', 0),
-    (3, 3, 3, 'Tablet is decent for the price.', 0);
+CREATE sequence employee_seq start
+WITH 100 increment BY 1 ;
+CREATE TABLE department
+  (
+            id integer NOT NULL PRIMARY KEY
+     ,    name varchar(255) NOT NULL
+     , version integer NOT NULL
+  ) ;
+CREATE TABLE employee
+  (
+                     id integer NOT NULL PRIMARY KEY
+     ,             name varchar(255) NOT NULL
+     ,              age integer NOT NULL
+     ,           salary integer
+     ,         job_type varchar(20)
+     ,         hiredate timestamp
+     ,    department_id integer
+     ,          version integer NOT NULL
+     , insert_timestamp timestamp
+     , update_timestamp timestamp
+  ) ;
+CREATE TABLE "user"
+  (
+               id int auto_increment PRIMARY KEY
+     ,       name varchar(100) NOT NULL
+     ,      email varchar(255) UNIQUE NOT NULL
+     , created_at timestamp DEFAULT current_timestamp
+     ,    version int DEFAULT 0 NOT NULL
+  ) ;
+CREATE TABLE role
+  (
+            id int auto_increment PRIMARY KEY
+     ,    name varchar(50) UNIQUE NOT NULL
+     , version int DEFAULT 0 NOT NULL
+  ) ;
+CREATE TABLE user_role
+  (
+            id int auto_increment PRIMARY KEY
+     , user_id int NOT NULL
+     , role_id int NOT NULL
+     , version int DEFAULT 0 NOT NULL
+     , FOREIGN KEY(user_id) REFERENCES "user" (id)
+     , FOREIGN KEY(role_id) REFERENCES    role(id)
+  ) ;
+CREATE TABLE product
+  (
+                   id int auto_increment PRIMARY KEY
+     ,           name varchar(255) NOT NULL
+     ,          price decimal(10    , 2) NOT NULL
+     , stock_quantity int NOT NULL
+     ,     created_at timestamp DEFAULT current_timestamp
+     ,        version int DEFAULT 0 NOT NULL
+  ) ;
+CREATE TABLE category
+  (
+            id int auto_increment PRIMARY KEY
+     ,    name varchar(100) UNIQUE NOT NULL
+     , version int DEFAULT 0 NOT NULL
+  ) ;
+CREATE TABLE product_category
+  (
+                id int auto_increment PRIMARY KEY
+     ,  product_id int NOT NULL
+     , category_id int NOT NULL
+     ,     version int DEFAULT 0 NOT NULL
+     , FOREIGN KEY(product_id) REFERENCES     product(id)
+     , FOREIGN KEY(category_id) REFERENCES    category(id)
+  ) ;
+CREATE TABLE "order"
+  (
+               id int auto_increment PRIMARY KEY
+     ,    user_id int NOT NULL
+     , order_date timestamp DEFAULT current_timestamp
+     ,     status varchar(50) NOT NULL
+     ,    version int DEFAULT 0 NOT NULL
+     , FOREIGN KEY(user_id) REFERENCES "user" (id)
+  ) ;
+CREATE TABLE order_item
+  (
+               id int auto_increment PRIMARY KEY
+     ,   order_id int NOT NULL
+     , product_id int NOT NULL
+     ,   quantity int NOT NULL
+     ,      price decimal(10          , 2) NOT NULL
+     ,    version int DEFAULT 0 NOT NULL
+     , FOREIGN KEY(order_id) REFERENCES "order" (id)
+     , FOREIGN KEY(product_id) REFERENCES    product(id)
+  ) ;
+CREATE TABLE payment
+  (
+                 id int auto_increment PRIMARY KEY
+     ,     order_id int UNIQUE NOT NULL
+     ,       amount decimal(10        , 2) NOT NULL
+     , payment_date timestamp DEFAULT current_timestamp
+     ,      version int DEFAULT 0 NOT NULL
+     , FOREIGN KEY(order_id) REFERENCES "order" (id)
+  ) ;
+CREATE TABLE review
+  (
+               id int auto_increment PRIMARY KEY
+     ,    user_id int NOT NULL
+     , product_id int NOT NULL
+     ,     rating int CHECK(rating BETWEEN 1 AND 5)
+     , COMMENT text
+     , created_at timestamp DEFAULT current_timestamp
+     ,    version int DEFAULT 0 NOT NULL
+     , FOREIGN KEY(user_id) REFERENCES "user" (id)
+     , FOREIGN KEY(product_id) REFERENCES    product(id)
+  ) ;
+     INSERT INTO department
+                 (id
+                  , name
+                  , version)
+          VALUES ( 1
+                   , 'ACCOUNTING'
+                   , 1 )
+          , (2, 'RESEARCH', 1)
+          , (3, 'SALES', 1) ; INSERT INTO employee
+                        (id
+                         , name
+                         , age
+                         , salary
+                         , job_type
+                         , hiredate
+                         , department_id
+                         , version
+                         , insert_timestamp
+                         , update_timestamp)
+                 VALUES ( 1
+                          , 'ALLEN'
+                          , 30
+                          , 1600
+                          , 'SALESMAN'
+                          , '2008-01-20 12:34:56'
+                          , 1
+                          , 1
+                          , current_timestamp
+                          , NULL )
+                 , (2, 'WARD', 32, 1250, 'ANALYST', '2008-02-20 12:34:56', 2, 1, current_timestamp, NULL)
+                 , (3, 'JONES', 38, 2975, 'MANAGER', '2008-03-20 12:34:56', 3, 1, current_timestamp, NULL)
+                 , (4, 'MARTIN', 40, 1250, 'SALESMAN', '2008-04-20 12:34:56', 1, 1, current_timestamp, NULL)
+                 , (5, 'BLAKE', 50, 2850, 'SALESMAN', '2008-05-20 12:34:56', 2, 1, current_timestamp, NULL)
+                 , (6, 'CLARK', 23, 2450, 'MANAGER', '2008-06-20 12:34:56', 3, 1, current_timestamp, NULL)
+                 , (7, 'SCOTT', 28, 3000, 'SALESMAN', '2008-07-20 12:34:56', 1, 1, current_timestamp, NULL)
+                 , (8, 'KING', 38, 5000, 'CLERK', '2008-08-20 12:34:56', 2, 1, current_timestamp, NULL)
+                 , (9, 'TURNER', 33, 1500, 'ANALYST', '2008-09-20 12:34:56', 3, 1, current_timestamp, NULL)
+                 , (10, 'ADAMS', 62, 1100, 'SALESMAN', '2008-10-20 12:34:56', 1, 1, current_timestamp, NULL)
+                 , (11, 'JAMES', 44, 950, 'CLERK', '2008-11-20 12:34:56', 2, 1, current_timestamp, NULL)
+                 , (12, 'FORD', 55, 3000, 'ANALYST', '2008-12-20 12:34:56', 3, 1, current_timestamp, NULL)
+                 , (13, 'MILLER', 51, 1300, 'MANAGER', '2009-01-20 12:34:56', 1, 1, current_timestamp, NULL)
+                 , (14, 'SMITH', 410, 800, 'PRESIDENT', '2009-02-20 12:34:56', 2, 1, current_timestamp, NULL) ; INSERT INTO "user"
+                               (name
+                                , email
+                                , version)
+                        VALUES ( 'Alice'
+                                 , 'alice@example.com'
+                                 , 0 )
+                        , ('Bob', 'bob@example.com', 0)
+                        , ('Charlie', 'charlie@example.com', 0) ; INSERT INTO role
+                                      (name
+                                       , version)
+                               VALUES ( 'Admin'
+                                        , 0 )
+                               , ('User', 0) ; INSERT INTO user_role
+                                             (user_id
+                                              , role_id
+                                              , version)
+                                      VALUES ( 1
+                                               , 1
+                                               , 0 )
+                                      , -- Alice is Admin
+                                      (2, 2, 0)
+                                      , -- Bob is User
+                                      (3, 2, 0) ; -- Charlie is User
+                                        INSERT INTO product
+                                                    (name
+                                                     , price
+                                                     , stock_quantity
+                                                     , version)
+                                             VALUES ( 'Laptop'
+                                                      , 1200.99
+                                                      , 10
+                                                      , 0 )
+                                             , ('Smartphone', 699.49, 20, 0)
+                                             , ('Tablet', 399.99, 15, 0) ; INSERT INTO category
+                                                           (name
+                                                            , version)
+                                                    VALUES ( 'Electronics'
+                                                             , 0 )
+                                                    , ('Gadgets', 0) ; INSERT INTO product_category
+                                                                  (product_id
+                                                                   , category_id
+                                                                   , version)
+                                                           VALUES ( 1
+                                                                    , 1
+                                                                    , 0 )
+                                                           , -- Laptop -> Electronics
+                                                           (2, 1, 0)
+                                                           , -- Smartphone -> Electronics
+                                                           (2, 2, 0)
+                                                           , -- Smartphone -> Gadgets
+                                                           (3, 2, 0) ; -- Tablet -> Gadgets
+                                                             INSERT INTO "order"
+                                                                         (user_id
+                                                                          , status
+                                                                          , version)
+                                                                  VALUES ( 1
+                                                                           , 'Pending'
+                                                                           , 0 )
+                                                                  , (2, 'Shipped', 0) ; INSERT INTO order_item
+                                                                                (order_id
+                                                                                 , product_id
+                                                                                 , quantity
+                                                                                 , price
+                                                                                 , version)
+                                                                         VALUES ( 1
+                                                                                  , 1
+                                                                                  , 1
+                                                                                  , 1200.99
+                                                                                  , 0 )
+                                                                         , -- Alice orders 1 Laptop
+                                                                         (2, 2, 2, 699.49, 0) ; -- Bob orders 2 Smartphones
+                                                                           INSERT INTO payment
+                                                                                       (order_id
+                                                                                        , amount
+                                                                                        , version)
+                                                                                VALUES ( 1
+                                                                                         , 1200.99
+                                                                                         , 0 )
+                                                                                , (2, 1398.98, 0) ; INSERT INTO review
+                                                                                              (user_id
+                                                                                               , product_id
+                                                                                               , rating
+                                                                                               , COMMENT
+                                                                                               , version)
+                                                                                       VALUES ( 1
+                                                                                                , 1
+                                                                                                , 5
+                                                                                                , 'Great laptop!'
+                                                                                                , 0 )
+                                                                                       , (2, 2, 4, 'Good phone, but battery life could be better.', 0)
+                                                                                       , (3, 3, 3, 'Tablet is decent for the price.', 0) ;

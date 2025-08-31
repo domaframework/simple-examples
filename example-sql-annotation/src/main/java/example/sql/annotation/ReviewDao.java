@@ -15,12 +15,14 @@ import org.seasar.doma.Sql;
 public interface ReviewDao {
   @Sql(
       """
-  select /*%expand */*
-  from review r
-  left outer join product pr on r.product_id = pr.id
-  left outer join "user" u on r.user_id = u.id
-  order by r.id
-  """)
+         SELECT /*%expand */*
+           FROM review r
+                LEFT OUTER JOIN product pr
+                             ON r.product_id = pr.id
+                LEFT OUTER JOIN "user" u
+                             ON r.user_id = u.id
+          ORDER BY r.id
+         """)
   @Select(aggregateStrategy = ReviewAggregateStrategy.class)
   List<Review> selectAll();
 }

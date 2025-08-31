@@ -1,4 +1,2 @@
-select
-    sum(salary)
-from
-    employee
+SELECT sum(salary)
+  FROM employee

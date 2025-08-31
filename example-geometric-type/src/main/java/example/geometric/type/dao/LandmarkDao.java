@@ -9,7 +9,12 @@ import org.seasar.doma.Sql;
 @Dao
 public interface LandmarkDao {
 
-  @Sql("select /*%expand */* from landmark where id = /* id */0")
+  @Sql(
+      """
+          SELECT /*%expand */*
+            FROM landmark
+           WHERE id = /* id */0
+          """)
   @Select
   Landmark selectById(Integer id);
 

@@ -1,6 +1,3 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    name in /* names */('aaa', 'bbb')
+SELECT /*%expand*/*
+  FROM employee
+ WHERE name IN /* names */('aaa', 'bbb')

@@ -1,6 +1,6 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    /*%if @isNotEmpty(name) */ name = /* name */'hoge' /*%end*/
+SELECT /*%expand*/*
+  FROM employee
+ WHERE
+       /*%if @isNotEmpty(name) */
+       name = /* name */'hoge'
+       /*%end*/

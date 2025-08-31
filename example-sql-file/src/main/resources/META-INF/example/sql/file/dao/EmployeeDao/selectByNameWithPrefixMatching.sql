@@ -1,6 +1,3 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    name like /* @prefix(prefix) */'X%' escape '$'
+SELECT /*%expand*/*
+  FROM employee
+ WHERE name LIKE /* @prefix(prefix) */'X%' escape '$'

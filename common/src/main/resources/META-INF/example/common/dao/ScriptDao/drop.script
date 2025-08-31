@@ -1,14 +1,13 @@
-drop sequence employee_seq;
-drop table employee;
-drop table department;
-
-drop table if exists review;
-drop table if exists payment;
-drop table if exists order_item;
-drop table if exists "order";
-drop table if exists product_category;
-drop table if exists category;
-drop table if exists product;
-drop table if exists user_role;
-drop table if exists role;
-drop table if exists "user";
+ DROP sequence employee_seq ;
+ DROP TABLE employee ;
+ DROP TABLE department ;
+ DROP TABLE IF EXISTS review ;
+ DROP TABLE IF EXISTS payment ;
+ DROP TABLE IF EXISTS order_item ;
+ DROP TABLE IF EXISTS "order" ;
+ DROP TABLE IF EXISTS product_category ;
+ DROP TABLE IF EXISTS category ;
+ DROP TABLE IF EXISTS product ;
+ DROP TABLE IF EXISTS user_role ;
+ DROP TABLE IF EXISTS role ;
+ DROP TABLE IF EXISTS "user" ;

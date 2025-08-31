@@ -1,6 +1,3 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    salary > /* salary */0
+SELECT /*%expand*/*
+  FROM employee
+ WHERE salary > /* salary */0

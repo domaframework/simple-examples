@@ -1,8 +1,4 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    age > /* age */0
-order by
-    age
+SELECT /*%expand*/*
+  FROM employee
+ WHERE age > /* age */0
+ ORDER BY age

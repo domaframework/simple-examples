@@ -1,6 +1,3 @@
-select
-    /*%expand*/*
-from
-    employee
-order by
-    id
+SELECT /*%expand*/*
+  FROM employee
+ ORDER BY id

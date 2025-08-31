@@ -1,2 +1,2 @@
-DROP TABLE landmark;
-DROP TABLE circle_zone;
+ DROP TABLE landmark ;
+ DROP TABLE circle_zone ;

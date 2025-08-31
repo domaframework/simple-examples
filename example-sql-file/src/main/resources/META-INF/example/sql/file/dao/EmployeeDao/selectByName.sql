@@ -1,11 +1,8 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    /*%if name != null*/
-    name = /*name*/'hoge'
-    /*%else */
-and
-    name is null
-/*%end */
+SELECT /*%expand*/*
+  FROM employee
+ WHERE
+       /*%if name != null*/
+       name = /* name */'hoge'
+       /*%else */
+       AND name IS NULL
+       /*%end */

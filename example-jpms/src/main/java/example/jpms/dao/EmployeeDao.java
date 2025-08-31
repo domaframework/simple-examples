@@ -10,13 +10,10 @@ public interface EmployeeDao {
 
   @Sql(
       """
-      select
-        /*%expand*/*
-      from
-        employee
-      where
-        id = /* id */0
-      """)
+         SELECT /*%expand*/*
+           FROM employee
+          WHERE id = /* id */0
+         """)
   @Select
   Employee selectById(Integer id);
 }

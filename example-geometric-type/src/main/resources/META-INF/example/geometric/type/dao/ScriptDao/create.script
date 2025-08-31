@@ -1,11 +1,12 @@
-CREATE TABLE landmark (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    location POINT NOT NULL
-);
-
-CREATE TABLE circle_zone (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    boundary CIRCLE NOT NULL
-);
+CREATE TABLE landmark
+  (
+             id INTEGER PRIMARY KEY
+     ,     name TEXT NOT NULL
+     , location POINT NOT NULL
+  ) ;
+CREATE TABLE circle_zone
+  (
+             id INTEGER PRIMARY KEY
+     ,     name TEXT NOT NULL
+     , boundary CIRCLE NOT NULL
+  ) ;

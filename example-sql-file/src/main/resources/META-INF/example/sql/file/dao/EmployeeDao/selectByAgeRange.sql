@@ -1,14 +1,10 @@
-select
-    /*%expand*/*
-from
-    employee
-where
-    /*%if min != null */
-    age >= /* min */10
-    /*%end */
-    /*%if max != null */
-    and
-    age <= /* max */70
-    /*%end */
-order by
-    age
+SELECT /*%expand*/*
+  FROM employee
+ WHERE
+       /*%if min != null */
+       age >= /* min */10
+       /*%end */
+   /*%if max != null */
+   AND age <= /* max */70
+   /*%end */
+ ORDER BY age

@@ -1,5 +1,2 @@
-delete
-from
-    Employee
-where
-    ID = /* employee.id */0
+DELETE FROM Employee
+ WHERE ID = /* employee.id */0

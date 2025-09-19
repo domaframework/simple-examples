@@ -9,7 +9,7 @@ doma-slf4j = { module = "org.seasar.doma:doma-slf4j", version.ref = "doma" }
 
 jdbc-h2 = { module = "com.h2database:h2", version = "2.3.232" }
 jdbc-mysql = { module = "mysql:mysql-connector-java", version = "8.0.33" }
-jdbc-postgresql = { module = "org.postgresql:postgresql", version = "42.7.7" }
+jdbc-postgresql = { module = "org.postgresql:postgresql", version = "42.7.8" }
 
 logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.18" }
 

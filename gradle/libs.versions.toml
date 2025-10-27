@@ -22,7 +22,7 @@ testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version
 testcontainers-mysql = { module = "org.testcontainers:mysql" }
 testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 
-google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.28.0" }
+google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.31.0" }
 ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.7.1" }
 
 [plugins]

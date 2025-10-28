@@ -19,8 +19,8 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version = "2.0.1" }
-testcontainers-mysql = { module = "org.testcontainers:mysql" }
-testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
+testcontainers-mysql = { module = "org.testcontainers:testcontainers-mysql" }
+testcontainers-postgresql = { module = "org.testcontainers:testcontainers-postgresql" }
 
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.28.0" }
 ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.7.1" }

@@ -23,7 +23,7 @@ testcontainers-mysql = { module = "org.testcontainers:testcontainers-mysql" }
 testcontainers-postgresql = { module = "org.testcontainers:testcontainers-postgresql" }
 
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version = "1.28.0" }
-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.7.1" }
+ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.8.0" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version = "8.0.0" }
